@@ -7,10 +7,6 @@
         Cadastros
 
       .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
-        %a.dropdown-item{href: filial_products_path(current_filial)}
-          = icon('fas', 'boxes')
-          %span.ms-1 Produtos
-        
         %a.dropdown-item{href: filial_users_path(current_filial)}
           = icon('fas', 'users')
           %span.ms-1 Usuários
@@ -18,6 +14,20 @@
         %a.dropdown-item{href: filials_path()}
           = icon('fas', 'building')
           %span.ms-1 Filiais
+
+  %hr.bg-white
+
+  %li.nav-item
+    %a{href: filial_expenses_path(current_filial), class: 'nav-link'}
+      = icon('fas', 'dollar-sign')
+      %span.ms-1
+        %b Despesas
+
+  %li.nav-item
+    %a{href: filial_products_path(current_filial), class: 'nav-link'}
+      = icon('fas', 'boxes')
+      %span.ms-1
+        %b Produtos
 
 
   -# %li.nav-item

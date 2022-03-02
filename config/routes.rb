@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   resources :filials do
     resources :users
     resources :products
+    resources :expenses
+    
+    resources :equipments do
+      resources :items
+      resources :references
+    end
+
   end
 
 end

@@ -1,0 +1,22 @@
+.card.card-body
+  = form_for [@filial, @expense] do |f|
+    = render 'shared/errors_form', model: @expense
+
+    .row
+      .form-group.col-lg-4
+        = f.label :title, "Título"
+        = f.text_field :title, class: "form-control"
+      .form-group.col-lg-2
+        = f.label :value, "Valor"
+        = f.text_field :value, class: "form-control"
+      .form-group.col-lg-2
+        = f.label :date, "Data"
+        = f.date_field :date, class: "form-control"
+    .row
+      .form-group.col-lg-6
+        = f.label :obs, "Observação"
+        = f.text_area :obs, class: "form-control", rows: 4
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 
