@@ -1,0 +1,85 @@
+// ===== Sizes ======
+.text-50 {
+  font-size: 0.5rem;
+}
+.text-55 {
+  font-size: 0.55rem;
+}
+.text-60 {
+  font-size: 0.6rem;
+}
+.text-65 {
+  font-size: 0.65rem;
+}
+.text-70 {
+  font-size: 0.7rem;
+}
+.text-75 {
+  font-size: 0.75rem;
+}
+.text-80 {
+  font-size: 0.8rem;
+}
+.text-85 {
+  font-size: 0.85rem;
+}
+.text-90 {
+  font-size: 0.9rem;
+}
+.text-95 {
+  font-size: 0.95rem;
+}
+.text-100 {
+  font-size: 1rem;
+}
+.text-150 {
+  font-size: 1.5rem;
+}
+.text-200 {
+  font-size: 2rem;
+}
+
+// ===== weight ======
+.text-bold {
+  font-weight: bold !important;
+}
+.text-lighter {
+  font-weight: lighter !important;
+}
+.text-w-normal, .text-normal {
+  font-weight: normal !important;
+}
+
+// ===== Colors ======
+.text-danger-weak {
+  color: $danger-weak;
+}
+
+// ===== Truncate =====
+.text-break {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+
+  &.tb-2 {
+    -webkit-line-clamp: 2;
+    max-height: 5ch;
+  }
+  &.tb-3 {
+    -webkit-line-clamp: 3;
+    max-height: 7ch;
+  }
+  &.tb-4 {
+    -webkit-line-clamp: 4;
+    max-height: 9ch;
+  }
+  &.tb-5 {
+    -webkit-line-clamp: 5;
+    max-height: 12ch;
+  }
+  &.tb-6 {
+    -webkit-line-clamp: 6;
+    max-height: 14ch;
+  }
+}

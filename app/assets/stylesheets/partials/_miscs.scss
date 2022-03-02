@@ -1,0 +1,22 @@
+
+@import 'datepicker';
+
+.pointer {
+  cursor: pointer;
+}
+
+.transparent {
+  background-color: transparent !important;
+}
+
+// ======= images ======
+.image-100 {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.image-placeholder {
+  background-image: image-url('placeholder.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

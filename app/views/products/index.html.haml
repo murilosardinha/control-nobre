@@ -1,0 +1,32 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Produtos"
+
+= link_to new_filial_product_path(@filial), class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Novo Produto"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Nome
+      %th.text-center
+        %b Quantidade
+      %th
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td.text-center= product.name
+        %td.text-center= product.quantity
+
+        %td.text-right
+          = link_to edit_filial_product_path(@filial, product), class: 'text-info' do
+            = icon("fas", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_product_path(@filial, product), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
+            = icon("fas", "trash")

@@ -1,0 +1,52 @@
+@import './variables';
+
+.table{
+  th, td {
+    font-size: em(14);
+    font-weight: normal;
+  }
+
+  .action_table{
+    display: flex;
+
+    a{
+      margin-left: 5px;
+    }
+
+    i {
+      padding: em(5) em(7);
+      border-radius: em(3);
+      background-color: rgba($primary, $alpha: 0.05);
+      transition: all .4s ease-in-out;
+      color: #58636d;
+
+      &:hover{
+        background-color: $primary;
+        color: #ffffff;
+        box-shadow: $shadow;
+      }
+    }
+    i.fe-edit{
+      background-color: rgba($warning, $alpha: 0.05);
+      color: $warning;
+
+      &:hover{
+        background-color: $warning;
+        color: #ffffff;
+      }
+    }
+    i.fe-trash{
+      background-color: rgba($danger, $alpha: 0.05);
+      color: $danger;
+
+      &:hover{
+        background-color: $danger;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .action_table__col{
+    width: em(100);
+  }
+}

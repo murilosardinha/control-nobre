@@ -1,0 +1,127 @@
+
+
+.loader{
+  background-image: image-url('loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px;
+}
+.loader-top{
+  background-image: image-url('loading.gif');
+  background-position-y: 4em;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-size: 80px;
+}
+.loader-md, .loader-md-fix{
+  background-image: image-url('loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px;
+}
+.loader-md-fix {
+  width: 100%;
+  min-height: 200px;
+}
+
+.loader-feed {
+  object-fit: cover;
+  min-width: 190px;
+  min-height: 190px;
+}
+.loader-story {
+  object-fit: cover;
+  min-width: 130px;
+  min-height: 230px;
+}
+
+// Shake
+.shake-in {
+  animation: shake-in 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Shake
+@keyframes shake-in {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+//
+// Spinner Rotating border
+//
+
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+  vertical-align: text-bottom;
+  border: 0.25em solid $primary;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border .75s linear infinite;
+
+  &.spinner-light{
+    border-color: $light;
+    border-right-color: transparent;
+  }
+
+  &.spinner-info{
+    border-color: $info;
+    border-right-color: transparent;
+  }
+}
+
+.spinner-border-sm {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-width: 0.18em;
+}
+
+//
+// Spinner Growing circle
+//
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.spinner-grow {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  animation: spinner-grow .75s linear infinite;
+}
+
+.spinner-grow-sm {
+  width: 0.9rem;
+  height: 0.9rem;
+}

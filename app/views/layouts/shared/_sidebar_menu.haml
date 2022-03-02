@@ -1,0 +1,31 @@
+#sideBar
+  .sidebar__content
+    .sidebar__user
+      = link_to root_path, style: "background: #fff;border-radius: 55px;" do
+        .sidebar__user_img.d-flex.justify-content-center
+          .justify-content-center.align-self-center.text-white
+            = current_user.admin? ? '' : @filial.name
+
+      .dropdown.mt-2
+        %a.nav-link.text-center.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+          = current_user.name
+        .dropdown-menu{"aria-labelledby": "navbarDropdown"}
+          = link_to edit_password_user_path(current_user), class: "dropdown-item" do
+            =icon('fa', 'unlock-alt')
+            Editar Senha
+
+          = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+            =icon('fa', 'sign-out-alt')
+            Sair
+
+    %ul.sidebar__menu
+      = render 'layouts/shared/options'
+
+.d-block.d-sm-block.d-md-none
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    = link_to 'Home', root_path, class: 'navbar-brand'
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.sidebar__menu
+      = render 'layouts/shared/options'

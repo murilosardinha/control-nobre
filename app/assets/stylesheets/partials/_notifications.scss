@@ -1,0 +1,159 @@
+@import './variables.scss';
+
+.notification {
+  position: absolute;
+  top: 4em;
+  right: 1.3em;
+  z-index: 10;
+  animation: slide-left 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  .alert-success, .alert-danger {
+    box-shadow: $shadow-big;
+    border-radius: 0.125rem;
+  }
+}
+.alert {
+  position: relative;
+  padding: .75rem 1.25rem;
+    padding-right: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+  border-radius: .25rem;
+}
+
+.alert-dismissible {
+  // Adjust close link position
+  padding-right: 4rem;
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit;
+  }
+}
+
+.close {
+  float: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+
+  &:not(:disabled):not(.disabled) {
+    // Opinionated: add "hand" cursor to non-disabled .close elements
+    cursor: pointer;
+  }
+}
+
+// Additional properties for button version
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+// stylelint-disable property-no-vendor-prefix, selector-no-qualifying-type
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.alert-sm {
+  padding: 0.3rem 1rem !important;
+}
+.alert-success {
+  color: #ffffff;
+  background-color: $success;
+  border-color: $success;
+}
+.alert-danger {
+  color: #ffffff;
+  background-color: $danger;
+  border-color: $danger;
+
+  &.transparent{
+    color: $danger;
+    background-color: transparent;
+  }
+}
+
+.tooltip{
+  &.show {
+    opacity: 1;
+  }
+}
+.tooltip-inner {
+  background-color: $gray-800 !important;
+  color: #fff;
+}
+
+.tooltip.fade{
+  display: block;
+}
+
+@media (max-width: 768px){
+  .notification {
+    position: fixed;
+    top: unset;
+    right: 2.2rem;
+    left: 1.3rem;
+    bottom: 1.4em;
+    margin-right: auto;
+    margin-left: auto;
+    animation: slide-top 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    // animation: none;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100px);
+  }
+  15% {
+    transform: translateX(0px);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@keyframes slide-top {
+  0% {
+    transform: translateY(100px);
+  }
+  10% {
+    transform: translateY(0px);
+  }
+  90% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.form_errors {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-bottom: 2rem;
+
+  .alert {
+    margin: 0 8px 8px 0;
+    padding: 0.8rem;
+  }
+}

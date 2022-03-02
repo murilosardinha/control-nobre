@@ -1,0 +1,79 @@
+@import './variables';
+
+
+.block-tag{
+  height: 9cm !important;
+  width: 10cm !important;
+  break-after: always;
+  page-break-after: always;
+  padding: 0.5cm 0 0;
+  overflow: hidden;
+
+  .card-header{
+    border-bottom: 1px solid #333 !important;
+  }
+
+  .card-footer{
+    background: none !important;
+  }
+
+  hr{
+    opacity: 0.5 !important;
+  }
+
+  h1{
+    font-size: 2rem !important;
+  }
+}
+
+.img-barcode{
+  overflow: hidden; /*hide bounds of image */
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  width: 100%;
+  margin: 5px 0px 0px;
+  height: 1.5cm;
+}
+.img-qrcode{
+  overflow: hidden; /*hide bounds of image */
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  width: 100%;
+  margin: 0.1em 0px;
+  height: 1.6cm;
+  width: auto;
+}
+
+.print-tag{
+  width: 95%;
+  margin: 0 auto;
+}
+
+.tag-color{
+  padding-left: 1cm;
+}
+
+.line-height-100{
+  line-height: 100%;
+}
+
+.line-height-50{
+  line-height: 1.3em;
+}
+
+.tag-title{
+  font-size: 1.5em;
+}
+
+.tag-code{
+  font-size: 1.3em;
+  padding-bottom: 0.3em;
+}
+
+.tag-reference{
+  font-weight: 800;
+}
+
+.tag-expedition-image{
+  width: 50%;
+}

@@ -1,0 +1,307 @@
+@import './variables';
+
+.btn {
+  padding: em(10) em(25);
+  border-radius: 3px;
+  font-size: 12px;
+
+  &.square{
+    border-radius: 0 !important;
+  }
+
+  &.btn-trp{
+    background: transparent;
+  }
+}
+
+.btn-outline-gray{
+  background-color: $gray-600;
+  color: $dark;
+}
+
+.card-footer .btn{
+  border-radius: 0px;
+}
+.btn-sm, .btn-group-sm > .btn {
+  padding: em(6) em(15);
+}
+
+.btn-default {
+  background-color: $light;
+  border: 1px solid #dbdbdb;
+  color: #5b626a;
+
+  &:hover{
+    box-shadow: 0 0 4px rgba($color: $primary, $alpha: 0.3);
+  }
+}
+
+/* Facebook */
+#form-facebook, .btn-facebook {
+  background-color: $facebook;
+  text-shadow: 0 -1px 0 #354C8C;
+  color: #fff;
+}
+
+.btn-facebook {
+  &:before {
+    border-right: #364e92 1px solid;
+    padding-right: 4px;
+    margin-right: 5px;
+    content: '\e86c';
+  }
+  &:hover, &:focus {
+    background-color: #5B7BD5;
+    background-image: linear-gradient(#5B7BD5, #4864B1);
+    color: #fff;
+  }
+
+}
+// ----------- Checkbox Switcher --------------
+.check-switch {
+  width: 100%;
+  display: flex;
+}
+.check-switcher {
+  position: relative;
+  display: inline-block;
+  width: em(30);
+  height: em(25);
+
+  input {
+    display:none;
+  }
+
+}
+.labelsw {
+  font-weight: 400;
+  font-size: em(12);
+  margin-top: 2px;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+.label-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+
+  &:before {
+      position: absolute;
+      content: "";
+      height: 11px;
+      width: 11px;
+      left: 2px;
+      top: 1px;
+      bottom: 0px;
+      background-color: transparent;
+      border: 2px solid #ccc;
+      transition: .4s;
+      border-radius: 50%;
+  }
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+input:checked + .label-switch.primary {
+  border: 2px solid $info;
+  &:before{
+    border: 2px solid $info;
+    background-color: $info;
+  }
+}
+input:checked + .label-switch.success {
+  border: 2px solid $success;
+  &:before{
+    border: 2px solid $success;
+    background-color: $success;
+  }
+}
+input:checked + .label-switch.warn {
+  border: 2px solid $warning;
+  &:before{
+    border: 2px solid $warning;
+    background-color: $warning;
+  }
+}
+
+input:checked + .label-switch:before {
+  -webkit-transform: translateX(11px);
+  -ms-transform: translateX(11px);
+  transform: translateX(11px);
+}
+
+
+// ------------------------- badge --------------------
+.badge {
+  padding: 0.25em 0.4em;
+  font-size: 0.6rem;
+  background-color: transparent !important;
+  text-decoration: none;
+  
+  &::before {
+    position: relative;
+    top: 0px;
+    left: -4px;
+    display: inline-block;
+    border: 3px solid;
+    border-radius: 1rem;
+    content: "";
+  }
+
+  &.badge-primary, &.badge-primary:hover {
+    color: $primary;
+  }
+  &.badge-success, &.badge-success:hover {
+    color: $success;
+  }
+  &.badge-secondary, &.badge-secondary:hover {
+    color: $secondary;
+  }
+  &.badge-danger, &.badge-danger:hover {
+    color: $danger;
+  }
+  &.badge-warning, &.badge-warning:hover {
+    color: $warning;
+  }
+  &.badge-info, &.badge-info:hover {
+    color: $info;
+  }
+  &.badge-light, &.badge-light:hover {
+    color: $info;
+    background-color: $light;
+  }
+  &.badge-dark, &.badge-dark:hover {
+    color: $dark;
+  }
+
+  &.badge-simples{
+    color: inherit;
+
+    &::before{display: none}
+    &::after{
+      position: relative;
+      top: 0px;
+      right: -4px;
+      display: inline-block;
+      border: 3px solid;
+      border-radius: 1rem;
+      content: "";
+    }
+
+    &.badge-primary::after { color: $primary; }
+    &.badge-success::after { color: $success; }
+    &.badge-secondary::after { color: $secondary; }
+    &.badge-danger::after { color: $danger; }
+    &.badge-warning::after { color: $warning; }
+    &.badge-info::after { color: $info; }
+    &.badge-light::after { color: $info; background-color: $light; }
+    &.badge-dark::after { color: $dark; }
+  }
+}
+
+.page-head-title .badge{
+  font-size: 1rem;
+
+  &::before{
+    top: -3px;
+  }
+}
+.badge-default-not {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  
+  position: relative;
+  z-index: 2;
+  right: 10px;
+  top: -5px;
+  border-radius: 10px;
+  width: 20px;
+}
+
+.badge-default {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  top: -5px;
+  border-radius: 10px;
+  width: 20px;
+
+  &.badge-danger, &.badge-danger:hover, &.badge-success, &.badge-success:hover {
+    color: #ffffff;
+  }
+  &.badge-dark, &.badge-dark:hover {
+    color: $white;
+  }
+  &.badge-gray, &.badge-gray:hover {
+    color: $white;
+    background-color: $gray-600;
+  }
+
+}
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+.badge-notify {
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border-radius: 10rem;
+}
+
+
+// ----------- Group Buttons ----------------------
+.group__rounded_button{
+  .btn{
+    border-radius: 0;
+  }
+  .btn:nth-child(1){
+    border-top-left-radius: em(30);
+    border-bottom-left-radius: em(30);
+  }
+  .btn:nth-last-child(1){
+    border-top-right-radius: em(30);
+    border-bottom-right-radius: em(30);
+  }
+}
+.admin.group__rounded_button{
+  .btn:nth-child(1){
+    border-radius: em(30) 0 0 em(30);
+  }
+  .btn:nth-child(n+2){
+    border-radius: 0px;
+    border-left: 0;
+  }
+  .btn:nth-last-child(1){
+    border-radius: 0 em(30) em(30) 0;
+  }
+}

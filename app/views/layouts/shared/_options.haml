@@ -1,0 +1,106 @@
+
+- if current_user.admin?
+  %li.nav-item
+    .dropdown.dropright
+      %a.nav-link#dropdownMenuButton.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+        = icon('fas', 'plus-square')
+        Cadastros
+
+      .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+        %a.dropdown-item{href: filial_products_path(current_filial)}
+          = icon('fas', 'boxes')
+          %span.ms-1 Produtos
+        
+        %a.dropdown-item{href: filial_users_path(current_filial)}
+          = icon('fas', 'users')
+          %span.ms-1 Usuários
+
+        %a.dropdown-item{href: filials_path()}
+          = icon('fas', 'building')
+          %span.ms-1 Filiais
+
+
+  -# %li.nav-item
+  -#   .dropdown.dropright
+  -#     %a.nav-link#dropdownMenuButton.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+  -#       = icon('fas', 'plus-square')
+  -#       Produtos
+
+  -#     .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+  -#       %a.dropdown-item{href: serrada_products_path}
+  -#         = icon('fas', 'cubes')
+  -#         %span.ms-1 Madeira Serrada
+        
+  -#       %a.dropdown-item{href: beneficiada_products_path}
+  -#         = icon('fas', 'cubes')
+  -#         %span.ms-1 Madeira Beneficiada
+
+
+- else
+  -# %li.nav-item
+  -#   %a{href: industry_parts_path(@industry), class: 'nav-link'}
+  -#     = icon('fas', 'door-open')
+  -#     %span.ms-1
+  -#       %b Estoque de Toras
+  -# %li.nav-item
+  -#   %a{href: industry_desdobros_path(@industry), class: 'nav-link'}
+  -#     = icon('fas', 'grip-vertical')
+  -#     %span.ms-1
+  -#       %b Desdobro de Toras
+  
+  -# %li.nav-item
+  -#   .dropdown.dropright
+  -#     %a.nav-link#dropdownMenuLink.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+  -#       = icon('fas', 'cubes')
+  -#       %b Romaneio
+
+  -#     %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuLink"}
+  -#       %li
+  -#         %a.dropdown-item{href: industry_romaneio_serrados_path(@industry)}
+  -#           = icon('fas', 'th-large')
+  -#           %span.ms-1 Serrada
+  -#       %li
+  -#         %a.dropdown-item{href: industry_romaneio_beneficiados_path(@industry)}
+  -#           = icon('fas', 'boxes')
+  -#           %span.ms-1 Beneficiada
+  -#       %li
+  -#         %a.dropdown-item{href: industry_romaneio_residuos_path(@industry)}
+  -#           = icon('fas', 'recycle')
+  -#           %span.ms-1 Resíduo
+  -# %li.nav-item
+  -#   %a{href: industry_expeditions_path(@industry), class: 'nav-link'}
+  -#     = icon('fas', 'file-invoice-dollar')
+  -#     %span.ms-1
+  -#       %b Expedição
+
+  -# %hr.bg-white
+
+  -# %li.nav-item
+  -#   %a{href: industry_search_path(@industry), class: 'nav-link'}
+  -#     = icon('fas', 'search')
+  -#     %span.ms-1
+  -#       %b Rastreio de Toras
+
+  -# %li.nav-item
+  -#   .dropdown.dropright
+  -#     %a.nav-link#dropdownMenuButton.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+  -#       = icon('fas', 'plus-square')
+  -#       %b Cadastros
+
+  -#     .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+  -#       %a.dropdown-item{href: industry_customers_path(@industry)}
+  -#         = icon('fas', 'user-tie')
+  -#         %span.ms-1 Clientes
+
+  -#       %a.dropdown-item{href: industry_cars_path(@industry)}
+  -#         = icon('fas', 'truck')
+  -#         %span.ms-1 Placas
+        
+  -#       %a.dropdown-item{href: industry_turnos_path(@industry)}
+  -#         = icon('fas', 'retweet')
+  -#         %span.ms-1 Turnos
+        
+  -#       %a.dropdown-item{href: users_path}
+  -#         = icon('fas', 'users')
+  -#         %span.ms-1 Usuários
+

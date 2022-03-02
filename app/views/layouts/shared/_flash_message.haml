@@ -1,0 +1,11 @@
+- if flash.any?
+  - flash.each do |key, message|
+    %div{class: key == 'notice'? 'notification' : ''}
+      .alert.alert-dismissible.fade.show.d-flex{role:"alert", class: key == 'notice'? 'alert-success': 'alert-danger'}
+        - if message.is_a? Array
+          .col= safe_join(message, "<br/>".html_safe)
+        - else
+          .col= message
+        
+        %button.close{type:"button", "data-dismiss": "alert", "aria-label": "Close"}
+          %span{"aria-hidden":"true"} &times

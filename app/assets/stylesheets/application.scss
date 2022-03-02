@@ -1,0 +1,262 @@
+@charset "utf-8";
+@import './partials/variables';
+
+@import 'bootstrap';
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+@import './partials/navigation';
+@import './partials/buttons';
+@import './partials/tables';
+@import './partials/notifications';
+@import './partials/animations';
+@import './partials/cards';
+@import './partials/forms';
+@import './partials/modal';
+@import './partials/texts';
+@import './partials/spinners';
+@import './partials/miscs';
+@import './partials/tag';
+@import './partials/collapse';
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+  background-color: #f4f4fb;
+  overflow-y: scroll;
+
+  &.closed__sidebar {
+    .main-page {
+      padding-left: 0;
+    }
+  }
+
+  .page-head {
+    padding: 0 em(20);
+
+    h2 {
+      font-size: em(22);
+    }
+  }
+
+  .container-fluid{
+    min-height: 80vh;
+  }
+
+  .main-page {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: em(250);
+    padding-bottom: em(40);
+    transition: padding-left 0.4s ease-in-out;
+
+    .body-content {
+      padding-top: 2em;
+    }
+  }
+}
+
+.content-center{
+  margin: 0 auto;
+}
+
+.stripped{
+  background: $stripped;
+}
+
+.back-button{
+  z-index: 1 !important;
+  position: absolute;
+}
+
+a {
+  cursor: pointer;
+  color: $gray-700;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+p {
+  font-weight: normal;
+}
+
+.big-shadow {
+  box-shadow: $shadow-big
+}
+
+.access__control {
+  background-color: $gray-100;
+}
+
+.relative {
+  position: relative;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.flex-column-end {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.flex-row-between {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.flex-column-between {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.thumbnail{
+  width: 50px;
+}
+
+
+// Modals
+.modal-full {
+  .modal-content {
+    min-width: 1000px;
+  }
+}
+
+.wrong-specie{
+  input{
+    border: 1px solid $danger;
+    background-color: $danger !important;
+    color: $white;
+  }
+}
+
+.mini-row{
+  input{
+    font-size: 12px;
+  }
+
+  .column-1{
+    flex: 0 0 6%;
+    max-width: 6%;
+    position: relative;
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .column-2{
+    flex: 0 0 9%;
+    max-width: 9%;
+    position: relative;
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .column-3{
+    flex: 0 0 13%;
+    max-width: 13%;
+    position: relative;
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
+.disabled{
+  opacity: 0.5;
+  
+  .card{
+    background-color: #e3e3e3;
+    border-color: none !important;
+  }
+
+  a{
+    cursor: not-allowed;
+  }
+}
+
+.reclassification-check{
+  position: absolute;
+  right: 3px;
+  top: 4px;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.col{
+  width: 100%;
+}
+
+.drop-arrow::after{
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+
+@media (min-width: 1300px) {
+  // body {
+  //   zoom: 0.9;
+  // }
+  .container {
+    max-width: 1790px;
+  }
+  .modal-xl {
+    min-width: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-page {
+    padding-left: 0 !important;
+  }
+  .body-content {
+    padding-top: 5em !important;
+  }
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title Controle Nobre
+    = render 'layouts/shared/header_tags'
+    
+  %body
+    = render 'layouts/shared/sidebar_menu'
+
+    .main-page
+      .container-fluid.body-content
+        = render partial: "layouts/shared/flash_message"
+        = yield
+
+    -# = render 'layouts/shared/footer'

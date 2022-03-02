@@ -1,0 +1,24 @@
+.limiter
+  .container-login100
+    .wrap-login100
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'login100-form'}) do |f|
+        .login-logo.text-center.mt-3.mb-5
+          -# = image_tag 'logo-login.png', class: 'w-50'
+
+        %span.login100-form-title.pb-3
+          Admin
+        .wrap-input100.col-12.mb-2
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "input100", placeholder: "Email"
+          %span.focus-input100
+        .wrap-input100.col-12.mb-3
+          = f.password_field :password, autocomplete: "current-password", class: "input100", placeholder: "Senha"          
+          %span.focus-input100
+        .w-full.text-center.p-t-27.p-b-239
+          = f.check_box :remember_me, { id: 'check', class: 'check', checked: "checked"}
+          %label{:for => "check"}
+            Manter-me logado
+        .container-login100-form-btn
+          %button.login100-form-btn
+            Login
+
+      .login100-more
