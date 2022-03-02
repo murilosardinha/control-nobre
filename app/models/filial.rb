@@ -1,0 +1,2 @@
+class Filial < ApplicationRecord
+end

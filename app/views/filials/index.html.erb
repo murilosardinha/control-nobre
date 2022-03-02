@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Filials</h1>
+
+<div id="filials">
+  <% @filials.each do |filial| %>
+    <%= render filial %>
+    <p>
+      <%= link_to "Show this filial", filial %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New filial", new_filial_path %>
