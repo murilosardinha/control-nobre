@@ -12,11 +12,10 @@ Rails.application.routes.draw do
     resources :products
     resources :expenses
     
-    resources :equipments do
-      resources :items
-      resources :references
+    resources :machines do
+      resources :items do
+        resources :similars
+      end
     end
-
   end
-
 end

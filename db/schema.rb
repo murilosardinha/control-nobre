@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_182435) do
+ActiveRecord::Schema.define(version: 2022_03_02_201358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,23 @@ ActiveRecord::Schema.define(version: 2022_03_02_182435) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "machine_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["machine_id"], name: "index_items_on_machine_id"
+  end
+
+  create_table "machines", force: :cascade do |t|
+    t.string "name"
+    t.bigint "filial_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["filial_id"], name: "index_machines_on_filial_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "quantity"
@@ -40,6 +57,15 @@ ActiveRecord::Schema.define(version: 2022_03_02_182435) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["filial_id"], name: "index_products_on_filial_id"
+  end
+
+  create_table "similars", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_similars_on_item_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,6 +85,9 @@ ActiveRecord::Schema.define(version: 2022_03_02_182435) do
   end
 
   add_foreign_key "expenses", "filials"
+  add_foreign_key "items", "machines"
+  add_foreign_key "machines", "filials"
   add_foreign_key "products", "filials"
+  add_foreign_key "similars", "items"
   add_foreign_key "users", "filials"
 end

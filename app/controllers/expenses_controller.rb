@@ -50,7 +50,7 @@ class ExpensesController < ApplicationController
 
   private
     def set_expense
-      @expense = Expense.find(params[:id])
+      @expense = @filial.expenses.find(params[:id])
     end
 
     def expense_params

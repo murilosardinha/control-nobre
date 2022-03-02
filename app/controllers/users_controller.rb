@@ -55,10 +55,10 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = @filial.users.find(params[:id])
     end
 
     def user_params
-      params.require(:user).permit(:name, :role)
+      params.require(:user).permit(:name, :role, :email, :password, :password_confirmation)
     end
 end

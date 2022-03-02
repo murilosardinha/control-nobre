@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:  
+
+    models:
+
+    attributes:
+      user:
+        role:
+          one: Função
+          others: Funções
+          admin: Admin
+          manager: Gerente     
+  activemodel:
+    attributes:

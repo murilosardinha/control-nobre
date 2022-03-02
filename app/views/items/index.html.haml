@@ -1,0 +1,38 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Itens de #{@machine.name}"
+
+= link_to new_filial_machine_item_path(@filial, @machine), class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Novo Item"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Nome
+      %th.text-center
+        %b Descrição
+      %th
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td.text-center= item.name
+        %td.text-center= item.description.truncate(50)
+        %td.text-right
+          = link_to filial_machine_item_similars_path(@filial, @machine, item), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Ver Paralelos" do
+            = icon("fas", "tasks")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to edit_filial_machine_item_path(@filial, @machine, item), class: 'text-info' do
+            = icon("fas", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_machine_item_path(@filial, @machine, item), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
+            = icon("fas", "trash")
+            
+          

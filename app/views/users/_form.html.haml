@@ -1,0 +1,25 @@
+.card.card-body
+  = form_for [@filial, @user] do |f|
+    = render 'shared/errors_form', model: @user
+
+    .row
+      .form-group.col-lg-4
+        = f.label :name, "Nome"
+        = f.text_field :name, class: "form-control"
+      .form-group.col-lg-2
+        = f.label :role, "Função"
+        = f.select :role, t_enum_collection(user, :role), { include_blank: false }, class: "form-control"
+    .row
+      .form-group.col-lg-4
+        = f.label :email, "Email"
+        = f.text_field :email, class: "form-control"        
+      .form-group.col-lg-2
+        = f.label :password, "Senha"
+        = f.password_field :password, class: "form-control"        
+      .form-group.col-lg-2
+        = f.label :password_confirmation, "Confirmação de senha"
+        = f.password_field :password_confirmation, class: "form-control"        
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 
