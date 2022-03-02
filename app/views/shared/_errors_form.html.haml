@@ -1,0 +1,6 @@
+- if model.errors.any?
+  .row
+    .col-lg-12
+      - model.errors.full_messages.each do |message|
+        .alert.alert-danger{role:"alert"}
+          = message

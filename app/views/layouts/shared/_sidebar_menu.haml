@@ -4,11 +4,13 @@
       = link_to root_path, style: "background: #fff;border-radius: 55px;" do
         .sidebar__user_img.d-flex.justify-content-center
           .justify-content-center.align-self-center.text-white
-            = current_user.admin? ? '' : @filial.name
+            -# = current_user.admin? ? '' : @filial.name
 
       .dropdown.mt-2
-        %a.nav-link.text-center.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-          = current_user.name
+        %a.nav-link.text-center.dropdown-toggle.p-0.m-0.h4{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+          = current_user.first_name
+        %label.col.text-center.m-0= current_filial.name
+
         .dropdown-menu{"aria-labelledby": "navbarDropdown"}
           = link_to edit_password_user_path(current_user), class: "dropdown-item" do
             =icon('fa', 'unlock-alt')
