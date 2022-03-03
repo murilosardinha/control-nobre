@@ -8,25 +8,42 @@
     = icon('fas', 'plus-square')
     = "Novo Produto"
 
+= render 'filter'
+
 %table.table.table-striped.table-sm
   %thead
     %tr
       %th.text-center
-        %b Nome
+        %b Código
+      %th.text-center
+        %b Produto
       %th.text-center
         %b Quantidade
+      %th.text-center
+        %b Localização
       %th
   %tbody
     - @products.each do |product|
       %tr
+        %td.text-center= product.code
         %td.text-center= product.name
         %td.text-center= product.quantity
+        %td.text-center= product.location
 
         %td.text-right
           = link_to edit_filial_product_path(@filial, product), class: 'text-info' do
-            = icon("fas", "edit")
+            = icon("fas fa-2x", "edit")
 
           .d-none.d-lg-inline= "|"
 
           = link_to filial_product_path(@filial, product), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
-            = icon("fas", "trash")
+            = icon("fas fa-2x", "trash")
+
+.col-lg-12
+  .d-flex.justify-content-center{style: "margin-top: 20px"}
+    %nav
+      %ul.pagination
+        %li.page-item
+          = link_to_prev_page @products, 'Anterior', class: "page-link"
+        %li.page-item
+          = link_to_next_page @products, 'Próxima', class: "page-link"

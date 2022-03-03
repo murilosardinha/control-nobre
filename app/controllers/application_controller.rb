@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
     @filial = current_filial
   end
 
+  def format_number(number)
+    return 0 unless number.present?
+    return number if number.class == Integer
+
+    number.gsub(/\,/mi, '.').to_f
+  end
+
   protected
 
   def pundit_user
@@ -22,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize(record, query = nil)
-    super([record], query)
+    super(record, query)
   end
 
   def user_not_authorized

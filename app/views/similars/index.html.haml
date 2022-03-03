@@ -24,11 +24,11 @@
 
         %td.text-right
           = link_to edit_filial_machine_item_similar_path(@filial, @machine, @item, similar), class: 'text-info' do
-            = icon("fas", "edit")
+            = icon("fas fa-2x", "edit")
 
           .d-none.d-lg-inline= "|"
 
           = link_to filial_machine_item_similar_path(@filial, @machine, @item, similar), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
-            = icon("fas", "trash")
+            = icon("fas fa-2x", "trash")
             
           

@@ -11,6 +11,6 @@ pt-BR:
           one: Função
           others: Funções
           admin: Admin
-          manager: Gerente     
+          manager: Gerente
   activemodel:
     attributes:

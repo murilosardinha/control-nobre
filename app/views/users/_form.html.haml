@@ -13,12 +13,14 @@
       .form-group.col-lg-4
         = f.label :email, "Email"
         = f.text_field :email, class: "form-control"        
-      .form-group.col-lg-2
-        = f.label :password, "Senha"
-        = f.password_field :password, class: "form-control"        
-      .form-group.col-lg-2
-        = f.label :password_confirmation, "Confirmação de senha"
-        = f.password_field :password_confirmation, class: "form-control"        
+      
+      - unless @user.persisted?
+        .form-group.col-lg-2
+          = f.label :password, "Senha"
+          = f.password_field :password, class: "form-control"        
+        .form-group.col-lg-2
+          = f.label :password_confirmation, "Confirmação de senha"
+          = f.password_field :password_confirmation, class: "form-control"        
 
     .row
       .form-group.col-lg-3.mt-2

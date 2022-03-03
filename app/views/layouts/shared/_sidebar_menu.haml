@@ -1,10 +1,11 @@
-#sideBar
+%nav#sideBar
   .sidebar__content
     .sidebar__user
       = link_to root_path, style: "background: #fff;border-radius: 55px;" do
         .sidebar__user_img.d-flex.justify-content-center
           .justify-content-center.align-self-center.text-white
-            -# = current_user.admin? ? '' : @filial.name
+            -# = image_tag 'logo.png', class: 'img-fluid'
+            = image_tag 'nobre.png', class: 'img-fluid'
 
       .dropdown.mt-2
         %a.nav-link.text-center.dropdown-toggle.p-0.m-0.h4{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -25,9 +26,10 @@
 
 .d-block.d-sm-block.d-md-none
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    = link_to 'Home', root_path, class: 'navbar-brand'
-    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+    = link_to root_path, class: 'navbar-brand col' do
+      = image_tag 'nobre.png', class: 'img-fluid'
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarNav.collapse.navbar-collapse
       %ul.sidebar__menu
-      = render 'layouts/shared/options'
+        = render 'layouts/shared/options'

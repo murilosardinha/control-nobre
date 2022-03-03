@@ -2,11 +2,11 @@
 
 
 .block-tag{
-  height: 9cm !important;
-  width: 10cm !important;
+  height: 3cm !important;
+  width: 5cm !important;
   break-after: always;
   page-break-after: always;
-  padding: 0.5cm 0 0;
+  margin: 0 0 0.5cm 0;
   overflow: hidden;
 
   .card-header{
@@ -32,25 +32,12 @@
   image-rendering: pixelated;
   width: 100%;
   margin: 5px 0px 0px;
-  height: 1.5cm;
-}
-.img-qrcode{
-  overflow: hidden; /*hide bounds of image */
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-  width: 100%;
-  margin: 0.1em 0px;
-  height: 1.6cm;
-  width: auto;
+  height: 1cm;
 }
 
 .print-tag{
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
-}
-
-.tag-color{
-  padding-left: 1cm;
 }
 
 .line-height-100{

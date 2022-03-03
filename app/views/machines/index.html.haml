@@ -12,7 +12,7 @@
   %thead
     %tr
       %th.text-center
-        %b Nome
+        %b Equipamento
       %th
   %tbody
     - @machines.each do |machine|
@@ -21,15 +21,15 @@
 
         %td.text-right
           = link_to filial_machine_items_path(@filial, machine), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Ver Itens" do
-            = icon("fas", "tasks")
+            = icon("fas fa-2x", "tasks")
           
           .d-none.d-lg-inline= "|"
 
           = link_to edit_filial_machine_path(@filial, machine), class: 'text-info' do
-            = icon("fas", "edit")
+            = icon("fas fa-2x", "edit")
 
           .d-none.d-lg-inline= "|"
 
           = link_to filial_machine_path(@filial, machine), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
-            = icon("fas", "trash")
+            = icon("fas fa-2x", "trash")
             

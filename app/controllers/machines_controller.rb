@@ -1,4 +1,5 @@
 class MachinesController < ApplicationController
+  before_action :authorize_user!
   before_action :set_filial
   before_action :set_machine, only: %i[ show edit update destroy ]
 
@@ -21,7 +22,7 @@ class MachinesController < ApplicationController
 
     respond_to do |format|
       if @machine.save
-        format.html { redirect_to filial_machines_path(@filial), notice: "machine was successfully created." }
+        format.html { redirect_to filial_machines_path(@filial), notice: "Equipamento foi criado com sucesso." }
         format.json { render :show, status: :created, location: @machine }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +34,7 @@ class MachinesController < ApplicationController
   def update
     respond_to do |format|
       if @machine.update(machine_params)
-        format.html { redirect_to filial_machines_path(@filial), notice: "machine was successfully updated." }
+        format.html { redirect_to filial_machines_path(@filial), notice: "Equipamento foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @machine }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,12 +47,16 @@ class MachinesController < ApplicationController
     @machine.destroy
 
     respond_to do |format|
-      format.html { redirect_to machine_index_url, notice: "machine was successfully destroyed." }
+      format.html { redirect_to machine_index_url, notice: "Equipamento foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end
 
   private
+    def authorize_user!
+      authorize :machine
+    end
+
     def set_machine
       @machine = @filial.machines.find(params[:id])
     end

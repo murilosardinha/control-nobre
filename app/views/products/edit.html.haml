@@ -3,4 +3,10 @@
     %h2.text-dark
       = "#{@product.name}"
 
-= render 'form'
+.col-lg-12.row
+  .col-lg-10
+    = render 'form'
+  .col-lg-2
+    .block-tag.w-100.pb-2
+      .print-tag.h-100
+        = render 'products/barcode', tag: @product

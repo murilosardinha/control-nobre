@@ -23,16 +23,16 @@
         %td.text-center= item.description.truncate(50)
         %td.text-right
           = link_to filial_machine_item_similars_path(@filial, @machine, item), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Ver Paralelos" do
-            = icon("fas", "tasks")
+            = icon("fas fa-2x", "tasks")
 
           .d-none.d-lg-inline= "|"
 
           = link_to edit_filial_machine_item_path(@filial, @machine, item), class: 'text-info' do
-            = icon("fas", "edit")
+            = icon("fas fa-2x", "edit")
 
           .d-none.d-lg-inline= "|"
 
           = link_to filial_machine_item_path(@filial, @machine, item), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
-            = icon("fas", "trash")
+            = icon("fas fa-2x", "trash")
             
           

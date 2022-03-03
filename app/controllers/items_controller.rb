@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to filial_machine_items_path(@filial, @machine), notice: "Item was successfully created." }
+        format.html { redirect_to filial_machine_items_path(@filial, @machine), notice: "Item foi criado com sucesso." }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to filial_machine_items_path(@filial, @machine), notice: "Item was successfully updated." }
+        format.html { redirect_to filial_machine_items_path(@filial, @machine), notice: "Item foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
+      format.html { redirect_to items_url, notice: "Item foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

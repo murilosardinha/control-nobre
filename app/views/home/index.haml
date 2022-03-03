@@ -1,4 +1,15 @@
 - if current_user.admin?
-  
 - else
-  Oi
+
+.card.card-body
+  .h3 Buscar Produto
+  = render 'products/filter'
+
+.row
+  .col-6
+    .card.card-body
+      .h3 Ultimas Saídas
+  .col-6
+    .card.card-body
+      .h3 Ultimas Despesas
+      = render 'expenses/table_expenses'

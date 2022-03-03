@@ -1,0 +1,7 @@
+.card.border.border-2.border-dark.h-100
+  .px-2.p-0.flex-fill
+    .text-truncate
+      = tag.name
+  .card-footer.text-center.pt-0
+    = image_tag tag.barcode, class: 'img-barcode w-100'
+    = tag.code

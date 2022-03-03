@@ -3,7 +3,12 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
-    @products = @filial.products.order(:name)
+    @q = @filial.products.ransack(params[:q])
+    @products = @q.result
+      .distinct(true)
+      .order(:location, :name)
+      .page(params[:page])
+      .per(100)
   end
 
   def new
@@ -13,7 +18,7 @@ class ProductsController < ApplicationController
   def edit; end
 
   def create
-    @product = @filial.products.new(product_params)
+    @product = @filial.products.new(product_params.except!(:code))
 
     respond_to do |format|
       if @product.save
@@ -53,6 +58,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :quantity)
+      params.require(:product).permit(:name, :quantity, :location)
     end
 end

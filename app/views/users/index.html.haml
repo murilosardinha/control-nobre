@@ -1,0 +1,35 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Usuários"
+
+= link_to new_filial_user_path(@filial), class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Novo Usuário"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Nome
+      %th.text-center
+        %b Email
+      %th.text-center
+        %b Função
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td.text-center= user.name
+        %td.text-center= user.email
+        %td.text-center= t_enum(user, :role)
+
+        %td.text-right
+          = link_to edit_filial_user_path(@filial, user), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_user_path(@filial, user), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Usuário?"} do
+            = icon("fas fa-2x", "trash")

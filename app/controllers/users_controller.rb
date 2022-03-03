@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorize_user!
   before_action :set_filial
   before_action :set_user, only: %i[ show edit update destroy edit_password]
 
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "Usuário foi criado com sucesso." }
+        format.html { redirect_to filial_users_path(@filial), notice: "Usuário foi criado com sucesso." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "Usuário foi atualizado com sucesso." }
+        format.html { redirect_to filial_users_path(@filial), notice: "Usuário foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,6 +55,10 @@ class UsersController < ApplicationController
   end
 
   private
+    def authorize_user!
+      authorize :user
+    end
+
     def set_user
       @user = @filial.users.find(params[:id])
     end

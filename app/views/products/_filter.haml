@@ -1,0 +1,17 @@
+= search_form_for @q, url: filial_products_path(@filial), html: { class: 'mb-2'} do |f|
+  .row
+    .form-group.col-lg-3
+      = f.search_field :code_eq, class: "form-control", placeholder: 'Código'
+
+    .form-group.col-lg-4
+      = f.search_field :name_cont, class: "form-control", placeholder: 'Produto'
+
+    .form-group.col-lg-2
+      = f.submit class: "btn btn-primary col h-100", value: "Filtrar"
+
+    .form-group.col-lg-2
+      - if params[:q].present?
+        = link_to request.path, class:"btn btn-default col h-100 d-flex justify-content-center" do
+          .justify-content-center.align-self-center
+            = icon('fas', 'window-close')
+            Limpar Filtros

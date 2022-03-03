@@ -21,7 +21,7 @@ class SimilarsController < ApplicationController
 
     respond_to do |format|
       if @similar.save
-        format.html { redirect_to filial_machine_item_similars_path(@filial, @machine, @item), notice: "Similar was successfully created." }
+        format.html { redirect_to filial_machine_item_similars_path(@filial, @machine, @item), notice: "Paralelo foi criado com sucesso." }
         format.json { render :show, status: :created, location: @similar }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ class SimilarsController < ApplicationController
   def update
     respond_to do |format|
       if @similar.update(similar_params)
-        format.html { redirect_to filial_machine_item_similars_path(@filial, @machine, @item), notice: "Similar was successfully updated." }
+        format.html { redirect_to filial_machine_item_similars_path(@filial, @machine, @item), notice: "Paralelo foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @similar }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class SimilarsController < ApplicationController
     @similar.destroy
 
     respond_to do |format|
-      format.html { redirect_to similars_url, notice: "Similar was successfully destroyed." }
+      format.html { redirect_to similars_url, notice: "Paralelo foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end
