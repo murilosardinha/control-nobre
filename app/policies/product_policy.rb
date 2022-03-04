@@ -30,7 +30,7 @@ class ProductPolicy
     true
   end
 
-  def receive_product?
+  def entrances?
     true
   end
 

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_034652) do
+ActiveRecord::Schema.define(version: 2022_03_04_175059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "destinations", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.bigint "filial_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["filial_id"], name: "index_destinations_on_filial_id"
+  end
 
   create_table "expenses", force: :cascade do |t|
     t.string "title"
@@ -51,6 +60,16 @@ ActiveRecord::Schema.define(version: 2022_03_04_034652) do
     t.index ["filial_id"], name: "index_machines_on_filial_id"
   end
 
+  create_table "product_sales", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "product_id", null: false
+    t.bigint "sale_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_sales_on_product_id"
+    t.index ["sale_id"], name: "index_product_sales_on_sale_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "quantity"
@@ -60,6 +79,16 @@ ActiveRecord::Schema.define(version: 2022_03_04_034652) do
     t.string "location"
     t.string "code"
     t.index ["filial_id"], name: "index_products_on_filial_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.integer "destination_filial_id"
+    t.bigint "destination_id"
+    t.bigint "filial_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destination_id"], name: "index_sales_on_destination_id"
+    t.index ["filial_id"], name: "index_sales_on_filial_id"
   end
 
   create_table "similars", force: :cascade do |t|
@@ -87,10 +116,15 @@ ActiveRecord::Schema.define(version: 2022_03_04_034652) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "destinations", "filials"
   add_foreign_key "expenses", "filials"
   add_foreign_key "items", "machines"
   add_foreign_key "machines", "filials"
+  add_foreign_key "product_sales", "products"
+  add_foreign_key "product_sales", "sales"
   add_foreign_key "products", "filials"
+  add_foreign_key "sales", "destinations"
+  add_foreign_key "sales", "filials"
   add_foreign_key "similars", "items"
   add_foreign_key "users", "filials"
 end

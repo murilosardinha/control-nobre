@@ -46,7 +46,7 @@ class SimilarsController < ApplicationController
     @similar.destroy
 
     respond_to do |format|
-      format.html { redirect_to similars_url, notice: "Paralelo foi deletado com sucesso." }
+      format.html { redirect_to filial_machine_item_similars_path(@filial, @machine, @item), notice: "Paralelo foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

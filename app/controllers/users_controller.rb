@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "Usuário foi deletado com sucesso." }
+      format.html { redirect_to filial_users_path(@filial), notice: "Usuário foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

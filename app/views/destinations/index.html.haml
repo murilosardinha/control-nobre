@@ -1,0 +1,33 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Destinações"
+
+= link_to new_filial_destination_path(@filial), class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Nova Destinação"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Nome
+      %th.text-center
+        %b Endereço
+      %th
+  %tbody
+    - @destinations.each do |destination|
+      %tr
+        %td.text-center= destination.name
+        %td.text-center= destination.address
+        %td.text-right
+          = link_to edit_filial_destination_path(@filial, destination), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_destination_path(@filial, destination), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Destinação?"} do
+            = icon("fas fa-2x", "trash")
+            
+          

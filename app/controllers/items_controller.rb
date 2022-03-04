@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item foi deletado com sucesso." }
+      format.html { redirect_to filial_machine_items_path(@filial, @machine), notice: "Item foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

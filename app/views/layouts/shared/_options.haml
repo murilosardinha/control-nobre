@@ -24,6 +24,18 @@
         %b Equipamentos
 
 %li.nav-item
+  %a{href: filial_sales_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'boxes')
+    %span.ms-1
+      %b Baixas
+
+%li.nav-item
+  %a{href: filial_destinations_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'boxes')
+    %span.ms-1
+      %b Destinações
+
+%li.nav-item
   %a{href: filial_products_path(current_filial), class: 'nav-link'}
     = icon('fas', 'boxes')
     %span.ms-1

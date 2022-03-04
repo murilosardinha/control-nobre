@@ -47,7 +47,7 @@ class FilialsController < ApplicationController
     @filial.destroy
 
     respond_to do |format|
-      format.html { redirect_to filials_url, notice: "Filial foi deletada com sucesso." }
+      format.html { redirect_to filials_path, notice: "Filial foi deletada com sucesso." }
       format.json { head :no_content }
     end
   end

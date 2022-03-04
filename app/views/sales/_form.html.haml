@@ -1,0 +1,32 @@
+.card.card-body
+  = form_for [@filial, @sale] do |f|
+    = render 'shared/errors_form', model: @sale
+
+    -# .row
+      -# .form-group.col-lg-4
+      -#   = f.label :name, "Nome"
+      -#   = f.text_field :name, class: "form-control"
+      -# .form-group.col-lg-8
+      -#   = f.label :address, "Endereço"
+      -#   = f.text_field :address, class: "form-control", rows: 4
+
+    .row
+      - @products.each do |product|
+        %ul
+          %li= product.name
+
+    %hr
+
+    .row
+      %h2.mt-3 Destinação
+      .form-group.col-lg-4
+        = f.label :destination_id, "Cliente Final"
+        = f.select :destination_id, options_for_select(@destinations), { include_blank: "Selecione.." }, class: "form-control"
+      .form-group.col-lg-4
+        = f.label :destination_filial_id, "Filial"
+        = f.select :destination_filial_id, options_for_select(@destinations_filials), { include_blank: "Selecione.." }, class: "form-control"
+
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 

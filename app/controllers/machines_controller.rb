@@ -47,7 +47,7 @@ class MachinesController < ApplicationController
     @machine.destroy
 
     respond_to do |format|
-      format.html { redirect_to machine_index_url, notice: "Equipamento foi deletado com sucesso." }
+      format.html { redirect_to filial_machines_path(@filial), notice: "Equipamento foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

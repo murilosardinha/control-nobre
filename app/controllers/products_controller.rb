@@ -16,6 +16,10 @@ class ProductsController < ApplicationController
     @product = @filial.products.new
   end
 
+  def entrances
+    @sales = Sale.where(destination_filial_id: @filial.id)
+  end
+
   def edit; end
   def edit_limited; end
 

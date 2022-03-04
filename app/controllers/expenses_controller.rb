@@ -48,7 +48,7 @@ class ExpensesController < ApplicationController
     @expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to expenses_url, notice: "Despesa foi deletada com sucesso." }
+      format.html { redirect_to filial_expenses_path(@expense), notice: "Despesa foi deletada com sucesso." }
       format.json { head :no_content }
     end
   end

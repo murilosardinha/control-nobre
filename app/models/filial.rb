@@ -3,6 +3,9 @@ class Filial < ApplicationRecord
   has_many :products
   has_many :expenses
   has_many :machines
+  
+  has_many :sales
+  has_many :destinations
 
   enum category: { matriz: 1, branch: 2 }
 
