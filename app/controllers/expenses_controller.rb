@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
-  before_action :set_filial
+  before_action :set_current_filial
   before_action :set_expense, only: %i[ edit update destroy ]
 
   def index

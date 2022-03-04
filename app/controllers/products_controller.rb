@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authorize_user!
-  before_action :set_filial
+  before_action :set_current_filial
   before_action :set_product, only: %i[ show edit update destroy edit_limited]
 
   def index

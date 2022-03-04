@@ -53,7 +53,7 @@ class SimilarsController < ApplicationController
 
   private
     def set_item
-      set_filial
+      set_current_filial
       @machine = @filial.machines.find(params[:machine_id])
       @item = @machine.items.find(params[:item_id])
     end

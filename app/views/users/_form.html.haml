@@ -14,7 +14,7 @@
         = f.select :role, t_enum_collection(@user, :role), { include_blank: false }, class: "form-control"
       .form-group.col-lg-4
         = f.label :filial_id, "Almoxarifado"
-        = f.select :filial_id, options_for_select(filial_options), { include_blank: false }, class: "form-control"
+        = f.select :filial_id, options_for_select(filial_options, @user.filial_id), { include_blank: false }, class: "form-control"
     .row
       .form-group.col-lg-4
         = f.label :email, "Email"

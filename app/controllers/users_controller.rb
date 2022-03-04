@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_user!
-  before_action :set_filial
+  before_action :set_current_filial
   before_action :set_user, only: %i[ show edit update destroy edit_password]
 
   def index
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      @user = @filial.users.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     def user_params

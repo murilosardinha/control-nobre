@@ -1,7 +1,7 @@
 class FilialsController < ApplicationController
   before_action :authorize_user!
-  before_action :set_filial
-  before_action :set_filial_item, only: %i[ show edit update destroy ]
+  before_action :set_current_filial
+  before_action :set_filial, only: %i[ show edit update destroy ]
 
   def index
     @filials = Filial.order(:id)
@@ -57,7 +57,7 @@ class FilialsController < ApplicationController
       authorize :filial
     end
 
-    def set_filial_item
+    def set_filial
       @filial = Filial.find(params[:id])
     end
 

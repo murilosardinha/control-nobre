@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :set_filial
+  before_action :set_current_filial
 
   def index
     @q = @filial.products.ransack(params[:q])

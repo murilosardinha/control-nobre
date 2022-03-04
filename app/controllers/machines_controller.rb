@@ -1,6 +1,6 @@
 class MachinesController < ApplicationController
   before_action :authorize_user!
-  before_action :set_filial
+  before_action :set_current_filial
   before_action :set_machine, only: %i[ show edit update destroy ]
 
   def index

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     current_user.filial
   end
 
-  def set_filial
+  def set_current_filial
     @filial = current_filial
   end
 
