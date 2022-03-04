@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   
   resources :filials do
     resources :users
-    resources :products
     resources :expenses
+    resources :products do
+      get :edit_limited, on: :member
+    end
     
     resources :machines do
       resources :items do

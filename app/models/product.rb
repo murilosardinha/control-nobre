@@ -6,10 +6,13 @@ class Product < ApplicationRecord
   belongs_to :filial
   after_create :set_code
 
-  def set_code
-    return unless code.present?
+  validates_uniqueness_of :code, scope: :filial_id
 
-    self.code = id.to_s.rjust(13, '0')
+  def set_code
+    return if code.present?
+    
+    code_id = rand.to_s[2..14]
+    update(code: code_id)
   end
 
   def barcode

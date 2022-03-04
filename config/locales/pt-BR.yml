@@ -11,6 +11,14 @@ pt-BR:
           one: Função
           others: Funções
           admin: Admin
-          manager: Gerente
+          employee: Funcionário
+
+      filial:
+        category:
+          one: Tipo
+          others: Tipos
+          matriz: Matriz
+          branch: Filial
+
   activemodel:
     attributes:

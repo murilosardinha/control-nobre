@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :authorize_user!
   before_action :set_filial
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy edit_limited]
 
   def index
     @q = @filial.products.ransack(params[:q])
@@ -16,9 +17,10 @@ class ProductsController < ApplicationController
   end
 
   def edit; end
+  def edit_limited; end
 
   def create
-    @product = @filial.products.new(product_params.except!(:code))
+    @product = @filial.products.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -33,7 +35,7 @@ class ProductsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @product.update(product_params)
+      if @product.update(product_update_params)
         format.html { redirect_to filial_products_path(@filial), notice: "Produto foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -47,17 +49,25 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url, notice: "Produto foi deletado com sucesso." }
+      format.html { redirect_to filial_products_path(@filial), notice: "Produto foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end
 
   private
+    def authorize_user!
+      authorize :product
+    end
+
     def set_product
       @product = @filial.products.find(params[:id])
     end
 
     def product_params
+      params.require(:product).permit(:name, :quantity, :location, :code)
+    end
+    
+    def product_update_params
       params.require(:product).permit(:name, :quantity, :location)
     end
 end

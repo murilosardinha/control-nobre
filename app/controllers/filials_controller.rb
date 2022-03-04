@@ -3,7 +3,7 @@ class FilialsController < ApplicationController
   before_action :set_filial, only: %i[ show edit update destroy ]
 
   def index
-    @filials = Filial.all
+    @filials = Filial.order(:id)
   end
 
   def show
@@ -61,6 +61,6 @@ class FilialsController < ApplicationController
     end
 
     def filial_params
-      params.require(:filial).permit(:name, :address)
+      params.require(:filial).permit(:name, :address, :category)
     end
 end

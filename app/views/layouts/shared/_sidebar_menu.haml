@@ -15,7 +15,7 @@
         .dropdown-menu{"aria-labelledby": "navbarDropdown"}
           = link_to edit_password_user_path(current_user), class: "dropdown-item" do
             =icon('fa', 'unlock-alt')
-            Editar Senha
+            Editar
 
           = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
             =icon('fa', 'sign-out-alt')

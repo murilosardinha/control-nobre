@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   validates_presence_of :name
 
-  enum role: { admin: 1, manager: 2 }
+  enum role: { admin: 1, employee: 2 }
 
   delegate :name, to: :filial, prefix: true, allow_nil: true
 

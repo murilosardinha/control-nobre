@@ -4,14 +4,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy edit_password]
 
   def index
-    @users = @filial.users.order(:name)
+    @users = User.order(:filial_id, :role, :name)
   end
 
   def show
   end
 
   def new
-    @user = @filial.users.new
+    @user = User.new(role: :employee)
   end
 
   def edit
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def edit_password; end
 
   def create
-    @user = @filial.users.new(user_params)
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
@@ -64,6 +64,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :role, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :role, :filial_id, :email, :password, :password_confirmation)
     end
 end

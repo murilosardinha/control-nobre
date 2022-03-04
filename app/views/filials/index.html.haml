@@ -1,0 +1,36 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Almoxarifado"
+
+= link_to new_filial_path(@filial), class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Novo Almoxarifado"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Nome
+      %th.text-center
+        %b Localização
+      %th.text-center
+        %b Cateogria
+      %th
+  %tbody
+    - @filials.each do |filial|
+      %tr
+        %td.text-center= filial.name
+        %td.text-center= filial.address
+        %td.text-center= t_enum(filial, :category)
+        %td.text-right
+          = link_to edit_filial_path(filial), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_path(filial), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Almorarifado?"} do
+            = icon("fas fa-2x", "trash")
+            
+          

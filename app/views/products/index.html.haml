@@ -3,10 +3,16 @@
     %h2.text-dark
       = "Produtos"
 
-= link_to new_filial_product_path(@filial), class: 'float-end mb-2' do
+- if current_user.admin? && @filial.matriz?
+  = link_to new_filial_product_path(@filial), class: 'float-end mb-2' do
+    %btn.btn.btn-outline-primary
+      = icon('fas', 'plus-square')
+      = "Novo Produto"
+
+= link_to "#", class: 'float-end mb-2' do
   %btn.btn.btn-outline-primary
     = icon('fas', 'plus-square')
-    = "Novo Produto"
+    = "Receber Mercadoria"
 
 = render 'filter'
 
@@ -30,14 +36,19 @@
         %td.text-center= product.quantity
         %td.text-center= product.location
 
-        %td.text-right
-          = link_to edit_filial_product_path(@filial, product), class: 'text-info' do
-            = icon("fas fa-2x", "edit")
+        - if current_user.admin?
+          %td.text-right
+            = link_to edit_filial_product_path(@filial, product), class: 'text-info' do
+              = icon("fas fa-2x", "edit")
 
-          .d-none.d-lg-inline= "|"
+            .d-none.d-lg-inline= "|"
 
-          = link_to filial_product_path(@filial, product), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
-            = icon("fas fa-2x", "trash")
+            = link_to filial_product_path(@filial, product), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
+              = icon("fas fa-2x", "trash")
+        - else
+          %td.text-right
+            = link_to edit_limited_filial_product_path(@filial, product), class: 'text-info' do
+              = icon("fas fa-2x", "edit")
 
 .col-lg-12
   .d-flex.justify-content-center{style: "margin-top: 20px"}

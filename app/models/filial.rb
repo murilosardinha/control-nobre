@@ -4,6 +4,8 @@ class Filial < ApplicationRecord
   has_many :expenses
   has_many :machines
 
+  enum category: { matriz: 1, branch: 2 }
+
   def first_name
     "#{name.split.first}"
   end

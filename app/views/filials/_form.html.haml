@@ -1,0 +1,18 @@
+.card.card-body
+  = form_for @filial do |f|
+    = render 'shared/errors_form', model: @filial
+
+    .row
+      .form-group.col-lg-4
+        = f.label :name, "Nome"
+        = f.text_field :name, class: "form-control"
+      .form-group.col-lg-4
+        = f.label :address, "Localização"
+        = f.text_field :address, class: "form-control", rows: 4
+      .form-group.col-lg-4
+        = f.label :category, "Tipo"
+        = f.select :category, t_enum_collection(@filial, :category), { include_blank: false }, class: "form-control"
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 

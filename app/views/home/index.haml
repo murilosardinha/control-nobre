@@ -1,6 +1,3 @@
-- if current_user.admin?
-- else
-
 .card.card-body
   .h3 Buscar Produto
   = render 'products/filter'
@@ -8,8 +5,51 @@
 .row
   .col-6
     .card.card-body
-      .h3 Ultimas Saídas
+      .row
+        .h3.col-10 Ultimas Saídas
+        .col-2 
+          = link_to "#", class: 'float-end mb-2' do
+            = icon('fas fa-2x', 'plus-square')
+
   .col-6
     .card.card-body
-      .h3 Ultimas Despesas
+      .row
+        .h3.col-10 Ultimas Despesas
+        .col-2 
+          = link_to new_filial_expense_path(@filial), class: 'float-end mb-2' do
+            = icon('fas fa-2x', 'plus-square')
+      
       = render 'expenses/table_expenses'
+
+- if current_user.admin? && @filial.matriz?
+  .row
+    .col-12
+      .card.card-body
+        .row
+          .h3.col-8 Quadro Geral
+          .col-4
+            = form_with url: root_path, method: :get, html: { class: ''} do |f|
+              .row
+                .form-group.col-5.ps-0
+                  %label Data Início
+                  = f.text_field "resume[date_dategteq]", class: 'form-control', type: 'date', value: params[:resume][:date_dategteq]
+
+                .form-group.col-5.ps-0
+                  %label Data Final
+                  = f.text_field "resume[date_datelteq]", class: 'form-control', type: 'date', value: params[:resume][:date_datelteq]
+
+                .form-group.col-2.mt-4.m-0.p-0
+                  %button.btn.btn-primary.col.h-100{type:"submit"}
+                    = icon("fas fa-2x", "filter")
+
+        .row
+          - @filials.each do |filial|
+            -# :ruby
+              -# results = filial_sales_graph(filial, params[:resume])
+
+            .col-6
+              .card.card-body
+                = filial.name
+                -# = bar_chart results, title: "Saídas", messages: { empty: "Sem Saídas no Período" }
+
+
