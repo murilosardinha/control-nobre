@@ -7,26 +7,26 @@ class FilialPolicy
   end
 
   def index?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 
   def new?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 
   def edit?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 
   def create?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 
   def update?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 
   def destroy?
-    user.admin?
+    user.admin? && user.filial.matriz?
   end
 end
