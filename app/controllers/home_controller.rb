@@ -9,6 +9,12 @@ class HomeController < ApplicationController
       .page(params[:page])
       .per(100)
     
+    # SAIDAS
+    @sales = @filial.sales
+      .order(id: :desc)
+      .first(10)
+
+    # DESPESAS
     @expenses = @filial.expenses
       .distinct(true)
       .order(id: :desc)

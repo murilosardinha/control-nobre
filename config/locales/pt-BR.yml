@@ -2,10 +2,16 @@ pt-BR:
   activerecord:
     errors:
       models:  
+        product:
+          attributes:
+            code:
+              too_short: incompleto (13 dígitos*)
 
     models:
 
     attributes:
+      product:
+        code: Código
       user:
         role:
           one: Função

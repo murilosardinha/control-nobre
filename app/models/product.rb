@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   after_create :set_code
 
   validates_uniqueness_of :code, scope: :filial_id
+  validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
 
   def set_code
     return if code.present?

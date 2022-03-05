@@ -3,15 +3,16 @@
   = render 'products/filter'
 
 .row
-  .col-6
+  .col-lg-6
     .card.card-body
       .row
         .h3.col-10 Ultimas Baixas
         .col-2 
-          = link_to "#", class: 'float-end mb-2' do
+          = link_to filial_sales_path(@filial), class: 'float-end mb-2' do
             = icon('fas fa-2x', 'plus-square')
+      = render 'sales/table_sales'
 
-  .col-6
+  .col-lg-6
     .card.card-body
       .row
         .h3.col-10 Ultimas Despesas

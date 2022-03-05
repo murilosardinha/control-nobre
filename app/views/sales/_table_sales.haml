@@ -1,0 +1,24 @@
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b ID
+      %th.text-center
+        %b Produtos
+      %th.text-center
+        %b Destinação
+      %th
+  %tbo
+    - @sales.each do |sale|
+      %tr
+        %td.text-center= sale.id
+        %td.text-center= sale.products_name
+        %td.text-center= sale.destination_name
+        %td.text-right
+          = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_sale_path(@filial, sale), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Baixa?"} do
+            = icon("fas fa-2x", "trash")
