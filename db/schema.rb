@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_175059) do
+ActiveRecord::Schema.define(version: 2022_03_05_034730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_175059) do
     t.bigint "filial_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "date"
     t.index ["destination_id"], name: "index_sales_on_destination_id"
     t.index ["filial_id"], name: "index_sales_on_filial_id"
   end

@@ -24,25 +24,25 @@
         %b Equipamentos
 
 %li.nav-item
-  %a{href: filial_sales_path(current_filial), class: 'nav-link'}
-    = icon('fas', 'boxes')
-    %span.ms-1
-      %b Baixas
-
-%li.nav-item
-  %a{href: filial_destinations_path(current_filial), class: 'nav-link'}
-    = icon('fas', 'boxes')
-    %span.ms-1
-      %b Destinações
-
-%li.nav-item
   %a{href: filial_products_path(current_filial), class: 'nav-link'}
     = icon('fas', 'boxes')
     %span.ms-1
       %b Produtos        
 
 %li.nav-item
+  %a{href: filial_sales_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'cart-arrow-down')
+    %span.ms-1
+      %b Baixas
+
+%li.nav-item
   %a{href: filial_expenses_path(current_filial), class: 'nav-link'}
     = icon('fas', 'dollar-sign')
     %span.ms-1
       %b Despesas
+
+%li.nav-item
+  %a{href: filial_destinations_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'map-pin')
+    %span.ms-1
+      %b Destinações

@@ -27,7 +27,7 @@ class UserPolicy
   end
 
   def update?
-    user.admin?
+    true
   end
 
   def destroy?

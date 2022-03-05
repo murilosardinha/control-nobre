@@ -11,13 +11,13 @@ class HomeController < ApplicationController
     
     # SAIDAS
     @sales = @filial.sales
-      .order(id: :desc)
+      .order(date: :desc)
       .first(10)
 
     # DESPESAS
     @expenses = @filial.expenses
       .distinct(true)
-      .order(id: :desc)
+      .order(date: :desc)
       .first(10)
 
     # GRAPHS

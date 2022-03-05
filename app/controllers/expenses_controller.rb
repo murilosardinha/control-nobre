@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
     @q = @filial.expenses.ransack(params[:q])
     @expenses = @q.result
       .distinct(true)
-      .order(id: :desc)
+      .order(date: :desc)
       .page(params[:page])
       .per(100)
   end

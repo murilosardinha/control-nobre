@@ -6,6 +6,10 @@ pt-BR:
           attributes:
             code:
               too_short: incompleto (13 dígitos*)
+        user:
+          attributes:
+            password:
+              blank: não pode ficar em branco.
 
     models:
 

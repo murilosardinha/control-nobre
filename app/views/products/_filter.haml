@@ -9,7 +9,7 @@
     .form-group.col-lg-2
       = f.submit class: "btn btn-primary col h-100", value: "Filtrar"
 
-    .form-group.col-lg-2
+    .form-group.col-lg-3
       - if params[:q].present?
         = link_to request.path, class:"btn btn-default col h-100 d-flex justify-content-center" do
           .justify-content-center.align-self-center

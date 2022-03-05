@@ -5,6 +5,8 @@ class Sale < ApplicationRecord
 
   belongs_to :destination, optional: true
   belongs_to :destination_filial, foreign_key: :destination_filial_id, class_name: "Filial", optional: true
+  
+  before_save :set_date
 
   def products_name
     products.map(&:name).join(", ")
@@ -12,5 +14,9 @@ class Sale < ApplicationRecord
 
   def destination_name
     destination.present? ? destination.name : destination_filial.name
+  end
+
+  def set_date
+    self.date ||= Date.today 
   end
 end

@@ -3,18 +3,25 @@
     %h2.text-dark
       = "Produtos"
 
-- if current_user.admin? && @filial.matriz?
-  = link_to new_filial_product_path(@filial), class: 'float-end mb-2' do
-    %btn.btn.btn-outline-primary
-      = icon('fas', 'plus-square')
-      = "Novo Produto"
 
-= link_to entrances_filial_products_path(@filial), class: 'float-end mb-2' do
-  %btn.btn.btn-outline-primary
-    = icon('fas', 'plus-square')
-    = "Receber Mercadoria"
+.row.mb-2
+  .col-lg-9
+    = render 'filter'
 
-= render 'filter'
+  .col-lg-3
+    .row
+      - if current_user.admin? && @filial.matriz?
+        = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
+          %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
+            .justify-content-center.align-self-center
+              = icon('fas', 'plus-square')
+              = "Entrada de Produtos"
+
+      = link_to entrances_filial_products_path(@filial), class: 'col-lg-6' do
+        %btn.btn.btn-outline-success.col
+          = icon('fas', 'plus-square')
+          = "Receber Mercadoria"
+
 
 %table.table.table-striped.table-sm
   %thead
@@ -32,7 +39,7 @@
     - @products.each do |product|
       %tr
         %td.text-center= product.code
-        %td.text-center= product.name
+        %td.text-left= product.name
         %td.text-center= product.quantity
         %td.text-center= product.location
 
