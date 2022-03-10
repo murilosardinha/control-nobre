@@ -9,6 +9,9 @@ class Product < ApplicationRecord
   validates_uniqueness_of :code, scope: :filial_id
   validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
 
+  delegate :name, to: :filial, prefix: true
+  scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
+
   def set_code
     return if code.present?
     

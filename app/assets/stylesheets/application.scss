@@ -221,6 +221,16 @@ p {
   border-left: .3em solid transparent;
 }
 
+.product-other-filial{
+  background: $dark;
+  opacity: 0.4;
+  line-height: 0.5em;
+  
+  td{
+    color: $white !important;
+  }
+}
+
 @media (min-width: 1300px) {
   // body {
   //   zoom: 0.9;

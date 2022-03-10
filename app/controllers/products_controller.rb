@@ -4,12 +4,16 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy edit_limited]
 
   def index
-    @q = @filial.products.ransack(params[:q])
+    @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
       .distinct(true)
       .order(:location, :name)
       .page(params[:page])
       .per(100)
+
+    return @scope = @products.where(filial_id: @filial.id).group_by(&:code) unless params[:q]
+
+    @scope = @products.group_by(&:code)
   end
 
   def new
