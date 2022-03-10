@@ -262,6 +262,22 @@ textarea{
   }
 }
 
+.list-group-flush{
+  position: absolute;
+  z-index: 1;
+  background: $gray-100;
+}
+
+.list-group-flush li{
+  color: $dark;
+
+  &:hover{
+    background: $secondary;
+    color: $white;
+    cursor: pointer;
+  }
+}
+
 @media (max-width: 768px) {
   .cirlce-icon-content {
     .circle-icon {

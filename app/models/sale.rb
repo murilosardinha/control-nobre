@@ -1,7 +1,7 @@
 class Sale < ApplicationRecord
   belongs_to :filial
-  has_many :product_sales, dependent: :destroy
-  has_many :products, through: :product_sales, dependent: :destroy
+  has_many :sale_products, dependent: :destroy
+  has_many :products, through: :sale_products, dependent: :destroy
 
   belongs_to :destination, optional: true
   belongs_to :destination_filial, foreign_key: :destination_filial_id, class_name: "Filial", optional: true
@@ -18,5 +18,15 @@ class Sale < ApplicationRecord
 
   def set_date
     self.date ||= Date.today 
+  end
+
+  def quantity_of_items
+    sale_products.map(&:quantity).sum
+  end
+
+  def return_items
+    sale_products.each do |p_sale|
+      p_sale.product.return_quantity(p_sale.quantity)
+    end
   end
 end

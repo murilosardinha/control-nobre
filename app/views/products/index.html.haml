@@ -5,19 +5,28 @@
 
 
 .row.mb-2
-  .col-lg-9
-    = render 'filter'
+  - if super_user?
+    .col-lg-12
+      = render 'filter'
+    .col-lg-12 
+      .col-4.float-end
+        .row
+          = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
+            %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'plus-square')
+                = "Entrada de Produtos"
 
-  .col-lg-3
-    .row
-      - if current_user.admin? && @filial.matriz?
-        = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
-          %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
-            .justify-content-center.align-self-center
+          = link_to import_filial_products_path(@filial), class: 'col-lg-6' do
+            %btn.btn.btn-outline-success.col
               = icon('fas', 'plus-square')
-              = "Entrada de Produtos"
-
-      = link_to entrances_filial_products_path(@filial), class: 'col-lg-6' do
+              = "Receber Mercadoria"
+  
+  - else
+    .col-lg-9
+      = render 'filter'
+    .col-lg-3
+      = link_to entrances_filial_sales_path(@filial), class: 'col-lg-8 float-end' do
         %btn.btn.btn-outline-success.col
           = icon('fas', 'plus-square')
           = "Receber Mercadoria"
@@ -30,6 +39,8 @@
         %b Código
       %th.text-center
         %b Produto
+      %th.text-center
+        %b Referência
       %th.text-center
         %b Quantidade
       %th.text-center

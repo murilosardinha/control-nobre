@@ -6,6 +6,9 @@
       .form-group.col-lg-5
         = f.label :name, "Nome"
         = f.text_field :name, class: "form-control", autocomplete: "off", readonly: true
+      .form-group.col-lg-5
+        = f.label :reference, "Referência"
+        = f.text_field :reference, class: "form-control", autocomplete: "off", readonly: true
       .form-group.col-lg-2
         = f.label :quantity, "Quantidade Atual"
         = f.number_field :quantity, class: "form-control", autocomplete: "off", readonly: true

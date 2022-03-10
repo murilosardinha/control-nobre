@@ -1,32 +1,52 @@
-.card.card-body
-  = form_for [@filial, @sale] do |f|
-    = render 'shared/errors_form', model: @sale
+.col-lg-12{"ng-app": "nobre", "ng-controller": "SalesController", "ng-init": "getProducts(#{@filial.id})"}
+  .row
+    .col-lg-7
+      .card.card-body
+        = form_for [@filial, @sale] do |f|
+          = render 'shared/errors_form', model: @sale
 
-    -# .row
-      -# .form-group.col-lg-4
-      -#   = f.label :name, "Nome"
-      -#   = f.text_field :name, class: "form-control"
-      -# .form-group.col-lg-8
-      -#   = f.label :address, "Endereço"
-      -#   = f.text_field :address, class: "form-control", rows: 4
+          .col-lg-12
+            .col-lg-6
+              %label Buscar
+              %input.form-control.col#searchProduct{"ng-model": "product.fullname", placeholder: 'Produto'}
+            
+            %ul.list-group.list-group-flush.col-lg-10{"ng-show": "product.fullname.length > 0"}
+              %li.list-group-item.pt-2.line-height-25{"ng-repeat": "product in products | filter: product"}
+                .item{"ng-click": "setProduct(product)"}
+                  .col= "{{product.codename}}"
+                  %small= "{{product.code}}"
 
-    .row
-      - @products.each do |product|
-        %ul
-          %li= product.name
+          %hr.mt-5
 
-    %hr
+          .row
+            %h2.mt-3 Destinação
+            .form-group.col-lg-6
+              = f.label :destination_id, "Cliente Final"
+              = f.select :destination_id, options_for_select(@destinations), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id"
+            .form-group.col-lg-6
+              = f.label :destination_filial_id, "Filial"
+              = f.select :destination_filial_id, options_for_select(@destinations_filials), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id"
 
-    .row
-      %h2.mt-3 Destinação
-      .form-group.col-lg-4
-        = f.label :destination_id, "Cliente Final"
-        = f.select :destination_id, options_for_select(@destinations), { include_blank: "Selecione.." }, class: "form-control"
-      .form-group.col-lg-4
-        = f.label :destination_filial_id, "Filial"
-        = f.select :destination_filial_id, options_for_select(@destinations_filials), { include_blank: "Selecione.." }, class: "form-control"
+    .col-lg-5
+      .card.card-body
+        .col-lg-12
+          %h4 Produtos no Caixa
 
+        .col-lg-12
+          %ul.list-group
+            %li.list-group-item.px-1.line-height-25{"ng-repeat": "product in selectedProducts"}
+              .item
+                %small.row
+                  .col-9.text-truncate
+                    .col
+                      = "{{product.codename}}"
+                    = "{{product.code}}"        
+                  .col-3.p-0.text-center
+                    %input.form-control-sm.col-6{"ng-model": "product.qtd_to_sale", max: "{{product.quantity}}", min: 1, type: :number}
 
-    .row
-      .form-group.col-lg-3.mt-2
-        = f.submit "Salvar", class: "btn btn-success text-white" 
+                    %button.btn-sm.btn-danger{"ng-click": "removeProduct(product)"}
+                      = icon('fas text-white', 'trash')
+        .row{"ng-show": "destination_id || destination_filial_id"}
+          .form-group.col-lg-12.mt-2
+            %button.btn.btn-success.text-white.col{"ng-click": "saveSale()"}
+              Salvar

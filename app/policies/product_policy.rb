@@ -30,10 +30,6 @@ class ProductPolicy
     true
   end
 
-  def entrances?
-    true
-  end
-
   def destroy?
     user.admin?
   end

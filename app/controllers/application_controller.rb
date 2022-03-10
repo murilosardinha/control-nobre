@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
   before_action :authenticate_user!
   
-  helper_method :current_filial
+  helper_method :current_filial, :super_user?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def current_filial
@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     return number if number.class == Integer
 
     number.gsub(/\,/mi, '.').to_f
+  end
+
+  def super_user?
+    current_user.admin? && current_filial.matriz?
   end
 
   protected

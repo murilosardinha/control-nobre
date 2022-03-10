@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_034730) do
+ActiveRecord::Schema.define(version: 2022_03_10_225204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,25 +60,26 @@ ActiveRecord::Schema.define(version: 2022_03_05_034730) do
     t.index ["filial_id"], name: "index_machines_on_filial_id"
   end
 
-  create_table "product_sales", force: :cascade do |t|
-    t.integer "quantity"
-    t.bigint "product_id", null: false
-    t.bigint "sale_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_product_sales_on_product_id"
-    t.index ["sale_id"], name: "index_product_sales_on_sale_id"
-  end
-
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "quantity"
+    t.integer "quantity"
     t.bigint "filial_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
     t.string "code"
+    t.string "reference"
     t.index ["filial_id"], name: "index_products_on_filial_id"
+  end
+
+  create_table "sale_products", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "product_id", null: false
+    t.bigint "sale_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_sale_products_on_product_id"
+    t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end
 
   create_table "sales", force: :cascade do |t|
@@ -121,9 +122,9 @@ ActiveRecord::Schema.define(version: 2022_03_05_034730) do
   add_foreign_key "expenses", "filials"
   add_foreign_key "items", "machines"
   add_foreign_key "machines", "filials"
-  add_foreign_key "product_sales", "products"
-  add_foreign_key "product_sales", "sales"
   add_foreign_key "products", "filials"
+  add_foreign_key "sale_products", "products"
+  add_foreign_key "sale_products", "sales"
   add_foreign_key "sales", "destinations"
   add_foreign_key "sales", "filials"
   add_foreign_key "similars", "items"

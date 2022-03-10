@@ -1,0 +1,21 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Entrada de Produtos"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Produtos
+      %th.text-center
+        %b Quantidade de Itens
+      %th
+  %tbody
+    - @sales.each do |sale|
+      %tr
+        %td.text-center= sale.products_name
+        %td.text-center= sale.quantity_of_items
+        %td.text-right
+          = link_to filial_sale_path(@filial, sale), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Receber Mercadoria" do
+            = icon("fas fa-2x", "download")

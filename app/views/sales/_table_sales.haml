@@ -4,6 +4,8 @@
       %th.text-center
         %b Produtos
       %th.text-center
+        %b Quantidade de Itens
+      %th.text-center
         %b Destinação
       %th.text-center
         %b Data
@@ -11,14 +13,15 @@
   %tbo
     - @sales.each do |sale|
       %tr
-        %td.text-center= sale.products_name
+        %td.text-center.text-truncate= sale.products_name
+        %td.text-center= sale.quantity_of_items
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-right
-          = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
-            = icon("fas fa-2x", "edit")
+          -# = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
+          -#   = icon("fas fa-2x", "edit")
 
-          .d-none.d-lg-inline= "|"
+          -# .d-none.d-lg-inline= "|"
 
           = link_to filial_sale_path(@filial, sale), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Baixa?"} do
             = icon("fas fa-2x", "trash")

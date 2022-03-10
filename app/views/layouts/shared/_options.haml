@@ -1,5 +1,5 @@
 
-- if current_user.admin? && @filial.matriz?
+- if super_user?
   %li.nav-item
     .dropdown.dropright
       %a.nav-link#dropdownMenuButton.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -17,17 +17,18 @@
 
   %hr.bg-white
   
+%li.nav-item.bg-secondary
+  %a{href: filial_products_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'boxes')
+    %span.ms-1
+      %b Produtos        
+
+- if super_user?
   %li.nav-item
     %a{href: filial_machines_path(current_filial), class: 'nav-link'}
       = icon('fas', 'tractor')
       %span.ms-1
         %b Equipamentos
-
-%li.nav-item
-  %a{href: filial_products_path(current_filial), class: 'nav-link'}
-    = icon('fas', 'boxes')
-    %span.ms-1
-      %b Produtos        
 
 %li.nav-item
   %a{href: filial_sales_path(current_filial), class: 'nav-link'}

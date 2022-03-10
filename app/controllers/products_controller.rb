@@ -1,13 +1,14 @@
 class ProductsController < ApplicationController
   before_action :authorize_user!
   before_action :set_current_filial
-  before_action :set_product, only: %i[ show edit update destroy edit_limited]
+  before_action :set_collection, only: :index
+  before_action :set_product, only: %i[ edit update destroy edit_limited]
 
   def index
     @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
       .distinct(true)
-      .order(:location, :name)
+      .order(:location, :name, :reference)
       .page(params[:page])
       .per(100)
 
@@ -19,13 +20,10 @@ class ProductsController < ApplicationController
   def new
     @product = @filial.products.new
   end
-
-  def entrances
-    @sales = Sale.where(destination_filial_id: @filial.id)
-  end
-
+  
   def edit; end
   def edit_limited; end
+  def import; end
 
   def create
     @product = @filial.products.new(product_params)
@@ -71,11 +69,15 @@ class ProductsController < ApplicationController
       @product = @filial.products.find(params[:id])
     end
 
+    def set_collection
+      @filials = Filial.order(:name).map{|f| [f.name, f.id]}
+    end
+
     def product_params
-      params.require(:product).permit(:name, :quantity, :location, :code)
+      params.require(:product).permit(:name, :reference, :quantity, :location, :code)
     end
     
     def product_update_params
-      params.require(:product).permit(:name, :quantity, :location)
+      params.require(:product).permit(:code, :location)
     end
 end

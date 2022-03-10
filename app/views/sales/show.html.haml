@@ -1,0 +1,20 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Nova Entrada de Mercadoria"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Produto
+      %th.text-center
+        %b Quantidade
+      %th.text-center
+        %b Localização Atual
+  %tbo
+    - @sale_products.each do |sale|
+      %tr
+        %td.text-center.text-truncate= sale.product_name
+        %td.text-center= sale.quantity
+        -# %td.text-center= sale.destination_name

@@ -22,7 +22,7 @@
       
       = render 'expenses/table_expenses'
 
--# - if current_user.admin? && @filial.matriz?
+-# - if super_user?
 -#   .row
 -#     .col-12
 -#       .card.card-body
@@ -44,11 +44,11 @@
 -#                     = icon("fas fa-2x", "filter")
 
 -#         .row
--#           - @filials.each do |filial|
+-#           - @filials.each do |filial_name, filial_id|
 -#             -# :ruby
 -#               -# results = filial_sales_graph(filial, params[:resume])
 
 -#             .col-6
 -#               .card.card-body
--#                 %b= filial.name
+-#                 %b= filial_name
 -#                 = bar_chart [["correia", 5], ["Filtro", 13], ["correia", 35], ["Filtro", 13], ["correia", 2], ["Sensor 3", 13], ["Sensor eletrico 3", 1], ["Moto-Serra", 1]], colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }

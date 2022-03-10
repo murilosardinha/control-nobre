@@ -102,7 +102,6 @@
   margin-left: 0;
   transition: margin-left 0.4s ease-in-out;
   background-color: $primary;
-  // background-image: url('background.png');
   background-blend-mode: normal;
 
 
@@ -122,7 +121,7 @@
         font-size: 0.95rem;
 
         &:hover {
-          background: $primary;
+          background: $secondary;
         }
       }
       .sidebar__menu__sub-item {

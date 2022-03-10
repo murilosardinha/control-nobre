@@ -4,6 +4,9 @@ class Product < ApplicationRecord
   require 'barby/outputter/png_outputter'
 
   belongs_to :filial
+  has_many :sale_products, dependent: :destroy
+  has_many :sales, through: :sale_products, dependent: :destroy
+
   after_create :set_code
 
   validates_uniqueness_of :code, scope: :filial_id
@@ -17,6 +20,26 @@ class Product < ApplicationRecord
     
     code_id = rand.to_s[2..14]
     update(code: code_id)
+  end
+
+  def codename
+    "#{name} - #{reference}"
+  end
+
+  def fullname
+    "#{codename} / #{code}"
+  end
+
+  def decrease_quantity(qtd)
+    qtd = qtd.to_i
+
+    update(quantity: self.quantity - qtd)
+  end
+
+  def return_quantity(qtd)
+    qtd = qtd.to_i
+
+    update(quantity: self.quantity)
   end
 
   def barcode

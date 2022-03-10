@@ -19,6 +19,13 @@
 //= require chartkick
 //= require Chart.bundle
 
+//= require angular
+//= require angular-resource
+
+//= require main
+//= require_tree ./resources
+//= require_tree ./controllers
+
 //= require_tree .
 
 function goBack() {

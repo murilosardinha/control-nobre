@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   before_action :set_current_filial
-  before_action :set_sale, only: %i[ edit update destroy ]
+  before_action :set_sale, only: %i[edit update destroy ]
 
   def index
     @sales = @filial.sales.order(date: :desc)
@@ -8,13 +8,20 @@ class SalesController < ApplicationController
 
   def new
     @sale = @filial.sales.new
-    @products = @filial.products.order(:name)
 
     @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
     @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
   end
 
-  def edit
+  def edit; end
+  
+  def show
+    @sale = Sale.find_by(destination_filial_id: @filial.id, id: params[:id])
+    @sale_products = @sale.sale_products.includes(:product).preload(:product)
+  end
+
+  def entrances
+    @sales = Sale.where(destination_filial_id: @filial.id)
   end
 
   def create
@@ -44,6 +51,7 @@ class SalesController < ApplicationController
   end
 
   def destroy
+    @sale.return_items
     @sale.destroy
 
     respond_to do |format|
