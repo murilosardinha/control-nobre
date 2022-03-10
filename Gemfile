@@ -8,7 +8,7 @@ gem "pg", "1.1.4"
 gem 'puma', '~> 3.11'
 
 gem 'bootstrap', '5.1.3'
-gem "font-awesome-sass", "5.13.0"
+gem "font-awesome-sass", "~> 6.0.0"
 gem 'sass-rails', '~> 5.0'
 gem 'haml'
 gem 'uglifier', '>= 1.3.0'
