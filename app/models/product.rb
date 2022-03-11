@@ -39,7 +39,7 @@ class Product < ApplicationRecord
   def return_quantity(qtd)
     qtd = qtd.to_i
 
-    update(quantity: self.quantity)
+    update(quantity: self.quantity + qtd)
   end
 
   def barcode

@@ -15,9 +15,9 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", func
 
     if (index < 0) {
       $scope.selectedProducts.push(product);
-      $scope.product = [];
-      $('#searchProduct').focus();
     }
+    $scope.product = [];
+    $('#searchProduct').focus();
   }
 
   $scope.removeProduct = function(product){
@@ -37,7 +37,20 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", func
       if (response.status == 'ok'){
         alert('Estoque atualizado com sucesso!');
         window.location.href = "/filials/"+ $scope.filial_id +"/sales";
+      }else{
+        alert('A Baixa contém errors!');
       }
     })
+  }
+
+  $scope.checkNumber = function(product){
+    var max = product.quantity;
+    var value = product.qtd_to_sale;
+
+    if (value > max){
+      $('#qdt_'+ product.id).val(max)
+    }else if(value == undefined ){
+      $('#qdt_'+ product.id).val(max)
+    }
   }
 }]);

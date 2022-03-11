@@ -26,7 +26,8 @@ class Sale < ApplicationRecord
 
   def return_items
     sale_products.each do |p_sale|
-      p_sale.product.return_quantity(p_sale.quantity)
+      product = p_sale.product
+      product.return_quantity(p_sale.quantity)
     end
   end
 end

@@ -3,7 +3,7 @@ module Api
     before_action :set_filial
 
     def index
-      query = @filial.products.order(:name)
+      query = @filial.products.in_stock.order(:name)
 
       json = query.map do |p|
         {
@@ -24,22 +24,27 @@ module Api
       products = params[:selectedProducts]
       product_ids = products.map{|p| p[:id]}
 
-      sale = @filial.sales.create(
+      @sale = @filial.sales.build(
         destination_id: params[:destination_id], 
         destination_filial_id: params[:destination_filial_id]
       )
       
       products.each do |p|
         product = @filial.products.find_by(id: p[:id])
+        next unless p[:qtd_to_sale]
+
         product.decrease_quantity(p[:qtd_to_sale])
-        
-        sale.sale_products.create(
+        @sale.sale_products.build(
           product_id: p[:id],
           quantity: p[:qtd_to_sale]
         )
       end
 
-      render json: {status: :ok}
+      if @sale.save!
+        render json: {status: :ok}
+      else
+        render json: {status: :error}
+      end
     end
 
     def set_filial

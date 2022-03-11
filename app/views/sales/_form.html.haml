@@ -40,9 +40,9 @@
                   .col-9.text-truncate
                     .col
                       = "{{product.codename}}"
-                    = "{{product.code}}"        
+                    = "{{product.code}}"
                   .col-3.p-0.text-center
-                    %input.form-control-sm.col-6{"ng-model": "product.qtd_to_sale", max: "{{product.quantity}}", min: 1, type: :number}
+                    %input.form-control-sm.col-6{"id": "qdt_{{product.id}}" , "ng-model": "product.qtd_to_sale", "ng-change": "checkNumber(product)", max: "{{product.quantity}}", min: '1', type: :number}
 
                     %button.btn-sm.btn-danger{"ng-click": "removeProduct(product)"}
                       = icon('fas text-white', 'trash')
