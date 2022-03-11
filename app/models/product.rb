@@ -32,8 +32,11 @@ class Product < ApplicationRecord
 
   def decrease_quantity(qtd)
     qtd = qtd.to_i
-
-    update(quantity: self.quantity - qtd)
+    result = self.quantity - qtd
+    return 0 unless result >= 0
+    
+    update(quantity: result)
+    qtd
   end
 
   def return_quantity(qtd)

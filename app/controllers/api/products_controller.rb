@@ -32,15 +32,18 @@ module Api
       products.each do |p|
         product = @filial.products.find_by(id: p[:id])
         next unless p[:qtd_to_sale]
+        
+        quantity = product.decrease_quantity(p[:qtd_to_sale])
+        next unless quantity > 0
 
-        product.decrease_quantity(p[:qtd_to_sale])
         @sale.sale_products.build(
           product_id: p[:id],
-          quantity: p[:qtd_to_sale]
+          quantity: quantity
         )
       end
 
-      if @sale.save!
+      if @sale.sale_products.size > 0
+        @sale.save!
         render json: {status: :ok}
       else
         render json: {status: :error}
