@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     
     resources :products do
       get :edit_limited, on: :member
-      get :import, on: :collection
     end
     
     resources :machines do

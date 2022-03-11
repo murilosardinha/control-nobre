@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
   
   def edit; end
   def edit_limited; end
-  def import; end
 
   def create
     @product = @filial.products.new(product_params)
