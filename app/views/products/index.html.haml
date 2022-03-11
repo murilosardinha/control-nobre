@@ -8,14 +8,13 @@
   - if super_user?
     .col-lg-12
       = render 'filter'
-    .col-lg-12 
-      .col-4.float-end
-        .row
-          = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
-            %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
-              .justify-content-center.align-self-center
-                = icon('fas', 'plus-square')
-                = "Entrada de Produtos"
+    .col-lg-12
+      .col-2.float-end
+        = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
+          %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
+            .justify-content-center.align-self-center
+              = icon('fas', 'plus-square')
+              = "Entrada de Produtos"
   
   - else
     .col-lg-9
