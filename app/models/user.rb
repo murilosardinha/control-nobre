@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   enum role: { admin: 1, employee: 2 }
 
-  delegate :name, to: :filial, prefix: true, allow_nil: true
+  delegate :name, to: :filial, prefix: true
 
   def first_name
     "#{name.split.first}"
