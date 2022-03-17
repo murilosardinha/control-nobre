@@ -3,4 +3,5 @@
     %h2.text-dark
       = "Baixa ##{@sale.id}"
 
-= render 'form'
+%div{"ng-app": "nobre", "ng-controller": "SalesController", "ng-init": "getProducts(#{@filial.id}); getSale(#{@filial.id}, #{@sale.id})"}
+  = render 'form'

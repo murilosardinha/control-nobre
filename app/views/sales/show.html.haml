@@ -1,20 +1,74 @@
 .col-lg-12
   .col.text-center
     %h2.text-dark
-      = "Nova Entrada de Mercadoria"
+      = "Entrada de Produtos"
 
-%table.table.table-striped.table-sm
-  %thead
-    %tr
-      %th.text-center
-        %b Produto
-      %th.text-center
-        %b Quantidade
-      -# %th.text-center
-      -#   %b Localização Atual
-  %tbo
-    - @sale_products.each do |sale|
-      %tr
-        %td.text-center.text-truncate= sale.product_name
-        %td.text-center= sale.quantity
-        -# %td.text-center= sale.destination_name
+.col-lg-12{"ng-app": "nobre", "ng-controller": "SalesController", "ng-init": "getSale(#{@filial.id}, #{params[:id]}, true)"}
+  .row
+    .col-lg-5
+      .card.card-body
+        .col-lg-12
+          %label Buscar
+          %input.form-control.col#searchProduct{"ng-model": "product.product_fullname", placeholder: 'Produto'}
+
+        %hr.mt-5
+
+        %table.table.table-striped.table-sm
+          %thead
+            %tr
+              %th.text-center
+                %b Código
+              %th.text-center
+                %b Produto
+              %th.text-center
+                %b Qtd                
+              %th.text-center
+          %tb
+            %tr{"ng-repeat": "saleProduct in saleProducts | filter: product"}
+              %td.text-center
+                = "{{saleProduct.product_code}}"
+              %td.text-center.text-truncate
+                = "{{saleProduct.product_name}}"
+              %td.text-center
+                = "{{saleProduct.quantity}}"
+              %td
+                %button.btn-sm.btn-success{"ng-click": "setProductSale(saleProduct)"}
+                  = icon('fas text-white', 'circle-plus')                
+
+
+    .col-lg-7
+      .card.card-body
+        .col-lg-12
+          %h4 Produtos Verificados
+
+        .col-lg-12
+          %table.table.table-striped.table-sm
+            %thead
+              %tr
+                %th.text-center
+                  %b Código
+                %th.text-center
+                  %b Produto
+                %th.text-center
+                  %b Qtd
+                %th.text-center
+                  %b Localização                  
+                %th
+            %tb
+              %tr{"ng-repeat": "product in selectedProducts"}
+                %td.text-center
+                  = "{{product.product_code}}"
+                %td.text-center.text-truncate
+                  = "{{product.product_name}}"
+                %td.text-center
+                  = "{{product.quantity}}"
+                %td.text-center
+                  %input.form-control-mini.text-center{"ng-model": "selectedProducts[$index].current_location", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"}
+                %td.text-center
+                  %button.btn-sm.btn-danger{"ng-click": "removeProductSale(product)"}
+                    = icon('fas text-white', 'trash')
+
+        .row
+          .form-group.col-lg-12.mt-2
+            %button.btn.btn-success.text-white.col{"ng-click": "receiveSale()"}
+              Receber

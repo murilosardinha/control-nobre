@@ -18,10 +18,11 @@
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-right
-          -# = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
-          -#   = icon("fas fa-2x", "edit")
+          = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
 
-          -# .d-none.d-lg-inline= "|"
-
-          = link_to filial_sale_path(@filial, sale), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Baixa?"} do
-            = icon("fas fa-2x", "trash")
+          - if sale.open?
+            .d-none.d-lg-inline= "|"
+            
+            = link_to filial_sale_path(@filial, sale), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Baixa?"} do
+              = icon("fas fa-2x", "trash")

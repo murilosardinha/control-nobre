@@ -5,8 +5,10 @@ class Sale < ApplicationRecord
 
   belongs_to :destination, optional: true
   belongs_to :destination_filial, foreign_key: :destination_filial_id, class_name: "Filial", optional: true
-  
+
   before_save :set_date
+
+  enum status: { open: 0, done: 1, partial: 2}
 
   def products_name
     products.map(&:name).join(", ")
@@ -27,7 +29,7 @@ class Sale < ApplicationRecord
   def return_items
     sale_products.each do |p_sale|
       product = p_sale.product
-      product.return_quantity(p_sale.quantity)
+      product.increase_quantity(p_sale.quantity)
     end
   end
 end

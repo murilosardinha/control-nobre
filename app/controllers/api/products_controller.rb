@@ -22,7 +22,6 @@ module Api
 
     def orders
       products = params[:selectedProducts]
-      product_ids = products.map{|p| p[:id]}
 
       @sale = @filial.sales.build(
         destination_id: params[:destination_id], 

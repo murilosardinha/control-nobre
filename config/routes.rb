@@ -32,5 +32,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     get '/products', to: 'products#index'
     post '/products', to: 'products#orders'
+    
+    get '/sales', to: 'sales#show'
+    post '/sales', to: 'sales#receive'
   end
 end

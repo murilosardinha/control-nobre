@@ -13,12 +13,12 @@ class SalesController < ApplicationController
     @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
   end
 
-  def edit; end
-  
-  def show
-    @sale = Sale.find_by(destination_filial_id: @filial.id, id: params[:id])
-    @sale_products = @sale.sale_products.includes(:product).preload(:product)
+  def edit
+    @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
+    @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
   end
+  
+  def show; end
 
   def entrances
     @sales = Sale.where(destination_filial_id: @filial.id)

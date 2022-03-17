@@ -3,4 +3,5 @@
     %h2.text-dark
       = "Nova Baixa"
 
-= render 'form'
+%div{"ng-app": "nobre", "ng-controller": "SalesController", "ng-init": "getProducts(#{@filial.id})"}
+  = render 'form'

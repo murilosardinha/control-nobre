@@ -1,5 +1,6 @@
-angular.module("nobre").controller("SalesController", ["$scope", "Product", function ($scope, Product) {
+angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sale", function ($scope, Product, Sale) {
   $scope.selectedProducts = [];
+  $scope.destination_id = 0;
 
   // PRODUCTS
   $scope.getProducts = function(filial_id){
@@ -52,5 +53,53 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", func
     }else if(value == undefined ){
       $('#qdt_'+ product.id).val(max)
     }
+  }
+
+  // ENTRANCES
+  $scope.getSale = function(filial_id, id, entrance = false){
+    $scope.filial_id = filial_id;
+    $scope.id = id;
+    $scope.entrance = entrance;
+
+    Sale.show({filial_id: $scope.filial_id, id: $scope.id, entrance: $scope.entrance}).$promise.then(function(response){
+      if ($scope.entrance == true){
+        $scope.saleProducts = response;
+      }else{
+        $scope.selectedProducts = response
+      }
+    })
+
+  }
+
+  $scope.setProductSale = function(saleProduct){
+    $scope.setProduct(saleProduct);
+
+    var index = $scope.saleProducts.indexOf(saleProduct);
+    $scope.saleProducts.splice(index, 1);
+  }
+
+  $scope.removeProductSale = function(saleProduct){
+    $scope.removeProduct(saleProduct);
+    $scope.saleProducts.push(saleProduct);
+  }
+
+  $scope.receiveSale = function(){
+    var checked_products = [];
+
+    for(var i = 0; i < $scope.selectedProducts.length; i++){
+      checked_products.push({
+        id: $scope.selectedProducts[i].id,
+        location: $scope.selectedProducts[i].current_location,
+      })
+    }
+
+    Sale.receive({filial_id: $scope.filial_id, id: $scope.id, checked_products: checked_products}).$promise.then(function(response){
+      if (response.status == 'ok'){
+        alert('Estoque atualizado com sucesso!');
+        window.location.href = "/filials/"+ $scope.filial_id +"/products";
+      }else{
+        alert('O Recebimento contém errors!');
+      }
+    })
   }
 }]);

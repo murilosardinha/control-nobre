@@ -1,4 +1,4 @@
-.col-lg-12{"ng-app": "nobre", "ng-controller": "SalesController", "ng-init": "getProducts(#{@filial.id})"}
+.col-lg-12
   .row
     .col-lg-7
       .card.card-body
@@ -6,7 +6,7 @@
           = render 'shared/errors_form', model: @sale
 
           .col-lg-12
-            .col-lg-6
+            .col-lg-12
               %label Buscar
               %input.form-control.col#searchProduct{"ng-model": "product.fullname", placeholder: 'Produto'}
             
@@ -22,10 +22,10 @@
             %h2.mt-3 Destinação
             .form-group.col-lg-6
               = f.label :destination_id, "Cliente Final"
-              = f.select :destination_id, options_for_select(@destinations), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id"
+              = f.select :destination_id, options_for_select(@destinations, @sale.destination_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id", "ng-init": "destination_id = '#{@sale.destination_id || ''}'"
             .form-group.col-lg-6
               = f.label :destination_filial_id, "Filial"
-              = f.select :destination_filial_id, options_for_select(@destinations_filials), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id"
+              = f.select :destination_filial_id, options_for_select(@destinations_filials, @sale.destination_filial_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id", "ng-init": "destination_filial_id = '#{@sale.destination_filial_id || ''}'"
 
     .col-lg-5
       .card.card-body

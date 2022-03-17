@@ -32,17 +32,20 @@ class Product < ApplicationRecord
 
   def decrease_quantity(qtd)
     qtd = qtd.to_i
-    result = self.quantity - qtd
+    current_quantity = self.quantity || 0
+
+    result = current_quantity - qtd
     return 0 unless result >= 0
     
     update(quantity: result)
     qtd
   end
 
-  def return_quantity(qtd)
+  def increase_quantity(qtd)
     qtd = qtd.to_i
+    current_quantity = self.quantity || 0
 
-    update(quantity: self.quantity + qtd)
+    update(quantity: current_quantity + qtd)
   end
 
   def barcode
