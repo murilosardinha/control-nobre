@@ -20,7 +20,7 @@ module Api
             codename: sale_product.product_codename,
             fullname: sale_product.product_fullname,
             code: sale_product.product_code,
-            quantity: sale_product.product_quantity,
+            quantity: sale_product.product_quantity + sale_product.quantity,
             qtd_to_sale: sale_product.quantity
           }
         end
