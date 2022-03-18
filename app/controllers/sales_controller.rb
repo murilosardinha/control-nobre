@@ -24,20 +24,6 @@ class SalesController < ApplicationController
     @sales = Sale.where(destination_filial_id: @filial.id)
   end
 
-  def create
-    @sale = @filial.sales.new(sale_params)
-
-    respond_to do |format|
-      if @sale.save
-        format.html { redirect_to filial_sales_path(@filial), notice: "Venda foi criada com sucesso." }
-        format.json { render :show, status: :created, location: @sale }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def update
     respond_to do |format|
       if @sale.update(sale_params)

@@ -6,25 +6,40 @@
 
 .row.mb-2
   - if super_user?
+    .col-lg-12.mb-2
+      .row.justify-content-md-end
+        .col-2
+          -# = link_to "#" do
+          -#   %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
+          -#     .justify-content-center.align-self-center
+          -#       = icon('fas', 'file-excel')
+          -#       = "Relatório"
+        .col-2
+          = link_to new_filial_product_path(@filial) do
+            %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'plus-square')
+                = "Entrada de Produtos"
+    
     .col-lg-12
       = render 'filter'
-    .col-lg-12
-      .col-2.float-end
-        = link_to new_filial_product_path(@filial), class: 'col-lg-6' do
-          %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
-            .justify-content-center.align-self-center
-              = icon('fas', 'plus-square')
-              = "Entrada de Produtos"
-  
+    
   - else
     .col-lg-9
       = render 'filter'
     .col-lg-3
-      = link_to entrances_filial_sales_path(@filial), class: 'col-lg-8 float-end' do
-        %btn.btn.btn-outline-success.col
-          = icon('fas', 'plus-square')
-          = "Receber Mercadoria"
-
+      .row
+        .col-6
+          = link_to "#" do
+            %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'file-excel')
+                = "Relatório"
+        .col-6
+          = link_to entrances_filial_sales_path(@filial) do
+            %btn.btn.btn-outline-success.col
+              = icon('fas', 'plus-square')
+              = "Receber Mercadoria"
 
 %table.table.table-striped.table-sm
   %thead

@@ -42,6 +42,7 @@ module Api
       end
 
       if @sale.sale_products.size > 0
+        @sale.status = :done if @sale.destination.present?
         @sale.save!
         render json: {status: :ok}
       else

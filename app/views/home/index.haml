@@ -22,33 +22,33 @@
       
       = render 'expenses/table_expenses'
 
--# - if super_user?
--#   .row
--#     .col-12
--#       .card.card-body
--#         .row
--#           .h3.col-8 Quadro Geral
--#           .col-4
--#             = form_with url: root_path, method: :get, html: { class: ''} do |f|
--#               .row
--#                 .form-group.col-5.ps-0
--#                   %label Data Início
--#                   = f.text_field "resume[date_dategteq]", class: 'form-control', type: 'date', value: params[:resume][:date_dategteq]
+- if super_user?
+  .row
+    .col-12
+      .card.card-body
+        .row
+          .h3.col-8 Quadro Geral
+          .col-4
+            = form_with url: root_path, method: :get, html: { class: ''} do |f|
+              .row
+                .form-group.col-5.ps-0
+                  %label Data Início
+                  = f.text_field "resume[date_dategteq]", class: 'form-control', type: 'date', value: params[:resume][:date_dategteq]
 
--#                 .form-group.col-5.ps-0
--#                   %label Data Final
--#                   = f.text_field "resume[date_datelteq]", class: 'form-control', type: 'date', value: params[:resume][:date_datelteq]
+                .form-group.col-5.ps-0
+                  %label Data Final
+                  = f.text_field "resume[date_datelteq]", class: 'form-control', type: 'date', value: params[:resume][:date_datelteq]
 
--#                 .form-group.col-2.mt-4.m-0.p-0
--#                   %button.btn.btn-primary.col.h-100{type:"submit"}
--#                     = icon("fas fa-2x", "filter")
+                .form-group.col-2.mt-4.m-0.p-0
+                  %button.btn.btn-primary.col.h-100{type:"submit"}
+                    = icon("fas fa-2x", "filter")
 
--#         .row
--#           - @filials.each do |filial_name, filial_id|
--#             -# :ruby
--#               -# results = filial_sales_graph(filial, params[:resume])
+        .row
+          - @filials.each do |filial_name, filial_id|
+            -# :ruby
+              -# results = filial_sales_graph(filial, params[:resume])
 
--#             .col-6
--#               .card.card-body
--#                 %b= filial_name
--#                 = bar_chart [["correia", 5], ["Filtro", 13], ["correia", 35], ["Filtro", 13], ["correia", 2], ["Sensor 3", 13], ["Sensor eletrico 3", 1], ["Moto-Serra", 1]], colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+            .col-6
+              .card.card-body
+                %b= filial_name
+                = bar_chart [["correia", 5], ["Filtro", 13], ["correia", 35], ["Filtro", 13], ["correia", 2], ["Sensor 3", 13], ["Sensor eletrico 3", 1], ["Moto-Serra", 1]], colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
