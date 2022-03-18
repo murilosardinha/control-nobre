@@ -30,19 +30,20 @@
     .col-lg-3
       .row
         .col-6
-          = link_to "#" do
-            %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
-              .justify-content-center.align-self-center
-                = icon('fas', 'file-excel')
-                = "Relatório"
+          -# = link_to "#" do
+          -#   %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
+          -#     .justify-content-center.align-self-center
+          -#       = icon('fas', 'file-excel')
+          -#       = "Relatório"
         .col-6
           = link_to entrances_filial_sales_path(@filial) do
-            %btn.btn.btn-outline-success.col.p-1
-              %span.badge.badge-success
-                = @sales_size
+            - unless @sales_size.zero?
+              %btn.btn.btn-outline-success.col.p-1
+                %span.badge.badge-success
+                  = @sales_size
 
-              = icon('fas', 'plus-square')
-              = "Receber Mercadoria"
+                = icon('fas', 'plus-square')
+                = "Receber Mercadoria"
 
 %table.table.table-striped.table-sm
   %thead

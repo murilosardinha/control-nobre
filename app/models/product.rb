@@ -34,11 +34,10 @@ class Product < ApplicationRecord
     qtd = qtd.to_i
     current_quantity = self.quantity || 0
 
-    result = current_quantity - qtd
-    return 0 unless result >= 0
-    
-    update(quantity: result)
-    qtd
+    result = current_quantity - qtd    
+    return update(quantity: result) if result >= 0
+
+    false
   end
 
   def increase_quantity(qtd)

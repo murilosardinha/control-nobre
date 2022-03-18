@@ -3,7 +3,7 @@ class SalesController < ApplicationController
   before_action :set_sale, only: %i[edit update destroy ]
 
   def index
-    @sales = @filial.sales.order(date: :desc)
+    @sales = @filial.sales.includes(:sale_products, :destination, :destination_filial).order(id: :desc)
   end
 
   def new
@@ -21,7 +21,7 @@ class SalesController < ApplicationController
   def show; end
 
   def entrances
-    @sales = Sale.where(destination_filial_id: @filial.id).order(date: :desc)
+    @sales = Sale.where(destination_filial_id: @filial.id).order(id: :desc)
   end
 
   def update

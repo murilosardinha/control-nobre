@@ -6,9 +6,9 @@ module HomeHelper
     query = sales.ransack(params)
     sales = query.result.distinct(true)
     products = sales.map(&:products).flatten.compact
-    
+
     products.map do |product|
-      quantity = sales.map{|s| s.sale_products.where(product_id: product.id).map(&:quantity)}.flatten.sum
+      quantity = sales.map{|s| s.sale_products.done.where(product_id: product.id).map(&:quantity)}.flatten.sum
       [product.name, quantity]
     end
   end

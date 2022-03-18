@@ -15,7 +15,7 @@
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-right
-          - if sale.open?
+          - if sale.open? || sale.partial?
             = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
               = icon("fas fa-2x", "edit")
 

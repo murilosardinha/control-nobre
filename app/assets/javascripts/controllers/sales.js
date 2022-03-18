@@ -29,6 +29,7 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sal
   $scope.saveSale = function(){
     var attrs = {
       filial_id: $scope.filial_id, 
+      sale_id: $scope.sale_id,
       destination_id: $scope.destination_id, 
       destination_filial_id: $scope.destination_filial_id, 
       selectedProducts: $scope.selectedProducts
@@ -58,10 +59,10 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sal
   // ENTRANCES
   $scope.getSale = function(filial_id, id, entrance = false){
     $scope.filial_id = filial_id;
-    $scope.id = id;
+    $scope.sale_id = id;
     $scope.entrance = entrance;
 
-    Sale.show({filial_id: $scope.filial_id, id: $scope.id, entrance: $scope.entrance}).$promise.then(function(response){
+    Sale.show({filial_id: $scope.filial_id, id: $scope.sale_id, entrance: $scope.entrance}).$promise.then(function(response){
       if ($scope.entrance == true){
         $scope.saleProducts = response;
       }else{
@@ -93,12 +94,13 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sal
       })
     }
 
-    Sale.receive({filial_id: $scope.filial_id, id: $scope.id, checked_products: checked_products}).$promise.then(function(response){
+    Sale.receive({filial_id: $scope.filial_id, id: $scope.sale_id, checked_products: checked_products}).$promise.then(function(response){
       if (response.status == 'ok'){
         alert('Estoque atualizado com sucesso!');
         window.location.href = "/filials/"+ $scope.filial_id +"/products";
       }else{
-        alert('O Recebimento contém errors!');
+        alert('O Recebimento foi feito parcialmente!');
+        window.location.href = "/filials/"+ $scope.filial_id +"/products";
       }
     })
   }
