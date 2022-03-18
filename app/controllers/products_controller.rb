@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
       .page(params[:page])
       .per(100)
 
+    @sales_size = Sale.where(destination_filial_id: @filial.id).where.not(status: :done).size
+
     return @scope = @products.where(filial_id: @filial.id).group_by(&:code) unless params[:q]
 
     @scope = @products.group_by(&:code)

@@ -21,7 +21,7 @@ class SalesController < ApplicationController
   def show; end
 
   def entrances
-    @sales = Sale.where(destination_filial_id: @filial.id)
+    @sales = Sale.where(destination_filial_id: @filial.id).order(date: :desc)
   end
 
   def update

@@ -44,11 +44,11 @@
                     = icon("fas fa-2x", "filter")
 
         .row
-          - @filials.each do |filial_name, filial_id|
-            -# :ruby
-              -# results = filial_sales_graph(filial, params[:resume])
+          - @filials.each do |filial_name, sales|
+            :ruby
+              results = filial_sales_graph(sales, params[:resume])
 
             .col-6
               .card.card-body
                 %b= filial_name
-                = bar_chart [["correia", 5], ["Filtro", 13], ["correia", 35], ["Filtro", 13], ["correia", 2], ["Sensor 3", 13], ["Sensor eletrico 3", 1], ["Moto-Serra", 1]], colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+                = bar_chart results, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }

@@ -2,9 +2,7 @@
   %thead
     %tr
       %th.text-center
-        %b Produtos
-      %th.text-center
-        %b Quantidade de Produtos
+        %b Quantidade de Itens
       %th.text-center
         %b Destinação
       %th.text-center
@@ -13,7 +11,6 @@
   %tbo
     - @sales.each do |sale|
       %tr
-        %td.text-center.text-truncate= sale.products_name
         %td.text-center= sale.quantity_of_items
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")

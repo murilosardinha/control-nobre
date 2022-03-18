@@ -144,70 +144,61 @@ input:checked + .label-switch:before {
 
 // ------------------------- badge --------------------
 .badge {
+  display: inline-block;
   padding: 0.25em 0.4em;
-  font-size: 0.6rem;
-  background-color: transparent !important;
-  text-decoration: none;
-  
-  &::before {
-    position: relative;
-    top: 0px;
-    left: -4px;
-    display: inline-block;
-    border: 3px solid;
-    border-radius: 1rem;
-    content: "";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  float: right;
+
+  // Empty badges collapse automatically
+  &:empty {
+    display: none;
   }
 
   &.badge-primary, &.badge-primary:hover {
-    color: $primary;
+    color: $white;
+    background-color: $primary;
   }
   &.badge-success, &.badge-success:hover {
-    color: $success;
+    color: $white;
+    background-color: $success;
   }
   &.badge-secondary, &.badge-secondary:hover {
-    color: $secondary;
+    color: $white;
+    background-color: $secondary;
   }
   &.badge-danger, &.badge-danger:hover {
-    color: $danger;
+    color: $white;
+    background-color: $danger;
   }
   &.badge-warning, &.badge-warning:hover {
-    color: $warning;
+    color: $white;
+    background-color: $warning;
   }
   &.badge-info, &.badge-info:hover {
-    color: $info;
+    color: $white;
+    background-color: $info;
   }
   &.badge-light, &.badge-light:hover {
-    color: $info;
-    background-color: $light;
+    color: $white;
+    background-color: $info;
   }
   &.badge-dark, &.badge-dark:hover {
-    color: $dark;
+    color: $white;
+    background-color: $dark;
   }
+}
 
-  &.badge-simples{
-    color: inherit;
-
-    &::before{display: none}
-    &::after{
-      position: relative;
-      top: 0px;
-      right: -4px;
-      display: inline-block;
-      border: 3px solid;
-      border-radius: 1rem;
-      content: "";
-    }
-
-    &.badge-primary::after { color: $primary; }
-    &.badge-success::after { color: $success; }
-    &.badge-secondary::after { color: $secondary; }
-    &.badge-danger::after { color: $danger; }
-    &.badge-warning::after { color: $warning; }
-    &.badge-info::after { color: $info; }
-    &.badge-light::after { color: $info; background-color: $light; }
-    &.badge-dark::after { color: $dark; }
-  }
+// Quick fix for badges in buttons
+.btn .badge {
+  position: relative;
+  top: -15px;
+  right: -10px;
 }
 
 .page-head-title .badge{
@@ -217,67 +208,6 @@ input:checked + .label-switch:before {
     top: -3px;
   }
 }
-.badge-default-not {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  
-  position: relative;
-  z-index: 2;
-  right: 10px;
-  top: -5px;
-  border-radius: 10px;
-  width: 20px;
-}
-
-.badge-default {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  
-  position: absolute;
-  z-index: 2;
-  right: 10px;
-  top: -5px;
-  border-radius: 10px;
-  width: 20px;
-
-  &.badge-danger, &.badge-danger:hover, &.badge-success, &.badge-success:hover {
-    color: #ffffff;
-  }
-  &.badge-dark, &.badge-dark:hover {
-    color: $white;
-  }
-  &.badge-gray, &.badge-gray:hover {
-    color: $white;
-    background-color: $gray-600;
-  }
-
-}
-.badge-pill {
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
-}
-.badge-notify {
-  position: absolute;
-  right: -9px;
-  top: -9px;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
-  border-radius: 10rem;
-}
-
 
 // ----------- Group Buttons ----------------------
 .group__rounded_button{

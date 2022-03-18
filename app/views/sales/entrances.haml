@@ -7,18 +7,15 @@
   %thead
     %tr
       %th.text-center
-        %b Produtos
-      %th.text-center
-        %b Quantidade de Produtos
+        %b Quantidade de Itens
       %th.text-center
         %b Data
       %th
   %tbody
     - @sales.each do |sale|
       %tr
-        %td.text-center= sale.products_name
         %td.text-center= sale.quantity_of_items
-        %td.text-center= sale.created_at.strftime("%d/%m/%Y")
+        %td.text-center= sale.date.strftime("%d/%m/%Y")
         %td.text-right
           = link_to (sale.done? ? "#" : filial_sale_path(@filial, sale)), class: (sale.done? ? 'text-success' : 'text-secondary'), "data-toggle": "tooltip", "data-placement": "top", title: (sale.done? ? "Recebido" : "Verificar Mercadoria") do
             = icon("fas fa-2x", "check-double")

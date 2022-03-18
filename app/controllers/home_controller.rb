@@ -21,7 +21,7 @@ class HomeController < ApplicationController
       .first(10)
 
     # GRAPHS
-    @filials = Filial.order(:name).map{|f| [f.name, f.id]}
+    @filials = Filial.order(:name).map{|f| [f.name, f.sales]}
     params[:resume] = {} unless params[:resume].present?
 
     params[:resume][:date_dategteq] = params[:resume][:date_dategteq].present? ? params[:resume][:date_dategteq] : (Date.today - 7.days)

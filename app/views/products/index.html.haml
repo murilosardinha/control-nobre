@@ -37,7 +37,10 @@
                 = "Relatório"
         .col-6
           = link_to entrances_filial_sales_path(@filial) do
-            %btn.btn.btn-outline-success.col
+            %btn.btn.btn-outline-success.col.p-1
+              %span.badge.badge-success
+                = @sales_size
+
               = icon('fas', 'plus-square')
               = "Receber Mercadoria"
 
