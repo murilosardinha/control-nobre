@@ -1,24 +1,16 @@
 .card.card-body
-  = form_for [@filial, @product] do |f|
-    = render 'shared/errors_form', model: @product
+  = form_for @filial_new_products, url: create_products_filial_products_path(@filial) do |f|
+    %h3 Produtos
 
+    #products
+      = f.fields_for :products do |product|
+        = render 'product_fields', f: product
+      
     .row
-      .form-group.col-lg-5
-        = f.label :name, "Nome"
-        = f.text_field :name, class: "form-control", autocomplete: "off"
-      .form-group.col-lg-5
-        = f.label :reference, "Referência"
-        = f.text_field :reference, class: "form-control", autocomplete: "off"
-      .form-group.col-lg-2
-        = f.label :quantity, "Quantidade"
-        = f.number_field :quantity, class: "form-control", autocomplete: "off", readonly: @product.persisted?
-      .form-group.col-lg-3
-        = f.label :code, "Código"
-        = f.text_field :code, class: "form-control", readonly: !(super_user?), autocomplete: "off"
-      .form-group.col-lg-2
-        = f.label :location, "Localização"
-        = f.text_field :location, class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+      .form-group.col-lg-2.mt-4
+        = link_to_add_association f, :products, class: 'btn btn-lg btn-outline-info col' do
+          = icon('fa', 'plus-circle')
+          = 'Adicionar'
 
-    .row
-      .form-group.col-lg-3.mt-2
-        = f.submit "Salvar", class: "btn btn-success text-white" 
+      .form-group.col-lg-2.mt-4
+        = f.submit "Salvar", class: "btn btn-lg btn-success text-white col" 

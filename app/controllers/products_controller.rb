@@ -20,24 +20,26 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = @filial.products.new
+    @filial_new_products = Filial.new
+    @filial_new_products.products.new
   end
   
   def edit; end
   def edit_limited; end
 
-  def create
-    @product = @filial.products.new(product_params)
+  def create_products
+    raise
+    # @product = @filial.products.new(product_params)
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to filial_products_path(@filial), notice: "Produto foi criado com sucesso." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @product.save
+    #     format.html { redirect_to filial_products_path(@filial), notice: "Produto foi criado com sucesso." }
+    #     format.json { render :show, status: :created, location: @product }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def update
@@ -80,5 +82,19 @@ class ProductsController < ApplicationController
     
     def product_update_params
       params.require(:product).permit(:code, :location)
+    end
+
+    def product_create_params
+    params.require(:filial).permit(
+      products_attributes: [
+        :id,
+        :name,
+        :reference,
+        :quantity,
+        :location,
+        :code,
+        :_destroy
+      ]
+    )
     end
 end

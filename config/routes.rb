@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     
     resources :products do
       get :edit_limited, on: :member
+      post :create_products, on: :collection
     end
     
     resources :machines do

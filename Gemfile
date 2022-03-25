@@ -48,6 +48,7 @@ gem 'rack-cors'
 gem 'barby', '0.6.8'
 gem 'rqrcode', '2.1.1'
 gem 'chunky_png', '1.4.0'
+gem "cocoon", '1.2.15'
 
 source "https://rails-assets.org" do
   gem "rails-assets-angular", "1.6.6"
