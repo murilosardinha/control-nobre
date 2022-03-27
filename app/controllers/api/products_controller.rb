@@ -94,14 +94,12 @@ module Api
         price = format_number(new_product[:price])
         
         if product.new_record?
-          binding.pry
           product.quantity = quantity
           product.reference = new_product[:reference]
           product.location = new_product[:location]
           
           product.save
         else
-          binding.pry
           product.update(location: new_product[:location]) unless new_product[:location].blank? && product.location != new_product[:location]
           product.increase_quantity(quantity)
         end
