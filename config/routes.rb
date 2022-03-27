@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     
     resources :products do
       get :edit_limited, on: :member
-      post :create_products, on: :collection
     end
     
     resources :machines do
@@ -28,11 +27,12 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
   # API
   namespace :api, defaults: { format: :json } do
     get '/products', to: 'products#index'
     post '/products', to: 'products#orders'
+    post '/create_products', to: 'products#create_products'
     
     get '/sales', to: 'sales#show'
     post '/sales', to: 'sales#receive'

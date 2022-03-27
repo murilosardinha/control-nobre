@@ -7,6 +7,13 @@ module Api
 
     skip_before_action :verify_authenticity_token
 
+    def format_number(number)
+      return 0 unless number.present?
+      return number if number.class == Integer
+  
+      number.gsub(/\,/mi, '.').to_f
+    end
+
     private
 
     def set_access_control_headers

@@ -1,16 +1,15 @@
 .card.card-body
-  = form_for @filial_new_products, url: create_products_filial_products_path(@filial) do |f|
-    %h3 Produtos
+  %h3 Produtos
 
-    #products
-      = f.fields_for :products do |product|
-        = render 'product_fields', f: product
-      
-    .row
-      .form-group.col-lg-2.mt-4
-        = link_to_add_association f, :products, class: 'btn btn-lg btn-outline-info col' do
-          = icon('fa', 'plus-circle')
-          = 'Adicionar'
+  #products{"ng-app": "nobre", "ng-controller": "ProductsController", "ng-init": "getProducts(#{@filial.id});"}
+    .col-12{'ng-repeat': "product in newProducts"}
+      = render 'product_fields'
 
-      .form-group.col-lg-2.mt-4
-        = f.submit "Salvar", class: "btn btn-lg btn-success text-white col" 
+    .form-group.col-lg-2.mt-4
+      = link_to "javascript:void(0)", "ng-click": "addMore()", class: 'btn btn-lg btn-outline-info col'do
+        = icon('fa', 'plus-circle')
+        = 'Adicionar'
+
+    .form-group.col-lg-2.mt-4
+      %button.btn.btn-lg.btn-success.text-white.col{"ng-click": "save()"}
+        = "Salvar"

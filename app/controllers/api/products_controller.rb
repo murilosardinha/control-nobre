@@ -8,11 +8,13 @@ module Api
       json = query.map do |p|
         {
           id: p.id,
+          name: p.name,
           codename: p.codename,
           fullname: p.fullname,
           code: p.code,
           location: p.location,
           quantity: p.quantity,
+          reference: p.reference,
           qtd_to_sale: 1
         }
       end
@@ -84,8 +86,62 @@ module Api
       end
     end
 
+    def create_products
+      params[:products].each do |new_product|
+        code = new_product[:code]
+        product = Product.find_or_initialize_by(code: code, filial_id: @filial.id)
+        quantity = format_number(new_product[:quantity])
+        price = format_number(new_product[:price])
+        
+        if product.new_record?
+          binding.pry
+          product.quantity = quantity
+          product.reference = new_product[:reference]
+          product.location = new_product[:location]
+          
+          product.save
+        else
+          binding.pry
+          product.update(location: new_product[:location]) unless new_product[:location].blank? && product.location != new_product[:location]
+          product.increase_quantity(quantity)
+        end
+
+        product.product_prices.create(quantity: quantity, price: price)
+      end
+      
+      render json: {status: :ok}
+    end
+
+    private
+
     def set_filial
       @filial = Filial.find(params[:filial_id])
+    end
+
+    def product_create_params
+      return unless params[:filial].present?
+      return unless params[:filial][:products_attributes].present?
+  
+      params[:filial][:products_attributes].each do |item_param|
+        item_param[1]['product_prices_attributes']["0"][:price] = format_number(item_param[1]['product_prices_attributes']["0"][:price])
+        item_param[1]['product_prices_attributes']["0"][:quantity] = format_number(item_param[1]['product_prices_attributes'][:quantity])
+      end
+  
+      params.require(:filial).permit(
+        :id,
+        products_attributes: [
+          :id,
+          :name,
+          :reference,
+          :location,
+          :code,
+          product_prices_attributes: [
+            :id,
+            :price,
+            :quantity
+          ]
+        ]
+      )
     end
   end
 end

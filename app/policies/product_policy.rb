@@ -22,7 +22,7 @@ class ProductPolicy
     true
   end
 
-  def create?
+  def create_products?
     user.admin?
   end
 

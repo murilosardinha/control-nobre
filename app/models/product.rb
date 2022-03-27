@@ -6,11 +6,12 @@ class Product < ApplicationRecord
   belongs_to :filial
   has_many :sale_products, dependent: :destroy
   has_many :sales, through: :sale_products, dependent: :destroy
-
-  after_create :set_code
-
+  has_many :product_prices, inverse_of: :product, dependent: :destroy
+  
   validates_uniqueness_of :code, scope: :filial_id
   validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
+  
+  after_create :set_code, :upcase_name
 
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
@@ -20,6 +21,10 @@ class Product < ApplicationRecord
     
     code_id = rand.to_s[2..14]
     update(code: code_id)
+  end
+
+  def upcase_name
+    self.name = name.upcase
   end
 
   def codename

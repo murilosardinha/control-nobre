@@ -5,7 +5,8 @@ class HomeController < ApplicationController
     @q = @filial.products.ransack(params[:q])
     @products = @q.result
       .distinct(true)
-      .order(:location, :name)
+      .order(Arel.sql("location desc NULLS LAST"))
+      .order(:name)
       .page(params[:page])
       .per(100)
     

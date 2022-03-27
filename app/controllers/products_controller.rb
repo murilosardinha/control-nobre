@@ -8,7 +8,8 @@ class ProductsController < ApplicationController
     @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
       .distinct(true)
-      .order(:location, :name, :reference)
+      .order(Arel.sql("location desc NULLS LAST"))
+      .order(:name, :reference)
       .page(params[:page])
       .per(100)
 
@@ -19,28 +20,10 @@ class ProductsController < ApplicationController
     @scope = @products.group_by(&:code)
   end
 
-  def new
-    @filial_new_products = Filial.new
-    @filial_new_products.products.new
-  end
+  def new; end
   
   def edit; end
   def edit_limited; end
-
-  def create_products
-    raise
-    # @product = @filial.products.new(product_params)
-
-    # respond_to do |format|
-    #   if @product.save
-    #     format.html { redirect_to filial_products_path(@filial), notice: "Produto foi criado com sucesso." }
-    #     format.json { render :show, status: :created, location: @product }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @product.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
 
   def update
     respond_to do |format|
@@ -75,26 +58,8 @@ class ProductsController < ApplicationController
     def set_collection
       @filials = Filial.order(:name).map{|f| [f.name, f.id]}
     end
-
-    def product_params
-      params.require(:product).permit(:name, :reference, :quantity, :location, :code)
-    end
     
     def product_update_params
       params.require(:product).permit(:code, :location)
-    end
-
-    def product_create_params
-    params.require(:filial).permit(
-      products_attributes: [
-        :id,
-        :name,
-        :reference,
-        :quantity,
-        :location,
-        :code,
-        :_destroy
-      ]
-    )
     end
 end

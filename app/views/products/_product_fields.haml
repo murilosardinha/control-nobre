@@ -1,26 +1,28 @@
 .nested-fields
   .card.card-body.border.border-info.border-2
     .col
-      %span.badge.badge-danger{ "data-toggle": "tooltip", "data-placement": "top", title: "Remover"}
-        = link_to_remove_association f, class: 'text-white' do
-          = icon('fa', 'minus-circle')
+      %span.badge.badge-danger{  "ng-click": "removeItem()", "data-toggle": "tooltip", "data-placement": "top", title: "Remover"}
+        = icon('fa', 'minus-circle')
+    
     .row
       .form-group.col-lg-6
-        = f.label :name, "Nome"
-        = f.text_field :name, class: "form-control", autocomplete: "off"
+        = label_tag :name, "Nome"
+        = text_field_tag :name, "", "ng-model": "product.name", "ng-disabled": "product.isDisabled", class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
       .form-group.col-lg-3
-        = f.label :code, "Código"
-        = f.text_field :code, class: "form-control", autocomplete: "off"
+        = label_tag :code, "Código"
+        = text_field_tag :code, "", "ng-model": "product.code", class: "form-control", autocomplete: "off", "ng-change": "setProduct(product)"
       .form-group.col-lg-2
-        = f.label :location, "Localização"
-        = f.text_field :location, class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+        = label_tag :location, "Localização"
+        = text_field_tag :location, "", "ng-model": "product.location", "ng-disabled": "product.isLocationDisabled", class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+    
     .row
       .form-group.col-lg-5
-        = f.label :reference, "Referência"
-        = f.text_field :reference, class: "form-control", autocomplete: "off"
+        = label_tag :reference, "Referência"
+        = text_field_tag :reference, "", "ng-model": "product.reference", "ng-disabled": "product.isDisabled", class: "form-control", autocomplete: "off"
       .form-group.col-lg-2
-        = f.label :quantity, "Quantidade"
-        = f.number_field :quantity, class: "form-control", autocomplete: "off"
+        = label_tag :quantity, "Quantidade"
+        = number_field_tag :quantity, "", "ng-model": "product.quantity", class: "form-control", autocomplete: "off"
+
       .form-group.col-lg-2
-        = f.label :price, "Preço"
-        = text_field_tag 'product[:price]', "", class: "form-control", autocomplete: "off"
+        = label_tag :price, "Preço"
+        = text_field_tag :price, "", "ng-model": "product.price", class: "form-control", autocomplete: "off"
