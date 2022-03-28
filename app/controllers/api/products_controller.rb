@@ -92,9 +92,10 @@ module Api
         product = Product.find_or_initialize_by(code: code, filial_id: @filial.id)
         quantity = format_number(new_product[:quantity])
         price = format_number(new_product[:price])
-        
+
         if product.new_record?
           product.quantity = quantity
+          product.name = new_product[:name]
           product.reference = new_product[:reference]
           product.location = new_product[:location]
           

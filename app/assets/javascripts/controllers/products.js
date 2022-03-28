@@ -35,6 +35,11 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       }else{
         element.isLocationDisabled = false;
       }
+    }else{
+      element.name = "";
+      element.location = "";
+      element.reference = "";
+      element.isDisabled = false;
     }
   }
 
