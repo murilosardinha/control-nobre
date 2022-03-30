@@ -7,7 +7,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       name: "",
       code: "",
       location: "",
-      quantity: "",
+      quantity: 1,
       reference: ""
     }
   ];

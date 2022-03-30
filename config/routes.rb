@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :products do
       get :edit_limited, on: :member
       get :print, on: :member
+      
+      get :report, on: :collection
     end
     
     resources :machines do

@@ -1,0 +1,22 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  wb.add_worksheet(name: "Dados") do |sheet|
+    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false} )
+    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
+    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
+
+    sheet.add_row ["Código", "Produto", "Referência", "Quantidade", "Localização"], style: text_center_bold
+    
+    @products.each do |product|
+      sheet.add_row [
+        product.code,
+        product.name,
+        product.reference,
+        product.quantity,
+        product.location,
+      ], style: [text_center, text_left, text_center, text_center, text_center]
+    end
+    
+    sheet.add_row ["TOTAL", @products.size.to_s + " Itens", "", @products.map(&:quantity).sum.to_s + "un.", ""], style: text_center_bold
+  end
+end

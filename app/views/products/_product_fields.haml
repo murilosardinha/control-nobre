@@ -21,7 +21,7 @@
         = text_field_tag :reference, "", "ng-model": "product.reference", "ng-disabled": "product.isDisabled", class: "form-control", autocomplete: "off"
       .form-group.col-lg-2
         = label_tag :quantity, "Quantidade"
-        = number_field_tag :quantity, "", "ng-model": "product.quantity", class: "form-control", autocomplete: "off"
+        = number_field_tag :quantity, "", "ng-model": "product.quantity", class: "form-control", autocomplete: "off", min: 1
 
       .form-group.col-lg-2
         = label_tag :price, "Preço"

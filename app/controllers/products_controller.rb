@@ -7,14 +7,12 @@ class ProductsController < ApplicationController
   def index
     @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
-      .distinct(true)
-      .order(Arel.sql("location desc NULLS LAST"))
+      .order(Arel.sql("location DESC NULLS LAST"))
       .order(:name, :reference)
       .page(params[:page])
       .per(100)
 
     @sales_size = Sale.where(destination_filial_id: @filial.id).where.not(status: :done).size
-
     return @scope = @products.where(filial_id: @filial.id).group_by(&:code) unless params[:q]
 
     @scope = @products.group_by(&:code)
@@ -48,6 +46,16 @@ class ProductsController < ApplicationController
 
   def print
     render(layout: 'application_devise')
+  end
+
+  def report
+    @q = Product.in_stock.ransack(params[:q])
+    @products = @q.result
+      .order(Arel.sql("location DESC NULLS LAST"))
+      .order(:name, :reference)
+
+    filename = "Estoque-#{@filial.first_name}-#{Date.today.in_time_zone.strftime('%d-%m-%Y')}.xlsx"
+    render xlsx: "Estoque", filename: filename, disposition: 'inline', template: 'reports/products'
   end
 
   private

@@ -34,6 +34,10 @@ class ProductPolicy
     true
   end
 
+  def report?
+    true
+  end
+
   def destroy?
     user.admin?
   end
