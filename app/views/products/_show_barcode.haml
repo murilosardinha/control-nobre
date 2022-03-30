@@ -1,9 +1,9 @@
-.block-tag.w-100.pb-2.m-0
-  .print-tag.h-100
+.w-100.m-0
+  .h-100
     = render 'products/barcode', tag: @product
 
 .print 
-  = link_to "#", class: 'text-info' do
-    %btn.btn.btn-outline-info
+  = link_to print_filial_product_path(@filial, @product), target: '_blank', class: 'text-warning' do
+    %btn.btn.btn-warning
       = icon('fas', 'print')
       = "Imprimir"

@@ -16,6 +16,11 @@
       = product.filial_name
 
   %td.text-right
+    = link_to print_filial_product_path(@filial, product), target: '_blank', class: 'text-warning', "data-toggle": "tooltip", "data-placement": "top", title: "Imprimir Cód. Barras" do
+      = icon("fas fa-2x", "print")
+    
+    .d-none.d-lg-inline= "|"
+
     - if product.filial_id == @filial.id
       - if current_user.admin?
         = link_to edit_filial_product_path(@filial, product), class: 'text-info' do

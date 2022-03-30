@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :authorize_user!
   before_action :set_current_filial
   before_action :set_collection, only: :index
-  before_action :set_product, only: %i[ edit update destroy edit_limited]
+  before_action :set_product, only: %i[ edit update destroy edit_limited, print]
 
   def index
     @q = Product.in_stock.ransack(params[:q])
@@ -44,6 +44,10 @@ class ProductsController < ApplicationController
       format.html { redirect_to filial_products_path(@filial), notice: "Produto foi deletado com sucesso." }
       format.json { head :no_content }
     end
+  end
+
+  def print
+    render(layout: 'application_devise')
   end
 
   private

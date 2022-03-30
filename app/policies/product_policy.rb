@@ -30,6 +30,10 @@ class ProductPolicy
     true
   end
 
+  def print?
+    true
+  end
+
   def destroy?
     user.admin?
   end
