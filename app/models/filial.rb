@@ -1,11 +1,11 @@
 class Filial < ApplicationRecord
-  has_many :users
-  has_many :products, inverse_of: :filial
-  has_many :expenses
-  has_many :machines
+  has_many :users, dependent: :destroy
+  has_many :products, inverse_of: :filial, dependent: :destroy
+  has_many :expenses, dependent: :destroy
+  has_many :machines, dependent: :destroy
   
-  has_many :sales
-  has_many :destinations
+  has_many :sales, dependent: :destroy
+  has_many :destinations, dependent: :destroy
   
   enum category: { matriz: 1, branch: 2 }
 
