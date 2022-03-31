@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   def index
     @q = @filial.sales.ransack(params[:q])
     @sales = @q.result
-      .includes(:sale_products, :destination, :destination_filial)
+      .includes(:destination, :destination_filial, sale_products: :product)
       .order(id: :desc)
       .page(params[:page])
       .per(100)

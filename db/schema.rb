@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2022_03_31_144408) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
-    t.json "prices"
+    t.json "prices", default: []
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end

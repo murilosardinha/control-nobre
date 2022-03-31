@@ -591,3 +591,5 @@ array.each do |p|
   
   Product.create(p)
 end
+
+# SaleProduct.all.each{|ps| ps.update(prices: Product.find_prices(ps.product_code, ps.quantity))}
