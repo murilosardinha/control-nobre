@@ -8,6 +8,7 @@ class Filial < ApplicationRecord
   has_many :destinations, dependent: :destroy
   
   enum category: { matriz: 1, branch: 2 }
+  scope :main, ->() { matriz.first }
 
   def first_name
     "#{name.split.first}"

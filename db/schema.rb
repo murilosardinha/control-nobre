@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_26_191810) do
+ActiveRecord::Schema.define(version: 2022_03_31_144408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 2022_03_26_191810) do
     t.index ["product_id"], name: "index_product_prices_on_product_id"
   end
 
+  create_table "product_sales", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "product_id", null: false
+    t.bigint "sale_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_sales_on_product_id"
+    t.index ["sale_id"], name: "index_product_sales_on_sale_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
@@ -89,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_191810) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
+    t.json "prices"
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end

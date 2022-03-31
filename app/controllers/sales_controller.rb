@@ -1,9 +1,14 @@
 class SalesController < ApplicationController
   before_action :set_current_filial
-  before_action :set_sale, only: %i[edit update destroy ]
+  before_action :set_sale, only: %i[edit update destroy consult ]
 
   def index
-    @sales = @filial.sales.includes(:sale_products, :destination, :destination_filial).order(id: :desc)
+    @q = @filial.sales.ransack(params[:q])
+    @sales = @q.result
+      .includes(:sale_products, :destination, :destination_filial)
+      .order(id: :desc)
+      .page(params[:page])
+      .per(100)
   end
 
   def new
@@ -19,6 +24,7 @@ class SalesController < ApplicationController
   end
   
   def show; end
+  def consult; end
 
   def entrances
     @sales = Sale.where(destination_filial_id: @filial.id).order(id: :desc)

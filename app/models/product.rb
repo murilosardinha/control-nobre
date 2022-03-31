@@ -16,19 +16,18 @@ class Product < ApplicationRecord
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
 
-  def self.by_location
-    order_by_location = "case when location = '' then 'zzzzzzzz' else 1 end"
-    order(Arel.sql(<<-SQL.squish
-      CASE
-        WHEN products.location = '' THEN 2
-        ELSE 1 END;
-      SQL
-    ))
+  def self.find_prices(code, quantity)
+    product = Product.find_by(code: code, filial: Filial.main )
+    product_prices = product.product_prices.in_stock
+    return [{quantity: quantity, price: 0}] unless product_prices.any?
+
+    prices = ProductPrice.find_prices(product_prices, quantity)
+    prices.sort_by{|k| k['price']}.reverse
   end
   
   def set_code
     return if code.present?
-    
+
     code_id = rand.to_s[2..14]
     update(code: code_id)
   end

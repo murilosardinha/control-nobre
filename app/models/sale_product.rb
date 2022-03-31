@@ -2,7 +2,7 @@ class SaleProduct < ApplicationRecord
   belongs_to :sale
   belongs_to :product
 
-  delegate :codename, :name, :fullname, :code, :quantity, to: :product, prefix: true
+  delegate :codename, :name, :fullname, :code, :quantity, :reference, to: :product, prefix: true
 
   enum status: { open: 0, done: 1}
 
@@ -19,5 +19,9 @@ class SaleProduct < ApplicationRecord
     end
 
     filial_product.update(location: location) if location != filial_product.location
+  end
+
+  def total_amount
+    prices.map{|p| p['price'].to_f}.sum
   end
 end

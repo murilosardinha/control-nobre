@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :sales do
       # INDEX entrada de mercadoria
       get :entrances, on: :collection
+
+      get :consult, on: :member
     end
     
     resources :products do

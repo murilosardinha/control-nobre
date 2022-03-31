@@ -8,7 +8,7 @@
       %th.text-center
         %b Data
       %th
-  %tbo
+  %tbody
     - @sales.each do |sale|
       %tr
         %td.text-center= sale.quantity_of_items
@@ -23,3 +23,6 @@
             
             = link_to filial_sale_path(@filial, sale), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Baixa?"} do
               = icon("fas fa-2x", "trash")
+          - else
+            = link_to consult_filial_sale_path(@filial, sale), class: 'text-info', "data-toggle": "tooltip", "data-placement": "top", title: "Consultar" do
+              = icon("fas fa-2x", "check-double")          

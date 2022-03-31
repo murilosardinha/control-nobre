@@ -53,9 +53,10 @@ module Api
         # add in order
         @sale.sale_products.build(
           product_id: p[:id],
-          quantity: p[:qtd_to_sale]
+          quantity: p[:qtd_to_sale],
+          prices: Product.find_prices(product.code, p[:qtd_to_sale])
         )
-      end     
+      end
     end
 
     def edit_order
@@ -84,6 +85,8 @@ module Api
         # update order
         sale_product.update(quantity: p[:qtd_to_sale])
       end
+
+      # REMOVE FROM ORDER
     end
 
     def create_products

@@ -1,0 +1,56 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Saída de Produtos"
+
+.card.card-body
+  %table
+    %thead.table-light
+      %tr
+        %th.text-center
+          %b Quantidade de Itens
+        %th.text-center
+          %b Destinação
+        %th.text-center
+          %b Data
+        %th.text-center
+          %b Valor Total
+    %tbody.table-light
+      %tr
+        %td.text-center= @sale.quantity_of_items
+        %td.text-center= @sale.destination_name
+        %td.text-center= @sale.date.strftime("%d/%m/%y")
+        %td.text-center
+          = number_to_currency(@sale.total_amount, unit: "R$ ", separator: ",", delimiter: "")
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Item
+      %th.text-center
+        %b Referência
+      %th.text-center
+        %b Quantidade
+      %th.text-center
+        %b Valor
+  %tbody
+    - @sale.sale_products.each do |sale_product|
+      - sale_product.prices.each_with_index do |price_hash, index|
+        %tr
+          %td.text-center= index.zero? ? sale_product.product_name : ''
+          %td.text-center= index.zero? ? sale_product.product_reference : ''
+          %td.text-center= index.zero? ? sale_product.quantity : ''
+          %td.text-center= number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: "")
+      
+      %tr
+        %td.text-center{colspan: 3}
+        %td.text-center
+          %b= number_to_currency(sale_product.prices.map{|p| p['price'].to_f}.sum, unit: "R$ ", separator: ",", delimiter: "")
+
+      %tr
+        %td.text-center{colspan: 2}
+        %td.text-center
+          %b TOTAL
+        %td.text-center
+          %b= number_to_currency(@sale.total_amount, unit: "R$ ", separator: ",", delimiter: "")

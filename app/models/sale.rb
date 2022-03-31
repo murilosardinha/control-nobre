@@ -6,6 +6,9 @@ class Sale < ApplicationRecord
   belongs_to :destination, optional: true
   belongs_to :destination_filial, foreign_key: :destination_filial_id, class_name: "Filial", optional: true
 
+  delegate :name, to: :destination, prefix: :true, allow_nil: true
+  delegate :name, to: :destination_filial, prefix: :true, allow_nil: true
+
   before_save :set_date
 
   enum status: { open: 0, done: 1, partial: 2}
@@ -20,6 +23,10 @@ class Sale < ApplicationRecord
 
   def set_date
     self.date ||= Date.today 
+  end
+
+  def total_amount
+    sale_products.map(&:total_amount).sum
   end
 
   def quantity_of_items
