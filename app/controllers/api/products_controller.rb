@@ -71,11 +71,11 @@ module Api
         # update stock
 
         if sale_product.quantity > p[:qtd_to_sale]
-          # return item to STOCK
+          # add item quantity to STOCK (remove items from order)
           increase = sale_product.quantity - p[:qtd_to_sale].to_i
           result = product.increase_quantity(increase)
         else
-          # remote item from STOCK
+          # remove item quantity from STOCK (add items to order)
           decrease = p[:qtd_to_sale].to_i - sale_product.quantity
           result = product.decrease_quantity(decrease)
         end
@@ -86,7 +86,14 @@ module Api
         sale_product.update(quantity: p[:qtd_to_sale])
       end
 
-      # REMOVE FROM ORDER
+      # REMOVE FROM ORDER && RETURN TO STOCK
+      ids = JSON.parse(@products.to_enum.to_json).map{|p| p['id']}
+      return_item = @sale.product_ids - ids
+      return unless return_item.any?
+
+      sale_product = @sale.sale_products.find_by(product_id: return_item)
+      sale_product.product.increase_quantity(sale_product.quantity)
+      @sale.product_ids = ids
     end
 
     def create_products
