@@ -19,10 +19,10 @@ class ProductPrice < ApplicationRecord
 
     if result >= 0
       used_quantity = quantity
-      # product_price.update(quantity: result)
+      product_price.update(quantity: result)
     else
       used_quantity = quantity - product_price.quantity
-      # product_price.update(quantity: 0)
+      product_price.update(quantity: 0)
       find_prices((product_prices - [product_price]), used_quantity, args)
     end
     

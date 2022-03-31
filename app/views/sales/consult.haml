@@ -27,7 +27,9 @@
   %thead
     %tr
       %th.text-center
-        %b Item
+        %b Código
+      %th.text-center
+        %b Produto
       %th.text-center
         %b Referência
       %th.text-center
@@ -38,18 +40,19 @@
     - @sale.sale_products.each do |sale_product|
       - sale_product.prices.each_with_index do |price_hash, index|
         %tr
+          %td.text-center= index.zero? ? sale_product.product_code : ''
           %td.text-center= index.zero? ? sale_product.product_name : ''
           %td.text-center= index.zero? ? sale_product.product_reference : ''
           %td.text-center= index.zero? ? sale_product.quantity : ''
           %td.text-center= number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: "")
       
       %tr
-        %td.text-center{colspan: 3}
+        %td.text-center{colspan: 4}
         %td.text-center
           %b= number_to_currency(sale_product.prices.map{|p| p['price'].to_f}.sum, unit: "R$ ", separator: ",", delimiter: "")
 
       %tr
-        %td.text-center{colspan: 2}
+        %td.text-center{colspan: 3}
         %td.text-center
           %b TOTAL
         %td.text-center
