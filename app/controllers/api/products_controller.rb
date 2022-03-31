@@ -94,10 +94,10 @@ module Api
         price = format_number(new_product[:price])
 
         if product.new_record?
-          product.quantity = quantity
+          product.quantity = quantity.presence || 1
           product.name = new_product[:name]
           product.reference = new_product[:reference]
-          product.location = new_product[:location]
+          product.location = new_product[:location].presence || '-'
           
           product.save
         else

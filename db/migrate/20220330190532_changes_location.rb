@@ -1,5 +1,9 @@
 class ChangesLocation < ActiveRecord::Migration[7.0]
-  def change
-    change_column :products, :location, :string, default: ''
+  def up
+    change_column :products, :location, :string, default: '-'
   end
+  def down
+    change_column :products, :location, :string
+  end
+
 end

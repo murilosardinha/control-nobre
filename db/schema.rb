@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_190532) do
     t.bigint "filial_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "location", default: ""
+    t.string "location", default: "-"
     t.string "code"
     t.string "reference"
     t.index ["filial_id"], name: "index_products_on_filial_id"

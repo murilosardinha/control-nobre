@@ -30,11 +30,11 @@
     .col-lg-3
       .row
         .col-6
-          -# = link_to report_filial_products_path(@filial, q: (params[:q].to_enum.to_h if params[:q].present?), format: :xlsx) do
-          -#   %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
-          -#     .justify-content-center.align-self-center
-          -#       = icon('fas', 'file-excel')
-          -#       = "Relatório"
+          = link_to report_filial_products_path(@filial, q: (params[:q].to_enum.to_h if params[:q].present?), format: :xlsx) do
+            %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'file-excel')
+                = "Relatório"
         .col-6
           = link_to entrances_filial_sales_path(@filial) do
             - unless @sales_size.zero?

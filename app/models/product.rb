@@ -16,6 +16,16 @@ class Product < ApplicationRecord
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
 
+  def self.by_location
+    order_by_location = "case when location = '' then 'zzzzzzzz' else 1 end"
+    order(Arel.sql(<<-SQL.squish
+      CASE
+        WHEN products.location = '' THEN 2
+        ELSE 1 END;
+      SQL
+    ))
+  end
+  
   def set_code
     return if code.present?
     

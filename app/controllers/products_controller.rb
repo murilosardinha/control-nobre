@@ -7,13 +7,14 @@ class ProductsController < ApplicationController
   def index
     @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
-      .order(Arel.sql("location DESC NULLS LAST"))
+      .includes(:filial)
+      .order(Arel.sql("CASE WHEN location = '' THEN 'zz' ELSE location END"))
       .order(:name, :reference)
       .page(params[:page])
       .per(100)
 
+    @products = @products.where(filial_id: @filial.id) unless params[:q]
     @sales_size = Sale.where(destination_filial_id: @filial.id).where.not(status: :done).size
-    return @scope = @products.where(filial_id: @filial.id).group_by(&:code) unless params[:q]
 
     @scope = @products.group_by(&:code)
   end
@@ -51,10 +52,15 @@ class ProductsController < ApplicationController
   def report
     @q = Product.in_stock.ransack(params[:q])
     @products = @q.result
-      .order(Arel.sql("location DESC NULLS LAST"))
+      .includes(:filial)
+      .order(Arel.sql("CASE WHEN location = '' THEN 'zz' ELSE location END"))
       .order(:name, :reference)
 
-    filename = "Estoque-#{@filial.first_name}-#{Date.today.in_time_zone.strftime('%d-%m-%Y')}.xlsx"
+    @products = @products.where(filial_id: @filial.id) unless super_user?
+    query_filial_iq = params[:q][:filial_id_eq] if params[:q].present?
+    query_filial_name = Filial.find(query_filial_iq).first_name
+
+    filename = "Estoque-#{query_filial_name}-#{Date.today.in_time_zone.strftime('%d-%m-%Y')}.xlsx"
     render xlsx: "Estoque", filename: filename, disposition: 'inline', template: 'reports/products'
   end
 
