@@ -43,7 +43,7 @@
           %td.text-center= index.zero? ? sale_product.product_code : ''
           %td.text-center= index.zero? ? sale_product.product_name : ''
           %td.text-center= index.zero? ? sale_product.product_reference : ''
-          %td.text-center= index.zero? ? sale_product.quantity : ''
+          %td.text-center= price_hash['quantity']
           %td.text-center= number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: "")
       
       %tr
