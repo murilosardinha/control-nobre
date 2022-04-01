@@ -1,0 +1,20 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  wb.add_worksheet(name: "Dados") do |sheet|
+    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false} )
+    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
+    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
+
+    sheet.add_row ["Data", "Título", "Valor"], style: text_center_bold
+
+    @expenses.each do |expense|
+      sheet.add_row [
+        expense.date.strftime("%d/%m/%y"),
+        expense.title,
+        number_to_currency(expense.value, unit: "R$ ", separator: ",", delimiter: "")
+      ], style: text_center
+    end
+
+    sheet.add_row ["", "TOTAL", number_to_currency(@expenses.map(&:value).sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
+  end
+end

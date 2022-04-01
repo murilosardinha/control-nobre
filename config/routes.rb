@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   
   resources :filials do
     resources :users
-    resources :expenses
+    
+    resources :expenses do
+      get :report, on: :collection
+    end
+
     resources :destinations
     resources :sales do
       # #INDEX entrada de mercadoria

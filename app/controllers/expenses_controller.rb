@@ -53,6 +53,18 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def report
+    @q = @filial.expenses.ransack(params[:q])
+    @expenses = @q.result
+      .distinct(true)
+      .order(date: :desc)
+
+    query_filial_name = @filial.first_name
+
+    filename = "Despesas-#{query_filial_name}.xlsx"
+    render xlsx: "Despesas", filename: filename, disposition: 'inline', template: 'reports/expenses'
+  end
+
   private
     def set_expense
       @expense = @filial.expenses.find(params[:id])
