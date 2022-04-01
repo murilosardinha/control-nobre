@@ -16,7 +16,7 @@
           = number_to_currency(expense.value, unit: "R$ ", separator: ",", delimiter: "")
         %td.text-center= expense.date.strftime("%d/%m/%y")
 
-        %td.text-right
+        %td.text-center
           = link_to edit_filial_expense_path(@filial, expense), class: 'text-info' do
             = icon("fas fa-2x", "edit")
 

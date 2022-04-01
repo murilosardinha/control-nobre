@@ -21,7 +21,7 @@
       %tr
         %td.text-center= item.name
         %td.text-center= item.description.truncate(50)
-        %td.text-right
+        %td.text-center
           = link_to filial_machine_item_similars_path(@filial, @machine, item), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Ver Paralelos" do
             = icon("fas fa-2x", "tasks")
 

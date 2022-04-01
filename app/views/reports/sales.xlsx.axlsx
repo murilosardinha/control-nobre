@@ -1,0 +1,32 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  wb.add_worksheet(name: "Dados") do |sheet|
+    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false} )
+    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
+    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
+
+    sheet.add_row ["Data", "Destinação", "Código", "Produto", "Referência", "Quantidade", "Valor"], style: text_center_bold
+
+    @sales.each do |sale|
+      sale.sale_products.each do |sale_product|
+        sale_product.prices.each_with_index do |price_hash, index|
+          sheet.add_row [
+            sale.date.strftime("%d/%m/%y"),
+            sale.destination_name,
+            sale_product.product_code,
+            sale_product.product_name,
+            sale_product.product_reference,
+            price_hash['quantity'],
+            number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: "")
+          ], style: [text_center, text_center, text_center, text_left, text_left, text_center, text_center]
+        end
+
+        sheet.add_row ["", "", "", "", "", "", number_to_currency(sale_product.prices.map{|p| p['price'].to_f}.sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
+      end
+
+      sheet.add_row ["", "", "", "", "", "Sub total", number_to_currency(sale.total_amount, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
+    end
+
+    sheet.add_row ["", "", "", "", "TOTAL", @sales.map(&:quantity_of_items).sum, number_to_currency(@sales.map(&:total_amount).sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
+  end
+end

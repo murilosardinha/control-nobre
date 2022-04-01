@@ -7,14 +7,14 @@
         %b Destinação
       %th.text-center
         %b Data
-      %th
+      %th.text-center
   %tbody
     - @sales.each do |sale|
       %tr
         %td.text-center= sale.quantity_of_items
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
-        %td.text-right
+        %td.text-center
           - if sale.open? || sale.partial?
             = link_to edit_filial_sale_path(@filial, sale), class: 'text-info' do
               = icon("fas fa-2x", "edit")

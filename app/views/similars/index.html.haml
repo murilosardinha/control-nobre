@@ -22,7 +22,7 @@
         %td.text-center= similar.name
         %td.text-center= similar.description.truncate(50)
 
-        %td.text-right
+        %td.text-center
           = link_to edit_filial_machine_item_similar_path(@filial, @machine, @item, similar), class: 'text-info' do
             = icon("fas fa-2x", "edit")
 

@@ -52,6 +52,21 @@ class SalesController < ApplicationController
     end
   end
 
+  def report
+    @q = @filial.sales.ransack(params[:q])
+    @sales = @q.result
+      .includes(:destination, :destination_filial, sale_products: :product)
+      .order(date: :asc)
+      # .order("destinations.name asc")
+      # .order("destination_filial.name asc")
+      # .order("date asc")
+
+    query_filial_name = @filial.first_name
+
+    filename = "Baixas-#{query_filial_name}.xlsx"
+    render xlsx: "Baixas", filename: filename, disposition: 'inline', template: 'reports/sales'
+  end
+
   private
     def set_sale
       @sale = @filial.sales.find(params[:id])
