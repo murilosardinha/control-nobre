@@ -12,6 +12,8 @@ class HomeController < ApplicationController
     
     # SAIDAS
     @sales = @filial.sales
+      .includes(:destination, :destination_filial)
+      .preload(:destination, :destination_filial)
       .order(date: :desc)
       .first(10)
 

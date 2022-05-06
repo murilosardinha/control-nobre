@@ -28,7 +28,9 @@ module Api
 
       # update status of ORDER
       if @sale.sale_products.size > 0
-        @sale.status = :done if @sale.destination.present?
+        if @sale.destination.present?
+          @sale.status = :done 
+          @sale.sale_products.map(&:done!)
         @sale.save!
         render json: {status: :ok}
       else

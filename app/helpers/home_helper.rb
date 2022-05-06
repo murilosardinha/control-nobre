@@ -2,14 +2,15 @@
 
 module HomeHelper
   def filial_sales_graph(sales, params)
-    sales = sales.includes(:sale_products).preload(:sale_products)
+    sales = sales.includes(:destination, :destination_filial).preload(:destination, :destination_filial)
     query = sales.ransack(params)
     sales = query.result.distinct(true)
-    products = sales.map(&:products).flatten.compact
 
-    products.map do |product|
-      quantity = sales.map{|s| s.sale_products.done.where(product_id: product.id).map(&:quantity)}.flatten.sum
-      [product.name, quantity]
-    end
+    sale_ids = sales.map(&:id)
+    sale_products = SaleProduct.includes(:product).preload(:product).where(sale_id: sale_ids)
+    group = sale_products.group_by(&:product_name)
+    group.map{|k, v| 
+      [k, v.map(&:quantity).sum]
+    }
   end
 end

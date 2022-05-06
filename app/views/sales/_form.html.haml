@@ -21,11 +21,16 @@
           .row
             %h2.mt-3 Destinação
             .form-group.col-lg-6
-              = f.label :destination_id, "Cliente Final"
+              = f.label :destination_id, "Destinação"
               = f.select :destination_id, options_for_select(@destinations, @sale.destination_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id", "ng-init": "destination_id = '#{@sale.destination_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
             .form-group.col-lg-6
               = f.label :destination_filial_id, "Filial"
               = f.select :destination_filial_id, options_for_select(@destinations_filials, @sale.destination_filial_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id", "ng-init": "destination_filial_id = '#{@sale.destination_filial_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
+
+          .row
+            %h2.mt-3 Observação
+            .form-group.col-lg-12
+              = f.text_area :obs, class: "form-control", rows: 4
 
     .col-lg-5
       .card.card-body
@@ -50,3 +55,4 @@
           .form-group.col-lg-12.mt-2
             %button.btn.btn-success.text-white.col{"ng-click": "saveSale()"}
               Salvar
+

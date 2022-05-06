@@ -9,7 +9,7 @@ class Sale < ApplicationRecord
   delegate :name, to: :destination, prefix: :true, allow_nil: true
   delegate :name, to: :destination_filial, prefix: :true, allow_nil: true
 
-  before_save :set_date
+  before_save :set_date, :update_quantity
 
   enum status: { open: 0, done: 1, partial: 2}
 
@@ -25,13 +25,17 @@ class Sale < ApplicationRecord
     self.date ||= Date.today 
   end
 
+  def update_quantity
+    self.quantity = sale_products.map(&:quantity).sum
+  end
+
   def total_amount
     sale_products.map(&:total_amount).sum
   end
 
   def quantity_of_items
     return sale_products.open.map(&:quantity).sum if partial?
-    sale_products.map(&:quantity).sum
+    quantity
   end
 
   def return_items
