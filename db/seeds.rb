@@ -2436,7 +2436,7 @@ sales.each do |item|
 
   sale = filial.sales.build(
     destination_id: destination.id,
-    created_at: item[:created_at]
+    date: item[:created_at]
   )
   
   product = filial.products.find_by(id: product.id)
