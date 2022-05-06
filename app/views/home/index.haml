@@ -48,7 +48,6 @@
             :ruby
               results = filial_sales_graph(sales, params[:resume])
 
-            .col-6
-              .card.card-body
-                %b= filial_name
-                = bar_chart results, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+            .col-12
+              %b= filial_name
+              = bar_chart results, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }

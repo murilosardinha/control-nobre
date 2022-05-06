@@ -11,6 +11,6 @@ module HomeHelper
     group = sale_products.group_by(&:product_name)
     group.map{|k, v| 
       [k, v.map(&:quantity).sum]
-    }
+    }.sort_by{|k, v| -v}
   end
 end
