@@ -31,6 +31,8 @@ module Api
         if @sale.destination.present?
           @sale.status = :done 
           @sale.sale_products.map(&:done!)
+        end
+
         @sale.save!
         render json: {status: :ok}
       else
