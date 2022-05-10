@@ -5,7 +5,7 @@ wb.styles do |s|
     text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
     text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
 
-    sheet.add_row ["Código", "Produto", "Referência", "Quantidade", "Localização"], style: text_center_bold
+    sheet.add_row ["Código de Barras", "Produto", "Referência", "Quantidade", "Localização"], style: text_center_bold
     
     @products.each do |product|
       sheet.add_row [

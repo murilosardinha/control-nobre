@@ -13,7 +13,7 @@
         = f.label :quantity, "Quantidade Atual"
         = f.number_field :quantity, class: "form-control", autocomplete: "off", readonly: true
       .form-group.col-lg-3
-        = f.label :code, "Código"
+        = f.label :code, "Código de Barras"
         = f.text_field :code, class: "form-control", readonly: @product.persisted?, autocomplete: "off", readonly: true
       .form-group.col-lg-2
         = f.label :location, "Localização"

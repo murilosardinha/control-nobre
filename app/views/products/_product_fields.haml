@@ -9,7 +9,7 @@
         = label_tag :name, "Nome"
         = text_field_tag :name, "", "ng-model": "product.name", "ng-disabled": "product.isDisabled", class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
       .form-group.col-lg-3
-        = label_tag :code, "Código"
+        = label_tag :code, "Código de Barras"
         = text_field_tag :code, "", "ng-model": "product.code", class: "form-control", autocomplete: "off", "ng-change": "setProduct(product)"
       .form-group.col-lg-2
         = label_tag :location, "Localização"

@@ -15,7 +15,7 @@ pt-BR:
 
     attributes:
       product:
-        code: Código
+        code: Código de Barras
       user:
         role:
           one: Função
