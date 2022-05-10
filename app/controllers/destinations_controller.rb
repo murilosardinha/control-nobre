@@ -53,10 +53,10 @@ class DestinationsController < ApplicationController
 
   private
     def set_destination
-      @destination = destination.find(params[:id])
+      @destination = @filial.destinations.find(params[:id])
     end
 
     def destination_params
-      params.require(:destination).permit(:name, :address)
+      params.require(:destination).permit(:name, :address, :operador)
     end
 end

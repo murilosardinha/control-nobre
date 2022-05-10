@@ -11,8 +11,10 @@
 %table.table.table-striped.table-sm
   %thead
     %tr
-      %th.text-left
+      %th.text-center
         %b Nome
+      %th.text-center
+        %b Operador
       %th.text-center
         %b Observação
       %th
@@ -20,6 +22,7 @@
     - @destinations.each do |destination|
       %tr
         %td.text-left= destination.name
+        %td.text-center= destination.operador
         %td.text-center= destination.address
         %td.text-center
           = link_to edit_filial_destination_path(@filial, destination), class: 'text-info' do
