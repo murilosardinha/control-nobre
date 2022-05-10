@@ -231,6 +231,12 @@ p {
   }
 }
 
+.text-truncate{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
 @media (min-width: 1300px) {
   // body {
   //   zoom: 0.9;

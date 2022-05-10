@@ -4,6 +4,8 @@
       %th.text-center
         %b Quantidade de Itens
       %th.text-center
+        %b Produtos
+      %th.text-center
         %b Destinação
       %th.text-center
         %b Data
@@ -12,6 +14,8 @@
     - @sales.each do |sale|
       %tr
         %td.text-center= sale.quantity_of_items
+        %td.text-center.text-truncate
+          = truncate(sale.products_name, length: 120, omission: '...')
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-center
