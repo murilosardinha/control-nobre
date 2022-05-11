@@ -9,3 +9,24 @@
   
   .col-lg-2.p-0
     = render 'show_barcode'
+
+
+.col-lg-12.row
+  - @product.product_prices.each do |price|
+    %table.table.table-striped.table-sm
+      %thead
+        %tr
+          %th.text-center
+            %b Data da Entrada
+          %th.text-center
+            %b Preço
+          %th.text-center
+            %b Quantidade
+      %tbody
+        %tr
+          %td.text-center
+            = price.created_at.strftime("%d/%m/%Y")
+          %td.text-center
+            = number_to_currency(price.price, unit: "R$ ", separator: ",", delimiter: "")
+          %td.text-center
+            = price.quantity

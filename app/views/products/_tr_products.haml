@@ -1,6 +1,9 @@
 %tr{class: product.filial_id == @filial.id ? '' : 'product-other-filial'}
   %td.text-center= product.code
-  %td.text-left= product.name
+  %td.text-left
+    = link_to edit_filial_product_path(@filial, product), class: '' do
+      = product.name
+
   %td.text-left= product.reference
   
   %td.text-center
