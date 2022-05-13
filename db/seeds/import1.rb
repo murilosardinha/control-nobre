@@ -2455,3 +2455,22 @@ sales.each do |item|
   sale.done!
   sale.sale_products.map(&:done!)
 end
+
+# Destination.all.map(&:name).map(&:strip).uniq do |name|
+#   destination = Destination.find_by("TRIM(name) like (?)", name)
+#   to_exclude = Destination.where("TRIM(name) like (?)", name).where.not(id: destination.id)
+
+#   Sale.where(destination_id: to_exclude.map(&:id)).update_all(destination_id: destination.id)
+#   Destination.where(id: to_exclude.map(&:id)).destroy_all
+# end
+
+# Product.all.map(&:name).map(&:strip).uniq do |name|
+#   product = Product.find_by("TRIM(name) like (?)", name)
+#   to_exclude = Product.where("TRIM(name) like (?)", name).where.not(id: product.id)
+#   next unless to_exclude.any?
+  
+#   product.update(quantity: to_exclude.map(&:quantity).size)
+#   SaleProduct.where(product_id: to_exclude.map(&:id)).update_all(product_id: product.id)
+#   ProductPrice.where(product_id: to_exclude.map(&:id)).update_all(product_id: product.id)
+#   Product.where(id: to_exclude.map(&:id)).destroy_all
+# end

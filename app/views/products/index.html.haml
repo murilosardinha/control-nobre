@@ -3,7 +3,6 @@
     %h2.text-dark
       = "Produtos"
 
-
 .row.mb-2
   - if super_user?
     .col-lg-12.mb-2
@@ -63,8 +62,10 @@
     - @scope.each do |code, products|
       - products.select{|p| p.filial_id == @filial.id }.each do |product|
         = render 'tr_products', product: product
-      - products.select{|p| p.filial_id != @filial.id }.each do |product|
-        = render 'tr_products', product: product
+
+      - if super_user?
+        - products.select{|p| p.filial_id != @filial.id }.each do |product|
+          = render 'tr_products', product: product
 
 .col-lg-12
   .d-flex.justify-content-center{style: "margin-top: 20px"}
