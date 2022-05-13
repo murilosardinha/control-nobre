@@ -3,10 +3,15 @@
     %h2.text-dark
       = "Equipamentos"
 
-= link_to new_filial_machine_path(@filial), class: 'float-end mb-2' do
-  %btn.btn.btn-outline-primary
-    = icon('fas', 'plus-square')
-    = "Novo Equipamento"
+
+.row.mb-2
+  .col-2
+    = render 'filter'
+  .col-10
+    = link_to new_filial_machine_path(@filial), class: 'float-end mb-2' do
+      %btn.btn.btn-outline-primary
+        = icon('fas', 'plus-square')
+        = "Novo Equipamento"
 
 %table.table.table-striped.table-sm
   %thead
@@ -32,4 +37,9 @@
 
           = link_to filial_machine_path(@filial, machine), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o Produto?"} do
             = icon("fas fa-2x", "trash")
+          
+          .d-none.d-lg-inline= "|"
+
+          = link_to report_filial_machines_path(@filial, q: {machine_id_eq: machine.id}, format: :xlsx), "data-toggle": "tooltip", "data-placement": "top", title: "Relatório" do
+            = icon('fas fa-2x', 'file-excel')
             

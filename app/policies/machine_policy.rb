@@ -29,4 +29,8 @@ class MachinePolicy
   def destroy?
     user.admin?
   end
+
+  def report?
+    user.admin?
+  end
 end

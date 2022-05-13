@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       resources :items do
         resources :similars
       end
+
+      get :report, on: :collection
     end
   end
   

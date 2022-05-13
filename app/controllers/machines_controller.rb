@@ -4,7 +4,10 @@ class MachinesController < ApplicationController
   before_action :set_machine, only: %i[ show edit update destroy ]
 
   def index
-    @machines = @filial.machines.order(:name)
+    @q = @filial.machines.ransack(params[:q])
+    @machines = @q.result
+      .includes(items: :similars)
+      .order(:name)
   end
 
   def show
@@ -51,6 +54,20 @@ class MachinesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def report
+    @q = @filial.machines.ransack(params[:q])
+    @machine = @q.result
+      .includes(items: :similars)
+      .order("items.name", "similars.name")
+      .first
+
+    query_filial_name = @filial.first_name
+
+    filename = "Equipamentos-#{query_filial_name}.xlsx"
+    render xlsx: "Equipamentos", filename: filename, disposition: 'inline', template: 'reports/machines'
+  end
+
 
   private
     def authorize_user!
