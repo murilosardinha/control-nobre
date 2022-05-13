@@ -2464,9 +2464,9 @@ end
 #   Destination.where(id: to_exclude.map(&:id)).destroy_all
 # end
 
-# Product.all.map(&:name).map(&:strip).uniq do |name|
-#   product = Product.find_by("TRIM(name) like (?)", name)
-#   to_exclude = Product.where("TRIM(name) like (?)", name).where.not(id: product.id)
+# Product.all.map(&:name).map{|str| str.delete(' ') }.uniq do |name|
+#   product = Product.where("replace(name, ' ', '') like (?)", name).first
+#   to_exclude = Product.where("replace(name, ' ', '') like (?)", name).where.not(id: product.id)
 #   next unless to_exclude.any?
   
 #   product.update(quantity: to_exclude.map(&:quantity).size)
@@ -2474,3 +2474,4 @@ end
 #   ProductPrice.where(product_id: to_exclude.map(&:id)).update_all(product_id: product.id)
 #   Product.where(id: to_exclude.map(&:id)).destroy_all
 # end
+# Product.where(name: '').destroy_all
