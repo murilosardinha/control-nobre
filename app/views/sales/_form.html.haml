@@ -14,7 +14,11 @@
               %li.list-group-item.pt-2.line-height-25{"ng-repeat": "product in products | filter: product"}
                 .item{"ng-click": "setProduct(product)"}
                   .col= "{{product.codename}}"
-                  %small= "{{product.code}}"
+                  .col
+                    %small
+                      %b= "{{product.product_code}}"
+                      ="/"
+                      = "{{product.code}}"
 
           %hr.mt-5
 
@@ -45,6 +49,8 @@
                   .col-9.text-truncate
                     .col
                       = "{{product.codename}}"
+                    = "{{product.product_code}}"
+                    = "/"
                     = "{{product.code}}"
                   .col-3.p-0.text-center
                     %input.form-control-sm.col-6{"id": "qdt_{{product.id}}" , "ng-model": "product.qtd_to_sale", "ng-change": "checkNumber(product)", max: "{{product.quantity}}", min: '1', type: :number}

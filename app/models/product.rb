@@ -8,10 +8,10 @@ class Product < ApplicationRecord
   has_many :sales, through: :sale_products, dependent: :destroy
   has_many :product_prices, inverse_of: :product, dependent: :destroy
   
-  validates_uniqueness_of :code, scope: :filial_id
+  validates_uniqueness_of :product_code, :code, scope: :filial_id
   validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
   
-  after_create :set_code, :upcase_name
+  after_create :set_code, :upcase_attrs
 
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
@@ -32,8 +32,9 @@ class Product < ApplicationRecord
     update(code: code_id)
   end
 
-  def upcase_name
+  def upcase_attrs
     self.name = name.upcase
+    self.product_code = product_code.upcase if product_code
   end
 
   def codename
@@ -41,7 +42,7 @@ class Product < ApplicationRecord
   end
 
   def fullname
-    "#{codename} / #{code}"
+    "#{codename} / #{product_code} / #{code}"
   end
 
   def decrease_quantity(qtd)
