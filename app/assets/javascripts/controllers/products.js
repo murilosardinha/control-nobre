@@ -22,25 +22,63 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
   }
 
   $scope.setProduct = function(element){
-    var product = filter_by($scope.products, 'code', element.code);
+    var code = angular.copy(element.code);
+    setTimeout(function(){
+      if (code == element.code){
+        var product = filter_by($scope.products, 'code', element.code);
     
-    if (product){
-      element.name = product.name;
-      element.location = product.location;
-      element.reference = product.reference;
-      element.isDisabled = true;
-
-      if (product.location){
-        element.isLocationDisabled = true;
-      }else{
-        element.isLocationDisabled = false;
+        if (product){
+          element.name = product.name;
+          element.location = product.location;
+          element.reference = product.reference;
+          element.product_code = product.product_code;
+          element.isDisabled = true;
+    
+          if (product.location){
+            element.isLocationDisabled = true;
+          }else{
+            element.isLocationDisabled = false;
+          }
+        }else{
+          // element.name = "";
+          // element.location = "";
+          // element.reference = "";
+          // element.product_code = "";
+          element.isDisabled = false;
+        }        
       }
-    }else{
-      element.name = "";
-      element.location = "";
-      element.reference = "";
-      element.isDisabled = false;
-    }
+    }, 2000);
+  }
+
+  $scope.setByProductCode = function(element){
+    var code = angular.copy(element.product_code);
+    setTimeout(function(){
+      if (code == element.product_code){
+        var product = filter_by($scope.products, 'product_code', element.product_code);
+
+        if (product){
+          element.name = product.name;
+          element.location = product.location;
+          element.reference = product.reference;
+          element.code = product.code;
+
+          element.isDisabled = true;
+
+          if (product.location){
+            element.isLocationDisabled = true;
+          }else{
+            element.isLocationDisabled = false;
+          }
+        }else{
+          // element.name = "";
+          // element.location = "";
+          // element.reference = "";
+          // element.code = "";
+          element.isDisabled = false;
+        }
+
+      }
+    }, 2000);
   }
 
   $scope.addMore = function(){
@@ -50,6 +88,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       isDisabled: false,
       name: "",
       code: "",
+      product_code: "",
       location: "",
       quantity: "",
       reference: ""

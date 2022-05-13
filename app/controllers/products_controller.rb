@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ edit update destroy edit_limited, print]
 
   def index
-    @q = Product.in_stock.ransack(params[:q])
+    @q = Product.ransack(params[:q])
     @products = @q.result
       .includes(:filial)
       .order(Arel.sql("CASE WHEN location = '' THEN 'zz' ELSE location END"))
@@ -78,6 +78,6 @@ class ProductsController < ApplicationController
     end
     
     def product_update_params
-      params.require(:product).permit(:code, :location)
+      params.require(:product).permit(:code, :product_code, :location)
     end
 end

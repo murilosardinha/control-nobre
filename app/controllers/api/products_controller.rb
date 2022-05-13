@@ -12,6 +12,7 @@ module Api
           codename: p.codename,
           fullname: p.fullname,
           code: p.code,
+          product_code: p.product_code,
           location: p.location,
           quantity: p.quantity,
           reference: p.reference,
@@ -103,7 +104,8 @@ module Api
     def create_products
       params[:products].each do |new_product|
         code = new_product[:code]
-        product = Product.find_or_initialize_by(code: code, filial_id: @filial.id)
+        product_code = new_product[:product_code]
+        product = Product.find_or_initialize_by(code: code, product_code: product_code, filial_id: @filial.id)
         quantity = format_number(new_product[:quantity])
         price = format_number(new_product[:price])
 
