@@ -16,6 +16,11 @@ pt-BR:
     attributes:
       product:
         code: Código de Barras
+        category:
+          one: Categoria
+          others: Categorias
+          item: Produto
+          epi: EPI
       user:
         role:
           one: Função

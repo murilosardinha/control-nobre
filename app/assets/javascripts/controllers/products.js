@@ -1,22 +1,27 @@
 angular.module("nobre").controller("ProductsController", ["$scope", "Product", function ($scope, Product) {
-  $scope.newProducts = [
-    {
-      index: 0, 
-      isDisabled: false,
-      isLocationDisabled: false,
-      name: "",
-      code: "",
-      location: "",
-      quantity: 1,
-      reference: ""
-    }
-  ];
+  $scope.setCategory = function(category){
+    $scope.category = category;
+    
+    $scope.newProducts = [
+      {
+        index: 0, 
+        isDisabled: false,
+        isLocationDisabled: false,
+        name: "",
+        code: "",
+        location: "",
+        quantity: 1,
+        reference: "",
+        category: $scope.category
+      }
+    ];
+  }
 
   // PRODUCTS
   $scope.getProducts = function(filial_id){
     $scope.filial_id = filial_id;
 
-    Product.index({filial_id: $scope.filial_id}).$promise.then(function(response){
+    Product.index({filial_id: $scope.filial_id, category: $scope.category}).$promise.then(function(response){
       $scope.products = response;
     })
   }
@@ -33,6 +38,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           element.reference = product.reference;
           element.product_code = product.product_code;
           element.isDisabled = true;
+          element.category = $scope.category;
     
           if (product.location){
             element.isLocationDisabled = true;
@@ -61,6 +67,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           element.location = product.location;
           element.reference = product.reference;
           element.code = product.code;
+          element.category = $scope.category;
 
           element.isDisabled = true;
 
@@ -91,7 +98,8 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       product_code: "",
       location: "",
       quantity: "",
-      reference: ""
+      reference: "",
+      category: $scope.category
     }
 
     $scope.newProducts.push(newProduct);
@@ -121,7 +129,12 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
     Product.save(attrs).$promise.then(function(response){
       if (response.status == 'ok'){
         alert('Estoque atualizado com sucesso!');
-        window.location.href = "/filials/"+ $scope.filial_id +"/products";
+
+        if($scope.category == 'item'){
+          window.location.href = "/filials/"+ $scope.filial_id +"/products";
+        }else{
+          window.location.href = "/filials/"+ $scope.filial_id +"/epis";
+        }
       }else{
         alert('A Entrada contém errors!');
       }

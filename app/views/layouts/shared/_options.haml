@@ -17,18 +17,21 @@
 
   %hr.bg-white
   
-%li.nav-item.bg-secondary
+%li.nav-item
   %a{href: filial_products_path(current_filial), class: 'nav-link'}
     = icon('fas', 'boxes')
     %span.ms-1
       %b Produtos        
 
-- if super_user?
+- if current_user.admin?
   %li.nav-item
-    %a{href: filial_machines_path(current_filial), class: 'nav-link'}
-      = icon('fas', 'tractor')
+    %a{href: filial_epis_path(current_filial), class: 'nav-link'}
+      = icon('fa', 'helmet-safety')
       %span.ms-1
-        %b Equipamentos
+        %b EPI's        
+
+%hr.bg-white
+
 
 %li.nav-item
   %a{href: filial_sales_path(current_filial), class: 'nav-link'}
@@ -47,3 +50,10 @@
     = icon('fas', 'map-pin')
     %span.ms-1
       %b Destinações
+
+- if super_user?
+  %li.nav-item
+    %a{href: filial_machines_path(current_filial), class: 'nav-link'}
+      = icon('fas', 'tractor')
+      %span.ms-1
+        %b Equipamentos

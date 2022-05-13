@@ -1,11 +1,11 @@
-class ProductsController < ApplicationController
+class EpisController < ApplicationController
   before_action :authorize_user!
   before_action :set_current_filial
   before_action :set_collection, only: :index
   before_action :set_product, only: %i[ edit update destroy edit_limited, print]
 
   def index
-    @q = Product.item.ransack(params[:q])
+    @q = Product.epi.ransack(params[:q])
     @products = @q.result
       .includes(:filial)
       .order(Arel.sql("CASE WHEN location = '' THEN 'zz' ELSE location END"))
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_update_params)
-        format.html { redirect_to filial_products_path(@filial), notice: "Produto foi atualizado com sucesso." }
+        format.html { redirect_to filial_epis_path(@filial), notice: "EPI foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to filial_products_path(@filial), notice: "Produto foi deletado com sucesso." }
+      format.html { redirect_to filial_epis_path(@filial), notice: "EPI foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end

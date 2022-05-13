@@ -1,0 +1,38 @@
+%tr{class: product.filial_id == @filial.id ? '' : 'product-other-filial'}
+  %td.text-center= product.product_code
+  %td.text-left
+    = link_to edit_filial_epi_path(@filial, product), class: '' do
+      = product.name
+
+  %td.text-left= product.reference
+  
+  %td.text-center
+    - if current_user.admin? || product.filial_id == @filial.id
+      = product.quantity
+    - else
+      = "-"
+    
+  %td.text-center
+    - if product.filial_id == @filial.id
+      = product.location
+    - else
+      = product.filial_name
+
+  %td.text-center
+    = link_to print_filial_epi_path(@filial, product), target: '_blank', class: 'text-warning', "data-toggle": "tooltip", "data-placement": "top", title: "Imprimir Cód. Barras" do
+      = icon("fas fa-2x", "print")
+    
+    - if product.filial_id == @filial.id
+      .d-none.d-lg-inline= "|"
+
+      - if current_user.admin?
+        = link_to edit_filial_epi_path(@filial, product), class: 'text-info' do
+          = icon("fas fa-2x", "edit")
+
+        .d-none.d-lg-inline= "|"
+
+        = link_to filial_epi_path(@filial, product), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover o EPI?"} do
+          = icon("fas fa-2x", "trash")
+      - else
+        = link_to edit_limited_filial_epi_path(@filial, product), class: 'text-info' do
+          = icon("fas fa-2x", "edit")

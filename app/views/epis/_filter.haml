@@ -1,0 +1,26 @@
+= search_form_for @q, url: filial_epis_path(@filial), html: { class: 'mb-2'} do |f|
+  .row
+    .form-group{class: (super_user? ? 'col-lg-2' : 'col-lg-2')}
+      = f.search_field :product_code_i_cont, class: "form-control", placeholder: 'Código do Produto', autocomplete: 'off'
+
+    .form-group{class: (super_user? ? 'col-lg-2' : 'col-lg-3')}
+      = f.search_field :code_eq, class: "form-control", placeholder: 'Código de Barras', autocomplete: 'off'
+
+    .form-group{class: (super_user? ? 'col-lg-3' : 'col-lg-4')}
+      = f.search_field :name_i_cont, class: "form-control", placeholder: 'Produto', autocomplete: 'off'
+
+    - if super_user?
+      .form-group.col-lg-2
+        = f.select :filial_id_eq, @filials, {}, class: "form-control"
+
+    .form-group.col-lg-3
+      .row
+        .col-6
+          = f.submit class: "btn btn-primary col form-control", value: "Filtrar"
+
+        .col-6
+          - if params[:q].present?
+            = link_to request.path, class:"btn btn-default col d-flex justify-content-center form-control" do
+              .justify-content-center.align-self-center
+                = icon('fas', 'window-close')
+                Limpar

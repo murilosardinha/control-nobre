@@ -39,7 +39,7 @@ class Sale < ApplicationRecord
   end
 
   def return_items
-    sale_products.open.each do |p_sale|
+    sale_products.each do |p_sale|
       product = p_sale.product
       product.increase_quantity(p_sale.quantity)
     end

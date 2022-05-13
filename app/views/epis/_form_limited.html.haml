@@ -1,0 +1,24 @@
+.card.card-body
+  = form_for [@filial, @product], url: filial_epi_path(@filial, @product) do |f|
+    = render 'shared/errors_form', model: @product
+
+    .row
+      .form-group.col-lg-5
+        = f.label :name, "Nome"
+        = f.text_field :name, class: "form-control", autocomplete: "off", readonly: true
+      .form-group.col-lg-5
+        = f.label :reference, "Referência"
+        = f.text_field :reference, class: "form-control", autocomplete: "off", readonly: true
+      .form-group.col-lg-2
+        = f.label :quantity, "Quantidade Atual"
+        = f.number_field :quantity, class: "form-control", autocomplete: "off", readonly: true
+      .form-group.col-lg-3
+        = f.label :code, "Código de Barras"
+        = f.text_field :code, class: "form-control", readonly: @product.persisted?, autocomplete: "off", readonly: true
+      .form-group.col-lg-2
+        = f.label :location, "Localização"
+        = f.text_field :location, class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 

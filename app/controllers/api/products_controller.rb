@@ -105,7 +105,9 @@ module Api
       params[:products].each do |new_product|
         code = new_product[:code]
         product_code = new_product[:product_code]
-        product = Product.find_or_initialize_by(code: code, product_code: product_code, filial_id: @filial.id)
+        category = new_product[:category]
+
+        product = Product.find_or_initialize_by(code: code, product_code: product_code, filial_id: @filial.id, category: category)
         quantity = format_number(new_product[:quantity])
         price = format_number(new_product[:price])
 

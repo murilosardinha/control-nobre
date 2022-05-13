@@ -1,7 +1,7 @@
 .card.card-body
   %h3 Produtos
 
-  #products{"ng-app": "nobre", "ng-controller": "ProductsController", "ng-init": "setCategory('item'); getProducts(#{@filial.id});"}
+  #products{"ng-app": "nobre", "ng-controller": "ProductsController", "ng-init": "setCategory('epi'); getProducts(#{@filial.id});"}
     .col-12{'ng-repeat': "product in newProducts"}
       = render 'product_fields'
 

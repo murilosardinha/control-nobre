@@ -24,6 +24,13 @@ Rails.application.routes.draw do
       get :consult, on: :member
     end
     
+    resources :epis do
+      get :edit_limited, on: :member
+      get :print, on: :member
+      
+      get :report, on: :collection
+    end
+
     resources :products do
       get :edit_limited, on: :member
       get :print, on: :member

@@ -1,0 +1,56 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "EPI's"
+
+.row.mb-2
+  - if super_user?
+    .col-lg-12.mb-2
+      .row.justify-content-md-end
+        .col-2
+          = link_to report_filial_epis_path(@filial, q: (params[:q].to_enum.to_h if params[:q].present?), format: :xlsx) do
+            %btn.btn.btn-outline-info.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'file-excel')
+                = "Relatório"
+        .col-2
+          = link_to new_filial_epi_path(@filial) do
+            %btn.btn.btn-outline-primary.d-flex.justify-content-center.h-100
+              .justify-content-center.align-self-center
+                = icon('fas', 'plus-square')
+                = "Entrada de EPI's"
+    
+    .col-lg-12
+      = render 'filter'
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Código do Produto
+      %th.text-left
+        %b Produto
+      %th.text-left
+        %b Referência
+      %th.text-center
+        %b Quantidade
+      %th.text-center
+        %b Localização
+      %th
+  %tbody
+    - @scope.each do |code, products|
+      - products.select{|p| p.filial_id == @filial.id }.each do |product|
+        = render 'tr_products', product: product
+
+      - if super_user?
+        - products.select{|p| p.filial_id != @filial.id }.each do |product|
+          = render 'tr_products', product: product
+
+.col-lg-12
+  .d-flex.justify-content-center{style: "margin-top: 20px"}
+    %nav
+      %ul.pagination
+        %li.page-item
+          = link_to_prev_page @products, 'Anterior', class: "page-link"
+        %li.page-item
+          = link_to_next_page @products, 'Próxima', class: "page-link"

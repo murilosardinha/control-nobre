@@ -1,0 +1,9 @@
+.w-100.m-0
+  .h-100
+    = render 'epis/barcode', tag: @product
+
+.print 
+  = link_to print_filial_epi_path(@filial, @product), target: '_blank', class: 'text-warning' do
+    %btn.btn.btn-warning
+      = icon('fas', 'print')
+      = "Imprimir"

@@ -6,12 +6,16 @@
   .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "dropdownMenuButtonTwo"}
     = search_form_for @q, url: filial_sales_path(@filial), html: { class: 'px-4 py-3'} do |f|
       .form-group
-        %label Destinação
-        = f.search_field :destination_name_or_destination_filial_name_i_cont, class: "form-control", placeholder: 'Destinação'
+        %label Categoria
+        = f.select :products_category_eq, t_enum_value_collection(Product, :category), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
         %label Produto
         = f.search_field :products_name_i_cont, class: "form-control", placeholder: 'Produto'
+
+      .form-group
+        %label Destinação
+        = f.search_field :destination_name_or_destination_filial_name_i_cont, class: "form-control", placeholder: 'Destinação'
 
       .form-group
         %label Data Início

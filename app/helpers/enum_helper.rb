@@ -27,4 +27,13 @@ module EnumHelper
       [t_enum_class(inst_class, enum, key), value]
     end
   end
+
+  def color_span_generator(category)
+    case category
+    when "item"
+      content_tag(:span, "Produto", class: "badge badge-success")
+    when "epi"
+      content_tag(:span, "EPI", class: "badge badge-info")
+    end
+  end
 end

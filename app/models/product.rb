@@ -8,16 +8,19 @@ class Product < ApplicationRecord
   has_many :sales, through: :sale_products, dependent: :destroy
   has_many :product_prices, inverse_of: :product, dependent: :destroy
   
-  validates_uniqueness_of :product_code, :code, scope: :filial_id
+  validates_uniqueness_of :code, scope: :filial_id
   validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
   
-  after_create :set_code, :upcase_attrs
+  after_create :set_code
+  before_save :upcase_attrs
+
+  enum category: { item: 1, epi: 2 }
 
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
 
   def self.find_prices(code, quantity)
-    product = Product.find_by(code: code, filial: Filial.main )
+    product = Product.find_by(code: code, filial: Filial.main)
     product_prices = product.product_prices.in_stock
     return [{quantity: quantity, price: 0}] unless product_prices.any?
 
