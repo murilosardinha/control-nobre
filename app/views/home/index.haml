@@ -10,7 +10,7 @@
         .col-2
           = link_to new_filial_sale_path(@filial), class: 'float-end mb-2' do
             = icon('fas fa-2x', 'plus-square')
-      = render 'sales/table_sales'
+      = render 'sales/table_sales', text_small: true
 
   .col-lg-6
     .card.card-body

@@ -1,8 +1,12 @@
-%table.table.table-striped.table-sm
+%table.table.table-striped.table-sm.table-responsive
   %thead
     %tr
       %th.text-center
-        %b Quantidade de Itens
+        - if text_small
+          %b Qtd
+        - else
+          %b Quantidade de Itens
+
       %th.text-center
         %b Produtos
       %th.text-center
@@ -15,7 +19,7 @@
       %tr
         %td.text-center= sale.quantity_of_items
         %td.text-left.text-truncate
-          = truncate(sale.products_name, length: 90, omission: '...')
+          = truncate(sale.products_name, length: (text_small ? 30 : 90), omission: '...')
         %td.text-center= sale.destination_name
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-center

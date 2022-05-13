@@ -7,7 +7,7 @@
     = search_form_for @q, url: filial_expenses_path(@filial), html: { class: 'px-4 py-3'} do |f|
       .form-group
         %label Título
-        = f.search_field :title_cont, class: "form-control", placeholder: 'Título'
+        = f.search_field :title_i_cont, class: "form-control", placeholder: 'Título'
 
       .form-group
         %label Data Início
