@@ -31,7 +31,6 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
     setTimeout(function(){
       if (code == element.code){
         var product = filter_by($scope.products, 'code', element.code);
-    
         if (product){
           element.name = product.name;
           element.location = product.location;
@@ -53,7 +52,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           element.isDisabled = false;
         }        
       }
-    }, 2000);
+    }, 1000);
   }
 
   $scope.setByProductCode = function(element){
@@ -85,7 +84,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
         }
 
       }
-    }, 2000);
+    }, 1000);
   }
 
   $scope.addMore = function(){

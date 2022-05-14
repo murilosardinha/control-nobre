@@ -2,7 +2,7 @@ class SaleProduct < ApplicationRecord
   belongs_to :sale
   belongs_to :product
 
-  delegate :codename, :name, :fullname, :code, :quantity, :reference, to: :product, prefix: true
+  delegate :codename, :name, :fullname, :product_code, :code, :quantity, :reference, to: :product, prefix: true
 
   enum status: { open: 0, done: 1}
 

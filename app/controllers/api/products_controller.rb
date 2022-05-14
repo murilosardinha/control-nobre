@@ -3,7 +3,7 @@ module Api
     before_action :set_filial
 
     def index
-      query = @filial.products.in_stock.order(:name)
+      query = @filial.products.order(:name)
 
       json = query.map do |p|
         {

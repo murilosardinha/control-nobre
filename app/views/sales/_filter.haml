@@ -10,6 +10,10 @@
         = f.select :products_category_eq, t_enum_value_collection(Product, :category), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
+        %label Código do Produto
+        = f.search_field :products_product_code_eq, class: "form-control", placeholder: 'Código do Produto'
+
+      .form-group
         %label Produto
         = f.search_field :products_name_i_cont, class: "form-control", placeholder: 'Produto'
 
