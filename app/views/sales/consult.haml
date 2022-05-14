@@ -57,3 +57,6 @@
         %b TOTAL
       %td.text-center
         %b= number_to_currency(@sale.total_amount, unit: "R$ ", separator: ",", delimiter: "")
+  
+.card.card-body 
+  = @sale.obs
