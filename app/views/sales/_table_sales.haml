@@ -1,6 +1,10 @@
 %table.table.table-striped.table-sm.table-responsive
   %thead
     %tr
+      - unless text_small
+        %th.text-center
+          %b Categoria
+      
       %th.text-center
         - if text_small
           %b Qtd
@@ -10,6 +14,7 @@
       %th.text-center
         %b Produtos
       
+
       - unless text_small
         %th.text-center
           %b Destinação
@@ -20,6 +25,9 @@
   %tbody
     - @sales.each do |sale|
       %tr
+        - unless text_small
+          %td.text-center
+            %b= sale.category_title
         %td.text-center= sale.quantity_of_items
         %td.text-left.text-truncate
           = truncate(sale.products_name, length: (text_small ? 30 : 90), omission: '...')

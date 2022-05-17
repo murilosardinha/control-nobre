@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_13_195410) do
+ActiveRecord::Schema.define(version: 2022_05_16_213026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "destinations", force: :cascade do |t|
     t.string "name"
@@ -117,6 +123,8 @@ ActiveRecord::Schema.define(version: 2022_05_13_195410) do
     t.integer "status", default: 0, null: false
     t.text "obs"
     t.integer "quantity"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_sales_on_category_id"
     t.index ["destination_id"], name: "index_sales_on_destination_id"
     t.index ["filial_id"], name: "index_sales_on_filial_id"
   end
@@ -154,6 +162,7 @@ ActiveRecord::Schema.define(version: 2022_05_13_195410) do
   add_foreign_key "products", "filials"
   add_foreign_key "sale_products", "products"
   add_foreign_key "sale_products", "sales"
+  add_foreign_key "sales", "categories"
   add_foreign_key "sales", "destinations"
   add_foreign_key "sales", "filials"
   add_foreign_key "similars", "items"

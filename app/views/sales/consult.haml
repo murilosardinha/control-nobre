@@ -8,6 +8,8 @@
     %thead.table-light
       %tr
         %th.text-center
+          %b Categoria
+        %th.text-center
           %b Quantidade de Itens
         %th.text-center
           %b Destinação
@@ -17,6 +19,7 @@
           %b Valor Total
     %tbody.table-light
       %tr
+        %td.text-center= @sale.category_title
         %td.text-center= @sale.quantity_of_items
         %td.text-center= @sale.destination_name
         %td.text-center= @sale.date.strftime("%d/%m/%y")

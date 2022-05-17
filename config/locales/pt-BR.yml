@@ -6,10 +6,19 @@ pt-BR:
           attributes:
             code:
               too_short: incompleto (13 dígitos*)
+        destination:
+          attributes:
+            name: &invalid
+              blank: não pode ficar em branco
+              required: não pode ficar em branco
+              invalid: inválido 
+              taken: já foi cadastrado
         user:
           attributes:
-            password:
-              blank: não pode ficar em branco.
+            password: 
+              <<: *invalid    
+            password_confirmation:
+              confirmation: é diferente da senha digitada              
 
     models:
 
@@ -34,6 +43,9 @@ pt-BR:
           others: Tipos
           matriz: Matriz
           branch: Filial
+
+      destination:
+        name: Nome
 
   activemodel:
     attributes:

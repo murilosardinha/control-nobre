@@ -1,5 +1,7 @@
 class Sale < ApplicationRecord
   belongs_to :filial
+  belongs_to :category, optional: true
+
   has_many :sale_products, dependent: :destroy
   has_many :products, through: :sale_products, dependent: :destroy
 
@@ -8,6 +10,7 @@ class Sale < ApplicationRecord
 
   delegate :name, to: :destination, prefix: :true, allow_nil: true
   delegate :name, to: :destination_filial, prefix: :true, allow_nil: true
+  delegate :title, to: :category, prefix: true, allow_nil: true
 
   before_save :set_date, :update_quantity
 

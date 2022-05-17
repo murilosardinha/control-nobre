@@ -1,0 +1,23 @@
+.dropdown
+  %button#dropdownMenuButtonTwo.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+    =icon('fas', 'search')
+    Filtrar
+
+  .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "dropdownMenuButtonTwo"}
+    = search_form_for @q, url: filial_destinations_path(@filial), html: { class: 'px-4 py-3'} do |f|
+      .form-group
+        %label Nome
+        = f.search_field :name_i_cont, class: "form-control", placeholder: 'Nome'
+
+      .form-group
+        %label Operador
+        = f.search_field :operador_i_cont, class: "form-control", placeholder: 'Operador'
+
+      .form-group.mt-2
+        = f.submit class: "btn btn-primary", value: "Filtrar"
+
+        - if params[:q].present?
+          = link_to request.path, class:"btn btn-default float-end" do
+            = icon('fas', 'window-close')
+            Limpar Filtros
+

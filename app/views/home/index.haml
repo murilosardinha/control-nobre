@@ -46,8 +46,11 @@
         .row
           - @filials.each do |filial_name, sales|
             :ruby
-              results = filial_sales_graph(sales, params[:resume])
+              sale_products = filial_sales_graph(sales, params[:resume])
+              categories = category_sales_graph(sales, params[:resume])
 
             .col-12
               %b= filial_name
-              = bar_chart results, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+              = bar_chart sale_products, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+            .col-12
+              = column_chart categories, colors: ['#fc3939'], title: "Categorias", messages: { empty: "Sem Baixas no Período" }

@@ -1,0 +1,30 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Categorias de Baixas"
+
+= link_to new_category_path, class: 'float-end mb-2' do
+  %btn.btn.btn-outline-primary
+    = icon('fas', 'plus-square')
+    = "Nova Categoria"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Título
+      %th
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td.text-center= category.title
+        %td.text-center
+          = link_to edit_category_path(category), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to category_path(category), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Categoria?"} do
+            = icon("fas fa-2x", "trash")
+            
+          

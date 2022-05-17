@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get :edit_password, on: :member
   end
   
+  resources :categories
   resources :filials do
     resources :users
     
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     end
 
     resources :destinations
+
     resources :sales do
       # #INDEX entrada de mercadoria
       get :entrances, on: :collection

@@ -5,10 +5,12 @@ class SalesController < ApplicationController
   def index
     @q = @filial.sales.ransack(params[:q])
     @sales = @q.result
-      .includes(:destination, :destination_filial, :products, sale_products: :product)
+      .includes(:destination, :destination_filial, :products, :category, sale_products: :product)
       .order(date: :desc)
       .page(params[:page])
       .per(100)
+
+      @categories = Category.order(:title).collect{|c| [c.title, c.id] }
   end
 
   def new
@@ -55,7 +57,7 @@ class SalesController < ApplicationController
   def report
     @q = @filial.sales.ransack(params[:q])
     @sales = @q.result
-      .includes(:destination, :destination_filial, sale_products: :product)
+      .includes(:destination, :destination_filial, :category, sale_products: :product)
       .order(date: :asc)
       # .order("destinations.name asc")
       # .order("destination_filial.name asc")
@@ -73,6 +75,6 @@ class SalesController < ApplicationController
     end
 
     def sale_params
-      params.require(:sale).permit(:destination_id, :destination_filial_id)
+      params.require(:sale).permit(:destination_id, :destination_filial_id, :category_id)
     end
 end

@@ -3,7 +3,11 @@ class DestinationsController < ApplicationController
   before_action :set_destination, only: %i[ show edit update destroy ]
 
   def index
-    @destinations = @filial.destinations.order(:name)
+    @q = @filial.destinations.ransack(params[:q])
+    @destinations = @q.result
+      .order(:name)
+      .page(params[:page])
+      .per(50)
   end
 
   def show
@@ -21,7 +25,7 @@ class DestinationsController < ApplicationController
 
     respond_to do |format|
       if @destination.save
-        format.html { redirect_to filial_destinations_path(@filial, @filial), notice: "Destinação foi criada com sucesso." }
+        format.html { redirect_to filial_destinations_path(@filial), notice: "Destinação foi criada com sucesso." }
         format.json { render :show, status: :created, location: @destination }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +37,7 @@ class DestinationsController < ApplicationController
   def update
     respond_to do |format|
       if @destination.update(destination_params)
-        format.html { redirect_to filial_destinations_path(@filial, @filial), notice: "Destinação foi atualizada com sucesso." }
+        format.html { redirect_to filial_destinations_path(@filial), notice: "Destinação foi atualizada com sucesso." }
         format.json { render :show, status: :ok, location: @destination }
       else
         format.html { render :edit, status: :unprocessable_entity }

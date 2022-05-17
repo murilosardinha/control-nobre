@@ -3,10 +3,15 @@
     %h2.text-dark
       = "Destinações"
 
-= link_to new_filial_destination_path(@filial), class: 'float-end mb-2' do
-  %btn.btn.btn-outline-primary
-    = icon('fas', 'plus-square')
-    = "Nova Destinação"
+.row.mb-2
+  .col-2
+    = render 'filter'
+    
+  .col-lg-10
+    = link_to new_filial_destination_path(@filial), class: 'float-end mb-2' do
+      %btn.btn.btn-outline-primary
+        = icon('fas', 'plus-square')
+        = "Nova Destinação"
 
 %table.table.table-striped.table-sm
   %thead
@@ -32,5 +37,13 @@
 
           = link_to filial_destination_path(@filial, destination), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Destinação?"} do
             = icon("fas fa-2x", "trash")
-            
+
+.col-lg-12
+  .d-flex.justify-content-center{style: "margin-top: 20px"}
+    %nav
+      %ul.pagination
+        %li.page-item
+          = link_to_prev_page @destinations, 'Anterior', class: "page-link"
+        %li.page-item
+          = link_to_next_page @destinations, 'Próxima', class: "page-link"                     
           

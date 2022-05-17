@@ -7,6 +7,10 @@
     = search_form_for @q, url: filial_sales_path(@filial), html: { class: 'px-4 py-3'} do |f|
       .form-group
         %label Categoria
+        = f.select :category_id_eq, options_for_select(@categories, @q.category_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
+
+      .form-group
+        %label Tipo
         = f.select :products_category_eq, t_enum_value_collection(Product, :category), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
@@ -29,10 +33,11 @@
         %label Data Final
         = f.search_field :date_datelteq, class: 'form-control', type: 'date', value: @q.date_datelteq.present? ? @q.date_datelteq.strftime("%Y-%m-%d") : nil
 
-      = f.submit class: "btn btn-primary mt-2", value: "Filtrar"
+      .form-group.mt-2
+        = f.submit class: "btn btn-primary", value: "Filtrar"
 
-      - if params[:q].present?
-        = link_to request.path, class:"btn btn-default float-end" do
-          = icon('fas', 'window-close')
-          Limpar Filtros
+        - if params[:q].present?
+          = link_to request.path, class:"btn btn-default float-end" do
+            = icon('fas', 'window-close')
+            Limpar Filtros
 
