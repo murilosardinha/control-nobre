@@ -107,7 +107,13 @@ module Api
         product_code = new_product[:product_code]
         category = new_product[:category]
 
-        product = Product.find_or_initialize_by(code: code, product_code: product_code, filial_id: @filial.id, category: category)
+        product = nil
+
+        product = Product.find_by(product_code: product_code, filial_id: @filial.id, category: category) if product_code
+        product ||= Product.find_by(code: code, filial_id: @filial.id, category: category) if code
+        product ||= Product.find_by(name: new_product[:name].squish, filial_id: @filial.id, category: category)
+        product ||= Product.find_or_initialize_by(code: code, product_code: product_code, filial_id: @filial.id, category: category)
+
         quantity = format_number(new_product[:quantity])
         price = format_number(new_product[:price])
 
