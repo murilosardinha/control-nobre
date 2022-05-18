@@ -18,8 +18,8 @@ module HomeHelper
     sales = query.result.includes(:category).preload(:category)
 
     group = sales.group_by(&:category_title)
-    group.map{|k, v| 
-      [k, v.size]
+    group.map{|k, v|
+      [k || '', v.size]
     }.sort_by{|k, v| k}
   end
 end
