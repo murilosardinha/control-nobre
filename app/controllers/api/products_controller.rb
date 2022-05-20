@@ -108,12 +108,15 @@ module Api
         category = new_product[:category]
         
         product = nil
-        
-        product = Product.find_by(product_code: product_code, filial_id: @filial.id, category: category) if product_code.presence
-        product ||= Product.find_by(code: code, filial_id: @filial.id, category: category) if code.presence
-        product ||= Product.find_by(name: new_product[:name].squish, filial_id: @filial.id, category: category)
-        product ||= Product.find_or_initialize_by(name: new_product[:name].squish, code: code, product_code: product_code, filial_id: @filial.id, category: category)
-        
+
+        if product_code.presence
+          product = Product.find_or_initialize_by(product_code: product_code, filial_id: @filial.id, category: category)
+        elsif code.presence
+          product = Product.find_or_initialize_by(code: code, filial_id: @filial.id, category: category)
+        else
+          product = Product.find_or_initialize_by(name: new_product[:name].squish, filial_id: @filial.id, category: category)
+        end
+
         quantity = format_number(new_product[:quantity])
         price = format_number(new_product[:price])
 
@@ -122,6 +125,8 @@ module Api
           product.name = new_product[:name].squish
           product.reference = new_product[:reference]
           product.location = new_product[:location].presence || '-'
+          product.product_code = product_code
+          product.code = code
           
           product.save
         else
