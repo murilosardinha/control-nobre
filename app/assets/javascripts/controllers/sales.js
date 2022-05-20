@@ -32,7 +32,9 @@ angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sal
       sale_id: $scope.sale_id,
       destination_id: $scope.destination_id, 
       destination_filial_id: $scope.destination_filial_id, 
-      selectedProducts: $scope.selectedProducts
+      selectedProducts: $scope.selectedProducts,
+      category_id: $scope.category_id,
+      date: $scope.date || new Date()
     }
 
     Product.order(attrs).$promise.then(function(response){

@@ -2,7 +2,7 @@
   .row
     .col-lg-7
       .card.card-body
-        .form-group.col-lg-2.mt-4
+        = form_for [@filial, @sale], url: "#" do |f|
           = render 'shared/errors_form', model: @sale
 
           .col-lg-12
@@ -25,22 +25,22 @@
           .row
             %h2.mt-3 Destinação
             .form-group.col-lg-6
-              = label_tag :destination_id, "Destinação"
-              = select_tag :destination_id, options_for_select(@destinations, @sale.destination_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id", "ng-init": "destination_id = '#{@sale.destination_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
+              = f.label :destination_id, "Destinação"
+              = f.select :destination_id, options_for_select(@destinations, @sale.destination_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_id", "ng-init": "destination_id = '#{@sale.destination_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
             .form-group.col-lg-6
-              = label_tag :destination_filial_id, "Filial"
-              = select_tag :destination_filial_id, options_for_select(@destinations_filials, @sale.destination_filial_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id", "ng-init": "destination_filial_id = '#{@sale.destination_filial_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
+              = f.label :destination_filial_id, "Filial"
+              = f.select :destination_filial_id, options_for_select(@destinations_filials, @sale.destination_filial_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id", "ng-init": "destination_filial_id = '#{@sale.destination_filial_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
             .form-group.col-lg-6
-              = label_tag :category_id, "Categoria"
-              = select_tag :category_id, options_for_select(@categories, @sale.category_id), { include_blank: false }, class: "form-control"
+              = f.label :category_id, "Categoria"
+              = f.select :category_id, options_for_select(@categories, @sale.category_id), { include_blank: false }, class: "form-control", "ng-model": "category_id"
             .form-group.col-lg-6
-              = label_tag :date, "Data da Baixa"
-              = date_field_tag :date, class: "form-control"
+              = f.label :date, "Data da Baixa"
+              = f.date_field :date, class: "form-control", "ng-model": "date"
 
           .row
             %h2.mt-3 Observação
             .form-group.col-lg-12
-              = text_area_tag :obs, class: "form-control", rows: 4
+              = f.text_area :obs, class: "form-control", rows: 4
 
     .col-lg-5
       .card.card-body

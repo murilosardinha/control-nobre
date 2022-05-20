@@ -44,7 +44,9 @@ module Api
     def new_order
       @sale = @filial.sales.build(
         destination_id: params[:destination_id], 
-        destination_filial_id: params[:destination_filial_id]
+        destination_filial_id: params[:destination_filial_id],
+        category_id: params[:category_id],
+        date: params[:date]
       )
       
       @products.each do |p|
