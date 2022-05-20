@@ -77,6 +77,6 @@ class SalesController < ApplicationController
     end
 
     def sale_params
-      params.require(:sale).permit(:destination_id, :destination_filial_id, :category_id)
+      params.require(:sale).permit(:destination_id, :destination_filial_id, :category_id, :date)
     end
 end

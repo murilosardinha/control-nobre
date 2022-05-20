@@ -1,4 +1,4 @@
-angular.module("nobre").controller("ProductsController", ["$scope", "Product", function ($scope, Product) {
+angular.module("nobre").controller("ProductsController", ["$scope", "Product", function ($scope, Product) {  
   $scope.setCategory = function(category){
     $scope.category = category;
     
@@ -12,7 +12,8 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
         location: "",
         quantity: 1,
         reference: "",
-        category: $scope.category
+        category: $scope.category,
+        created_at: new Date
       }
     ];
   }
@@ -38,6 +39,8 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           element.product_code = product.product_code;
           element.isDisabled = true;
           element.category = $scope.category;
+          element.created_at = product.created_at;
+
     
           if (product.location){
             element.isLocationDisabled = true;
@@ -67,6 +70,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           element.reference = product.reference;
           element.code = product.code;
           element.category = $scope.category;
+          element.created_at = $scope.created_at;
 
           element.isDisabled = true;
 
@@ -98,7 +102,8 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       location: "",
       quantity: "",
       reference: "",
-      category: $scope.category
+      category: $scope.category,
+      created_at: new Date
     }
 
     $scope.newProducts.push(newProduct);

@@ -25,7 +25,7 @@ class Sale < ApplicationRecord
   end
 
   def set_date
-    self.date ||= Date.today 
+    # self.date ||= Date.today 
   end
 
   def update_quantity

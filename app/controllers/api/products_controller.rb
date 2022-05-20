@@ -129,7 +129,7 @@ module Api
           product.increase_quantity(quantity)
         end
 
-        product.product_prices.create(quantity: quantity, price: price)
+        product.product_prices.create(quantity: quantity, price: price, created_at: new_product[:created_at] || Date.today)
       end
       
       render json: {status: :ok}
