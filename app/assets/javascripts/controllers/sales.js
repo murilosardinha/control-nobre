@@ -1,6 +1,7 @@
 angular.module("nobre").controller("SalesController", ["$scope", "Product", "Sale", function ($scope, Product, Sale) {
   $scope.selectedProducts = [];
   $scope.destination_id = 0;
+  $scope.date = new Date();
 
   // PRODUCTS
   $scope.getProducts = function(filial_id){
