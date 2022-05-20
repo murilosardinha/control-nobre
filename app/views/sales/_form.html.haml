@@ -30,6 +30,9 @@
             .form-group.col-lg-6
               = f.label :destination_filial_id, "Filial"
               = f.select :destination_filial_id, options_for_select(@destinations_filials, @sale.destination_filial_id), { include_blank: "Selecione.." }, class: "form-control", "ng-model": "destination_filial_id", "ng-init": "destination_filial_id = '#{@sale.destination_filial_id || ''}'", readonly: @sale.persisted?, disabled: @sale.persisted?
+            .form-group.col-lg-12
+              = f.label :category_id, "Categoria"
+              = f.select :category_id, options_for_select(@categories, @sale.category_id), { include_blank: false }, class: "form-control"
 
           .row
             %h2.mt-3 Observação

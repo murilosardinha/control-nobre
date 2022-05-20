@@ -18,11 +18,13 @@ class SalesController < ApplicationController
 
     @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
     @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
+    @categories = Category.order(:title).map{|f| [f.title, f.id]}
   end
 
   def edit
     @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
     @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
+    @categories = Category.order(:title).map{|f| [f.title, f.id]}
   end
   
   def show; end
