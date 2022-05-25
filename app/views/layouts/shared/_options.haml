@@ -53,6 +53,12 @@
         %b Categorias
 
 %li.nav-item
+  %a{href: filial_damaged_items_path(current_filial), class: 'nav-link'}
+    = icon('fas', 'house-damage')
+    %span.ms-1
+      %b Itens Danificados
+
+%li.nav-item
   %a{href: filial_destinations_path(current_filial), class: 'nav-link'}
     = icon('fas', 'map-pin')
     %span.ms-1

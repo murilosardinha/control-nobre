@@ -6,6 +6,7 @@ class Filial < ApplicationRecord
   
   has_many :sales, dependent: :destroy
   has_many :destinations, dependent: :destroy
+  has_many :damaged_items, dependent: :destroy
   
   enum category: { matriz: 1, branch: 2 }
   scope :main, ->() { matriz.first }

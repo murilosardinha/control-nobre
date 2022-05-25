@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :filials do
     resources :users
+    resources :damaged_items
     
     resources :expenses do
       get :report, on: :collection

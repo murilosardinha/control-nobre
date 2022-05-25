@@ -1,0 +1,31 @@
+.dropdown
+  %button#dropdownMenuButtonTwo.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+    =icon('fas', 'search')
+    Filtrar
+
+  .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "dropdownMenuButtonTwo"}
+    = search_form_for @q, url: filial_damaged_items_path(@filial), html: { class: 'px-4 py-3'} do |f|
+      .form-group
+        %label Produto
+        = f.search_field :title_i_cont, class: "form-control", placeholder: 'Produto'
+
+      .form-group
+        %label Recebido por
+        = f.search_field :delivered_by_i_cont, class: "form-control", placeholder: 'Recebido por'
+    
+      .form-group
+        %label Data Início
+        = f.search_field :created_at_dategteq, class: 'form-control', type: 'date', value: @q.created_at_dategteq.present? ? @q.created_at_dategteq.strftime('%Y-%m-%d') : nil
+
+      .form-group.mb-2
+        %label Data Final
+        = f.search_field :created_at_datelteq, class: 'form-control', type: 'date', value: @q.created_at_datelteq.present? ? @q.created_at_datelteq.strftime("%Y-%m-%d") : nil
+
+      .form-group.mt-2
+        = f.submit class: "btn btn-primary", value: "Filtrar"
+
+        - if params[:q].present?
+          = link_to request.path, class:"btn btn-default float-end" do
+            = icon('fas', 'window-close')
+            Limpar Filtros
+

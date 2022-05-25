@@ -1,0 +1,49 @@
+.col-lg-12
+  .col.text-center
+    %h2.text-dark
+      = "Itens Danificados"
+
+.row.mb-2
+  .col-2
+    = render 'filter'
+    
+  .col-lg-10
+    = link_to new_filial_damaged_item_path(@filial), class: 'float-end mb-2' do
+      %btn.btn.btn-outline-primary
+        = icon('fas', 'plus-square')
+        = "Novo Item"
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th.text-center
+        %b Produto
+      %th.text-center
+        %b Recebido por
+      %th.text-center
+        %b Criado em
+      %th
+  %tbody
+    - @damaged_items.each do |damaged_item|
+      %tr
+        %td.text-left= damaged_item.title
+        %td.text-center= damaged_item.delivered_by
+        %td.text-center= damaged_item.created_at.strftime('%d/%m/%Y')
+        %td.text-center
+          = link_to edit_filial_damaged_item_path(@filial, damaged_item), class: 'text-info' do
+            = icon("fas fa-2x", "edit")
+
+          .d-none.d-lg-inline= "|"
+
+          = link_to filial_damaged_item_path(@filial, damaged_item), class: 'text-danger', method: :delete, data: {confirm: "Você tem certeza que deseja remover a Destinação?"} do
+            = icon("fas fa-2x", "trash")
+
+.col-lg-12
+  .d-flex.justify-content-center{style: "margin-top: 20px"}
+    %nav
+      %ul.pagination
+        %li.page-item
+          = link_to_prev_page @damaged_items, 'Anterior', class: "page-link"
+        %li.page-item
+          = link_to_next_page @damaged_items, 'Próxima', class: "page-link"                     
+          
