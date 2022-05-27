@@ -69,6 +69,6 @@
                     = icon('fas text-white', 'trash')
 
         .row
-          .form-group.col-lg-12.mt-2
+          .form-group.col-lg-12.mt-2{"ng-show": "selectedProducts.length > 0"}
             %button.btn.btn-success.text-white.col{"ng-click": "receiveSale()"}
               Receber
