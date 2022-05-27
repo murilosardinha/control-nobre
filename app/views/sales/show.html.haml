@@ -27,8 +27,9 @@
             %tr{"ng-repeat": "saleProduct in saleProducts | filter: product"}
               %td.text-center
                 = "{{saleProduct.product_code}}"
-              %td.text-center.text-truncate
+              %td.text-center.text-truncate{style: "max-width: 150px;"}
                 = "{{saleProduct.product_name}}"
+
               %td.text-center
                 = "{{saleProduct.quantity}}"
               %td
@@ -58,8 +59,9 @@
               %tr{"ng-repeat": "product in selectedProducts"}
                 %td.text-center
                   = "{{product.product_code}}"
-                %td.text-center.text-truncate
+                %td.text-center.text-truncate{style: "max-width: 150px;"}
                   = "{{product.product_name}}"
+
                 %td.text-center
                   = "{{product.quantity}}"
                 %td.text-center
