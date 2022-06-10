@@ -35,3 +35,9 @@ function goBack() {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+$(document).ready(function(){
+  $('.mask-decimal').maskMoney({
+    precision: 2
+  });
+});

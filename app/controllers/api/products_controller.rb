@@ -120,7 +120,7 @@ module Api
         end
 
         quantity = format_number(new_product[:quantity])
-        price = format_number(new_product[:price])
+        price = format_decimal(new_product[:price])
 
         if product.new_record?
           product.quantity = quantity.presence || 1
@@ -153,7 +153,7 @@ module Api
       return unless params[:filial][:products_attributes].present?
   
       params[:filial][:products_attributes].each do |item_param|
-        item_param[1]['product_prices_attributes']["0"][:price] = format_number(item_param[1]['product_prices_attributes']["0"][:price])
+        item_param[1]['product_prices_attributes']["0"][:price] = format_decimal(item_param[1]['product_prices_attributes']["0"][:price])
         item_param[1]['product_prices_attributes']["0"][:quantity] = format_number(item_param[1]['product_prices_attributes'][:quantity])
       end
   

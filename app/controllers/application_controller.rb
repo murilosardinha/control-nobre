@@ -22,6 +22,13 @@ class ApplicationController < ActionController::Base
     number.gsub(/\,/mi, '.').to_f
   end
 
+  def format_decimal(number)
+    return 0 unless number.present?
+    return number if number.class == Integer
+
+    number.gsub(/\,/mi, '').to_f
+  end
+
   def super_user?
     current_user.admin? && current_filial.matriz?
   end

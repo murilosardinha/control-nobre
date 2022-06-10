@@ -71,7 +71,7 @@ class ExpensesController < ApplicationController
     end
 
     def expense_params
-      params[:expense][:value] = format_number(params[:expense][:value]) if params[:expense].present?
+      params[:expense][:value] = format_decimal(params[:expense][:value]) if params[:expense].present?
       params.require(:expense).permit(:title, :value, :obs, :date)
     end
 end

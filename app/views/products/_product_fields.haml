@@ -24,7 +24,7 @@
 
       .form-group.col-lg-2
         = label_tag :price, "Preço"
-        = text_field_tag :price, "", "ng-model": "product.price", class: "form-control", autocomplete: "off"
+        = text_field_tag :price, "", "ng-model": "product.price", class: "form-control mask-decimal", autocomplete: "off"
 
       .form-group.col-lg-2
         = label_tag :location, "Localização"
