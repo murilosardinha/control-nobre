@@ -6,6 +6,12 @@
   .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "dropdownMenuButtonTwo"}
     = search_form_for @q, url: filial_machines_path(@filial), html: { class: 'px-4 py-3'} do |f|
       .form-group
+        %label Equipamento
+        = f.search_field :name_i_cont, class: "form-control", placeholder: 'Equipamento'
+      .form-group
+        %label Referência
+        = f.search_field :reference_i_cont, class: "form-control", placeholder: 'Referência'
+      .form-group
         %label Item
         = f.search_field :items_name_or_items_description_i_cont, class: "form-control", placeholder: 'Item'
       .form-group

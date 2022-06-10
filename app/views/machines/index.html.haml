@@ -18,11 +18,14 @@
     %tr
       %th.text-center
         %b Equipamento
+      %th.text-center
+        %b Referência
       %th
   %tbody
     - @machines.each do |machine|
       %tr
         %td.text-center= machine.name
+        %td.text-center= machine.reference
 
         %td.text-center
           = link_to filial_machine_items_path(@filial, machine), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Ver Itens" do
