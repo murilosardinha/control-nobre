@@ -1,6 +1,7 @@
 class SalesController < ApplicationController
   before_action :set_current_filial
   before_action :set_sale, only: %i[edit update destroy consult ]
+  before_action :set_collection, only: [:index, :new, :edit]
 
   def index
     @q = @filial.sales.ransack(params[:q])
@@ -9,22 +10,13 @@ class SalesController < ApplicationController
       .order(date: :desc)
       .page(params[:page])
       .per(100)
-
-      @categories = Category.order(:title).collect{|c| [c.title, c.id] }
   end
 
   def new
     @sale = @filial.sales.new
-
-    @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
-    @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
-    @categories = Category.order(:title).map{|f| [f.title, f.id]}
   end
 
   def edit
-    @destinations = @filial.destinations.order(:name).map{|d| [d.codename, d.id]}
-    @destinations_filials = Filial.order(:name).map{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
-    @categories = Category.order(:title).map{|f| [f.title, f.id]}
   end
   
   def show; end
@@ -74,6 +66,12 @@ class SalesController < ApplicationController
   private
     def set_sale
       @sale = @filial.sales.find(params[:id])
+    end
+
+    def set_collection
+      @destinations = @filial.destinations.order(:name).collect{|d| [d.codename, d.id]}
+      @destinations_filials = Filial.order(:name).collect{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
+      @categories = Category.order(:title).collect{|c| [c.title, c.id] }
     end
 
     def sale_params

@@ -22,8 +22,12 @@
         = f.search_field :products_name_i_cont, class: "form-control", placeholder: 'Produto'
 
       .form-group
-        %label Destinação
-        = f.search_field :destination_name_or_destination_filial_name_i_cont, class: "form-control", placeholder: 'Destinação'
+        %label Destinação Final
+        = f.select :destination_id_eq, options_for_select(@destinations, @q.destination_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
+
+      .form-group
+        %label Destinação Filial
+        = f.select :destination_filial_id_eq, options_for_select(@destinations_filials, @q.destination_filial_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
         %label Data Início
