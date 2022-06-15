@@ -37,7 +37,9 @@ $(function () {
 })
 
 $(document).ready(function(){
-  $('.mask-decimal').maskMoney({
-    precision: 2
+  $(document).on("click",function() {
+    $('.mask-decimal').maskMoney({
+      precision: 2
+    });
   });
 });
