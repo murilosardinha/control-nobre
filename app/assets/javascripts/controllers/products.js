@@ -61,7 +61,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
   $scope.setByProductCode = function(element){
     var code = angular.copy(element.product_code);
     setTimeout(function(){
-      if (code == element.product_code){
+      if (code == element.product_code && element.product_code != ""){
         var product = filter_by($scope.products, 'product_code', element.product_code);
 
         if (product){
@@ -79,6 +79,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           }else{
             element.isLocationDisabled = false;
           }
+          element.$apply;
         }else{
           // element.name = "";
           // element.location = "";
@@ -86,9 +87,8 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
           // element.code = "";
           element.isDisabled = false;
         }
-
       }
-    }, 1000);
+    }, 500);
   }
 
   $scope.addMore = function(){
@@ -100,7 +100,7 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
       code: "",
       product_code: "",
       location: "",
-      quantity: "",
+      quantity: 1,
       reference: "",
       category: $scope.category,
       created_at: new Date

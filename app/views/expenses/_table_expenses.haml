@@ -4,6 +4,8 @@
       %th.text-center
         %b Titulo
       %th.text-center
+        %b Observações
+      %th.text-center
         %b Valor
       %th.text-center
         %b Data
@@ -12,6 +14,7 @@
     - @expenses.each do |expense|
       %tr
         %td.text-left= expense.title
+        %td.text-left= expense.obs
         %td.text-center
           = number_to_currency(expense.value, unit: "R$ ", separator: ",", delimiter: "")
         %td.text-center= expense.date.strftime("%d/%m/%y")

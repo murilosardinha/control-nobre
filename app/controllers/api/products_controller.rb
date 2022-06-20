@@ -118,10 +118,10 @@ module Api
         else
           product = Product.find_or_initialize_by(name: new_product[:name].squish, filial_id: @filial.id, category: category)
         end
-
-        quantity = format_number(new_product[:quantity])
+        
+        quantity = format_number(new_product[:quantity].presence || 1)
         price = format_decimal(new_product[:price])
-
+        
         if product.new_record?
           product.quantity = quantity.presence || 1
           product.name = new_product[:name].squish
@@ -156,7 +156,7 @@ module Api
         item_param[1]['product_prices_attributes']["0"][:price] = format_decimal(item_param[1]['product_prices_attributes']["0"][:price])
         item_param[1]['product_prices_attributes']["0"][:quantity] = format_number(item_param[1]['product_prices_attributes'][:quantity])
       end
-  
+
       params.require(:filial).permit(
         :id,
         products_attributes: [
