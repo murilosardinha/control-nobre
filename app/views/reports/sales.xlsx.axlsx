@@ -1,9 +1,9 @@
 wb = xlsx_package.workbook
 wb.styles do |s|
   wb.add_worksheet(name: "Dados") do |sheet|
-    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false} )
-    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
-    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
+    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false, sz: 14} )
+    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false, sz: 14} )
+    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true, sz: 16} )
 
     # sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Referência", "Categoria", "Data", "Destinação"], style: text_center_bold
     # sale_product.product_reference,
@@ -14,22 +14,34 @@ wb.styles do |s|
       sheet.add_row [@destination], style: text_center_bold
       sheet.add_row [""]
 
-      sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data"], style: text_center_bold
+      sheet.add_row ["Cod. Produto", "Produto", "Quantidade", "Valor", "Data"], style: text_center_bold
+      sheet.column_widths 25, 85, 25, 25, 25
     else
-      sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data", "Destinação"], style: text_center_bold 
+      sheet.add_row ["Cod. Produto", "Produto", "Quantidade", "Valor", "Data", "Destinação"], style: text_center_bold 
+      sheet.column_widths 25, 85, 25, 25, 25, 60
     end
 
     @sales.each do |sale|
       sale.sale_products.each do |sale_product|
         sale_product.prices.each_with_index do |price_hash, index|
-          sheet.add_row [
-            sale_product.product_product_code,
-            sale_product.product_name,
-            price_hash['quantity'],
-            number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: ""),
-            sale.date.strftime("%d/%m/%y"),
-            (sale.destination_name unless @uniq_destination)
-          ], style: [text_center, text_left, text_center, text_center, text_center, text_center]
+          if @uniq_destination
+            sheet.add_row [
+              sale_product.product_product_code,
+              sale_product.product_name,
+              price_hash['quantity'],
+              number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: ""),
+              sale.date.strftime("%d/%m/%y"),
+            ], style: [text_center, text_left, text_center, text_center, text_center]
+          else
+            sheet.add_row [
+              sale_product.product_product_code,
+              sale_product.product_name,
+              price_hash['quantity'],
+              number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: ""),
+              sale.date.strftime("%d/%m/%y"),
+              sale.destination_name
+            ], style: [text_center, text_left, text_center, text_center, text_center, text_center]
+          end
         end
 
         # sheet.add_row ["", "", "", number_to_currency(sale_product.prices.map{|p| p['price'].to_f}.sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
@@ -38,4 +50,5 @@ wb.styles do |s|
 
     sheet.add_row ["", "TOTAL", @sales.map(&:quantity_of_items).sum, number_to_currency(@sales.map(&:total_amount).sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold
   end
+  
 end
