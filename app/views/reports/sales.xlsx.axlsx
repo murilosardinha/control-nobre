@@ -5,7 +5,11 @@ wb.styles do |s|
     text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false} )
     text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true} )
 
-    sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Referência", "Categoria", "Data", "Destinação"], style: text_center_bold
+    # sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Referência", "Categoria", "Data", "Destinação"], style: text_center_bold
+    # sale_product.product_reference,
+    # sale.category_title,
+
+    sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data", "Destinação"], style: text_center_bold
 
     @sales.each do |sale|
       sale.sale_products.each do |sale_product|
@@ -15,8 +19,6 @@ wb.styles do |s|
             sale_product.product_name,
             price_hash['quantity'],
             number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: ""),
-            sale_product.product_reference,
-            sale.category_title,
             sale.date.strftime("%d/%m/%y"),
             sale.destination_name
           ], style: [text_center, text_left, text_center, text_center, text_left, text_center, text_center, text_center]
