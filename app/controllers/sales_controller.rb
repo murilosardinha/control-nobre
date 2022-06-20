@@ -57,6 +57,8 @@ class SalesController < ApplicationController
       # .order("destination_filial.name asc")
       # .order("date asc")
 
+    @uniq_destination = @sales.map(&:destination_name).uniq.size == 1
+    @destination = @sales.map(&:destination_name).uniq.first
     query_filial_name = @filial.first_name
 
     filename = "Baixas-#{query_filial_name}.xlsx"

@@ -9,7 +9,15 @@ wb.styles do |s|
     # sale_product.product_reference,
     # sale.category_title,
 
-    sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data", "Destinação"], style: text_center_bold
+    if @uniq_destination
+      sheet.merge_cells "A1:C1"
+      sheet.add_row [@destination], style: text_center_bold
+      sheet.add_row [""]
+
+      sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data"], style: text_center_bold
+    else
+      sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Data", "Destinação"], style: text_center_bold 
+    end
 
     @sales.each do |sale|
       sale.sale_products.each do |sale_product|
@@ -20,8 +28,8 @@ wb.styles do |s|
             price_hash['quantity'],
             number_to_currency(price_hash['price'], unit: "R$ ", separator: ",", delimiter: ""),
             sale.date.strftime("%d/%m/%y"),
-            sale.destination_name
-          ], style: [text_center, text_left, text_center, text_center, text_left, text_center, text_center, text_center]
+            (sale.destination_name unless @uniq_destination)
+          ], style: [text_center, text_left, text_center, text_center, text_center, text_center]
         end
 
         # sheet.add_row ["", "", "", number_to_currency(sale_product.prices.map{|p| p['price'].to_f}.sum, unit: "R$ ", separator: ",", delimiter: "")], style: text_center_bold

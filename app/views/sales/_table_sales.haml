@@ -30,7 +30,7 @@
             %b= sale.category_title
         %td.text-center= sale.quantity_of_items
         %td.text-left.text-truncate
-          = truncate(sale.products_name, length: (text_small ? 30 : 90), omission: '...')
+          = truncate(sale.products_name, length: (text_small ? 30 : 75), omission: '...')
         
         - unless text_small
           %td.text-center= sale.destination_name
