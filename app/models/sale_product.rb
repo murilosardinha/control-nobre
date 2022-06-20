@@ -22,6 +22,6 @@ class SaleProduct < ApplicationRecord
   end
 
   def total_amount
-    prices.map{|p| p['price'].to_f}.sum
+    prices.map{|p| p['price'].to_f * p['quantity']}.sum
   end
 end

@@ -21,7 +21,7 @@ class Sale < ApplicationRecord
   end
 
   def destination_name
-    destination.present? ? destination.name : destination_filial.name
+    destination.present? ? "#{destination.name}" + " - #{destination.operador}" : destination_filial.name
   end
 
   def set_date

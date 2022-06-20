@@ -1,9 +1,9 @@
 wb = xlsx_package.workbook
 wb.styles do |s|
   wb.add_worksheet(name: "Dados") do |sheet|
-    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false, sz: 14} )
-    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false, sz: 14} )
-    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true, sz: 16} )
+    text_left = wb.styles.add_style({alignment: {horizontal: :left, vertical: :center, wrap_text: true}, b: false, sz: 16} )
+    text_center = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: false, sz: 16} )
+    text_center_bold = wb.styles.add_style({alignment: {horizontal: :center, vertical: :center, wrap_text: true}, b: true, sz: 18} )
 
     # sheet.add_row ["Código do Produto", "Produto", "Quantidade", "Valor", "Referência", "Categoria", "Data", "Destinação"], style: text_center_bold
     # sale_product.product_reference,
