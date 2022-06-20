@@ -22,6 +22,7 @@
             %b Preço
           %th.text-center
             %b Quantidade
+          %th.text-center
       %tbody
         %tr
           %td.text-center
@@ -30,3 +31,6 @@
             = number_to_currency(price.price, unit: "R$ ", separator: ",", delimiter: "")
           %td.text-center
             = price.quantity
+          %td.text-center
+            = link_to edit_filial_product_product_price_path(@filial, @product, price), class: 'text-success', "data-toggle": "tooltip", "data-placement": "top", title: "Editar Valores" do
+              = icon("fas fa-2x", "edit")

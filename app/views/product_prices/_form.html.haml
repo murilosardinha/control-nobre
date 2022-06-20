@@ -1,0 +1,18 @@
+.card.card-body
+  = form_for [@filial, @product, @product_price] do |f|
+    = render 'shared/errors_form', model: @product_price
+
+    .row
+      .form-group.col-lg-4
+        = f.label :name, "Nome"
+        = text_field_tag :name, @product.name, class: "form-control", readonly: true
+      .form-group.col-lg-4
+        = f.label :created_at, "Data de Entrada"
+        = f.text_field :created_at, class: "form-control", readonly: true, value: @product.created_at.strftime('%d/%m/%Y')
+      .form-group.col-lg-2
+        = f.label :price, "Preço"
+        = f.text_field :price, class: "form-control mask-decimal", autocomplete: "off"
+
+    .row
+      .form-group.col-lg-3.mt-2
+        = f.submit "Salvar", class: "btn btn-success text-white" 

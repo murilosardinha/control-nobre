@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       get :print, on: :member
       
       get :report, on: :collection
+      resources :product_prices, only: [:edit, :update]
     end
     
     resources :machines do

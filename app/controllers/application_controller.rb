@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     return 0 unless number.present?
     return number if number.class == Integer
 
-    number.gsub(/\,/mi, '').to_f
+    number.gsub(/\./mi, '').to_f
   end
 
   def super_user?

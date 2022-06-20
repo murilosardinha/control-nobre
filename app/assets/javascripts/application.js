@@ -39,7 +39,9 @@ $(function () {
 $(document).ready(function(){
   $(document).on("click",function() {
     $('.mask-decimal').maskMoney({
-      precision: 2
+      precision: 2,
+      decimal: ',',
+      thousands: '.'
     });
   });
 });
