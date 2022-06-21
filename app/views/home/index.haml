@@ -20,7 +20,7 @@
           = link_to new_filial_expense_path(@filial), class: 'float-end mb-2' do
             = icon('fas fa-2x', 'plus-square')
       
-      = render 'expenses/table_expenses'
+      = render 'expenses/table_expenses', text_small: true
 
 - if super_user?
   .row
@@ -47,10 +47,11 @@
           - @filials.each do |filial_name, sales|
             :ruby
               sale_products = filial_sales_graph(sales, params[:resume])
-              categories = category_sales_graph(sales, params[:resume])
-
-            .col-12
-              %b= filial_name
-              = bar_chart sale_products, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
-            .col-12
-              = column_chart categories, colors: ['#fc3939'], title: "Categorias", messages: { empty: "Sem Baixas no Período" }
+              # categories = category_sales_graph(sales, params[:resume])
+            
+            - if sale_products.any?
+              .col-12
+                %b= filial_name
+                = bar_chart sale_products, colors: ['#fc3939'], title: "Baixas", messages: { empty: "Sem Baixas no Período" }
+              -# .col-12
+              -#   = column_chart categories, colors: ['#fc3939'], title: "Categorias", messages: { empty: "Sem Baixas no Período" }

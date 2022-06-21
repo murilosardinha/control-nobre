@@ -8,7 +8,8 @@ class Product < ApplicationRecord
   has_many :sales, through: :sale_products, dependent: :destroy
   has_many :product_prices, inverse_of: :product, dependent: :destroy
   
-  validates_uniqueness_of :code, scope: :filial_id
+  validates_uniqueness_of :code, scope: :filial_id, allow_blank: true, allow_nil: true
+  validates_presence_of :name
   validates :code, length: {minimum: 13, maximum: 13}, allow_blank: true
   
   after_create :set_code

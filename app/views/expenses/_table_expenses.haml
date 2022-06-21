@@ -7,17 +7,23 @@
         %b Observações
       %th.text-center
         %b Valor
-      %th.text-center
-        %b Data
+
+      - unless text_small
+        %th.text-center
+          %b Data
       %th
   %tbody
     - @expenses.each do |expense|
       %tr
-        %td.text-left= expense.title
-        %td.text-left= expense.obs
+        %td.text-left
+          = truncate(expense.title, length: (text_small ? 20 : 75), omission: '...')
+        %td.text-left
+          = truncate(expense.obs, length: (text_small ? 30 : 75), omission: '...')
         %td.text-center
           = number_to_currency(expense.value, unit: "R$ ", separator: ",", delimiter: "")
-        %td.text-center= expense.date.strftime("%d/%m/%y")
+        
+        - unless text_small
+          %td.text-center= expense.date.strftime("%d/%m/%y")
 
         %td.text-center
           = link_to edit_filial_expense_path(@filial, expense), class: 'text-info' do

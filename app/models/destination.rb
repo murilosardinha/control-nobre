@@ -5,6 +5,8 @@ class Destination < ApplicationRecord
   validates_uniqueness_of :name, scope: :filial_id
 
   def codename
-    "#{name} / #{operador}"
+    return "#{name} - #{operador}" unless operador.blank?
+    
+    "#{name}"
   end
 end

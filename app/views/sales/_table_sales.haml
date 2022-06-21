@@ -1,9 +1,9 @@
 %table.table.table-striped.table-sm.table-responsive
   %thead
     %tr
-      - unless text_small
-        %th.text-center
-          %b Categoria
+      -# - unless text_small
+      -#   %th.text-center
+      -#     %b Categoria
       
       %th.text-center
         - if text_small
@@ -25,15 +25,15 @@
   %tbody
     - @sales.each do |sale|
       %tr
-        - unless text_small
-          %td.text-center
-            %b= sale.category_title
+        -# - unless text_small
+        -#   %td.text-center
+        -#     %b= sale.category_title
         %td.text-center= sale.quantity_of_items
         %td.text-left.text-truncate
           = truncate(sale.products_name, length: (text_small ? 30 : 75), omission: '...')
         
         - unless text_small
-          %td.text-center= sale.destination_name
+          %td.text-left= sale.destination_name
         
         %td.text-center= sale.date.strftime("%d/%m/%y")
         %td.text-center

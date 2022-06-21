@@ -5,9 +5,9 @@
 
   .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "dropdownMenuButtonTwo"}
     = search_form_for @q, url: filial_sales_path(@filial), html: { class: 'px-4 py-3'} do |f|
-      .form-group
-        %label Categoria
-        = f.select :category_id_eq, options_for_select(@categories, @q.category_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
+      -# .form-group
+      -#   %label Categoria
+      -#   = f.select :category_id_eq, options_for_select(@categories, @q.category_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
         %label Tipo
@@ -22,7 +22,7 @@
         = f.search_field :products_name_i_cont, class: "form-control", placeholder: 'Produto'
 
       .form-group
-        %label Destinação Final
+        %label Destinação
         = f.select :destination_id_eq, options_for_select(@destinations, @q.destination_id_eq), { include_blank: 'Selecione..' }, class: "form-control"
 
       .form-group
