@@ -136,8 +136,12 @@ angular.module("nobre").controller("ProductsController", ["$scope", "Product", f
 
         if($scope.category == 'item'){
           window.location.href = "/filials/"+ $scope.filial_id +"/products";
-        }else{
+        }
+        if($scope.category == 'epi'){
           window.location.href = "/filials/"+ $scope.filial_id +"/epis";
+        }
+        if($scope.category == 'motor'){
+          window.location.href = "/filials/"+ $scope.filial_id +"/motors";
         }
       }else{
         alert('A Entrada contém errors!');

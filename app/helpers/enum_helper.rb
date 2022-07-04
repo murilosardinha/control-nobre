@@ -34,6 +34,8 @@ module EnumHelper
       content_tag(:span, "Produto", class: "badge badge-success")
     when "epi"
       content_tag(:span, "EPI", class: "badge badge-info")
+    when "motor"
+      content_tag(:span, "Motoserra", class: "badge badge-warning")
     end
   end
 end

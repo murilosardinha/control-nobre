@@ -30,6 +30,7 @@ pt-BR:
           others: Categorias
           item: Produto
           epi: EPI
+          motor: Motoserra
       user:
         role:
           one: Função

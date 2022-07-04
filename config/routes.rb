@@ -34,6 +34,13 @@ Rails.application.routes.draw do
       get :report, on: :collection
     end
 
+    resources :motors do
+      get :edit_limited, on: :member
+      get :print, on: :member
+      
+      get :report, on: :collection
+    end
+
     resources :products do
       get :edit_limited, on: :member
       get :print, on: :member

@@ -1,0 +1,32 @@
+.nested-fields
+  .card.card-body.border.border-info.border-2
+    .col
+      %span.badge.badge-danger{  "ng-click": "removeItem()", "data-toggle": "tooltip", "data-placement": "top", title: "Remover"}
+        = icon('fa', 'minus-circle')
+    
+    .row
+      .form-group.col-lg-6
+        = label_tag :name, "Nome"
+        = text_field_tag :name, "", "ng-model": "product.name", "ng-disabled": "product.isDisabled", class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+      .form-group.col-lg-3
+        = label_tag :product_code, "Código do Produto"
+        = text_field_tag :product_code, "", "ng-model": "product.product_code", class: "form-control", autocomplete: "off", "ng-change": "setByProductCode(product)"
+      .form-group.col-lg-3
+        = label_tag :code, "Código de Barras"
+        = text_field_tag :code, "", "ng-model": "product.code", class: "form-control", autocomplete: "off", "ng-change": "setProduct(product)"
+    .row
+      .form-group.col-lg-5
+        = label_tag :reference, "Número de Série"
+        = text_field_tag :reference, "", "ng-model": "product.reference", "ng-disabled": "product.isDisabled", class: "form-control", autocomplete: "off"
+      .form-group.col-lg-2
+        = label_tag :quantity, "Quantidade"
+        = number_field_tag :quantity, "", "ng-model": "product.quantity", class: "form-control", autocomplete: "off", min: 1
+
+      .form-group.col-lg-2
+        = label_tag :price, "Preço"
+        = text_field_tag :price, "", "ng-model": "product.price", class: "form-control", autocomplete: "off"
+
+      .form-group.col-lg-2
+        = label_tag :location, "Localização"
+        = text_field_tag :location, "", "ng-model": "product.location", "ng-disabled": "product.isLocationDisabled", class: "form-control", oninput: "this.value = this.value.toUpperCase()", autocomplete: "off"
+    

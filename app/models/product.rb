@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   after_create :set_code
   before_save :upcase_attrs
 
-  enum category: { item: 1, epi: 2 }
+  enum category: { item: 1, epi: 2, motor: 3 }
 
   delegate :name, to: :filial, prefix: true
   scope :in_stock, ->() { where("CAST(quantity AS integer) > ?", 0) }
