@@ -7,3 +7,19 @@ destination_names.each do |d_name|
   filial.destinations.where(name: d_name).where.not(id: d.id).destroy_all
 end
 
+Destination.all.map{|d| d.update(name: d.name.strip)}
+
+
+d1=Destination.find_by(name: 'TRATOR CBJ')
+d2=Destination.find_by(name: 'TRATOR D6N CBJ 01')
+d3=Destination.find_by(name: 'D6N CBJ Nº16')
+
+Sale.where(destination_id: d1.id).update_all(destination_id: d3.id)
+Sale.where(destination_id: d2.id).update_all(destination_id: d3.id)
+d1.destroy
+d2.destroy
+
+d1=Destination.find_by(name: 'TRATOR D6N JLE')
+d2=Destination.find_by(name: 'D6N JLE Nº17')
+Sale.where(destination_id: d1.id).update_all(destination_id: d2.id)
+d1.destroy
