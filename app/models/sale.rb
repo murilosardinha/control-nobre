@@ -23,7 +23,7 @@ class Sale < ApplicationRecord
   def destination_name
     return "#{destination.codename}" if destination.present?
     
-    destination_filial.name
+    destination_filial.name if destination_filial.present?
   end
 
   def set_date
