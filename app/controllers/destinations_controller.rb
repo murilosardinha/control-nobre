@@ -5,6 +5,7 @@ class DestinationsController < ApplicationController
   def index
     @q = @filial.destinations.ransack(params[:q])
     @destinations = @q.result
+      .in_order_of(:status, %w[active inactive])
       .order(:name)
       .page(params[:page])
       .per(50)
@@ -61,6 +62,6 @@ class DestinationsController < ApplicationController
     end
 
     def destination_params
-      params.require(:destination).permit(:name, :address, :operador)
+      params.require(:destination).permit(:name, :address, :operador, :status)
     end
 end

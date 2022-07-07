@@ -47,6 +47,10 @@ pt-BR:
 
       destination:
         name: Nome
-
+        status:
+          one: Status
+          others: Status
+          active: Ativo
+          inactive: Inativo
   activemodel:
     attributes:

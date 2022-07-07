@@ -17,6 +17,8 @@
   %thead
     %tr
       %th.text-center
+        %b Status
+      %th.text-center
         %b Nome
       %th.text-center
         %b Operador
@@ -26,6 +28,7 @@
   %tbody
     - @destinations.each do |destination|
       %tr
+        %td.text-left= color_enum_generator(destination.status)
         %td.text-left= destination.name
         %td.text-center= destination.operador
         %td.text-center= destination.address

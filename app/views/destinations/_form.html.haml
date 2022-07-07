@@ -9,6 +9,11 @@
       .form-group.col-lg-4
         = f.label :operador, "Operador"
         = f.text_field :operador, class: "form-control"
+      .form-group.col-lg-2
+        = f.label :status, "Status"
+        = f.select :status, t_enum_collection(@destination, :status), { include_blank: false }, class: "form-control"
+    
+    .row
       .form-group.col-lg-8
         = f.label :address, "Observação"
         = f.text_area :address, class: "form-control", rows: 4

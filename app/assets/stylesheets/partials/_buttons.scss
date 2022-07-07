@@ -186,7 +186,7 @@ input:checked + .label-switch:before {
   }
   &.badge-light, &.badge-light:hover {
     color: $white;
-    background-color: $info;
+    background-color: $gray-600;
   }
   &.badge-dark, &.badge-dark:hover {
     color: $white;

@@ -67,17 +67,18 @@ class SalesController < ApplicationController
   end
 
   private
-    def set_sale
-      @sale = @filial.sales.find(params[:id])
-    end
 
-    def set_collection
-      @destinations = @filial.destinations.order(:name).collect{|d| [d.codename, d.id]}
-      @destinations_filials = Filial.order(:name).collect{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
-      @categories = Category.order(:title).collect{|c| [c.title, c.id] }
-    end
+  def set_sale
+    @sale = @filial.sales.find(params[:id])
+  end
 
-    def sale_params
-      params.require(:sale).permit(:destination_id, :destination_filial_id, :category_id, :date)
-    end
+  def set_collection
+    @destinations = @filial.destinations.active.order(:name).collect{|d| [d.codename, d.id]}
+    @destinations_filials = Filial.order(:name).collect{|f| [f.name, f.id]}.select{|k, v| v != @filial.id}
+    @categories = Category.order(:title).collect{|c| [c.title, c.id] }
+  end
+
+  def sale_params
+    params.require(:sale).permit(:destination_id, :destination_filial_id, :category_id, :date)
+  end
 end
